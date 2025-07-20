@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# 📘 REM-NE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Site do projeto REM-NE
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📑 Sumário
 
-### `npm start`
+- [Sobre](#sobre)
+- [Mockups](#mockups)
+- [Nossa Equipe](#nossa-equipe)
+- [Tecnologias](#tecnologias)
+- [Desenvolvimento Local](#desenvolvimento-local)
+  - [Repositório](#repositório)
+    - [Clonar uma branch específica](#clonar-uma-branch-específica)
+  - [Variáveis de ambiente](#variáveis-de-ambiente)
+    - [Como utilizar suas próprias chaves secretas](#como-utilizar-suas-próprias-chaves-secretas)
+  - [Instalando pacotes](#instalando-pacotes)
+  - [Desenvolvendo](#desenvolvendo)
+- [Requisitos Funcionais e Não-Funcionais](#requisitos-funcionais-e-não-funcionais)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Sobre
 
-### `npm test`
+> O projeto visa criar uma plataforma de referência para quem deseja informações relacionadas a ensino de matemática na região Nordeste do Brasil, reunindo eventos, notícias e publicações em um único ambiente virtual.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Mockups
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Nossa Equipe
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Nome         | Cargo         | 
+|--------------|---------------|
+| Paulo Magalhães   | Líder do projeto |
+| Dênis Rocha  | Desenvolvedor |
+| Samuel Anderson  | Desenvolvedor |
+| Lucas Toshio  | Designer |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Tecnologias
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js
+- React.js
+- Typescript
+- Firebase
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Desenvolvimento Local
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> Tenha certeza de ter o Node.js instalado.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Repositório
 
-## Learn More
+Clone esse repositório localmente (ou crie seu próprio fork):
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/REM-NE/remNE.git
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> **OBS:** A branch mais atualizada do repositório é a [dev](https://github.com/REM-NE/remNE/tree/dev). Porém, a [main](https://github.com/REM-NE/remNE/tree/main) terá sempre a versão mais estável do projeto e será sempre a versão de produção.
 
-### Code Splitting
+### Variáveis de ambiente
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Projeto no firebase ainda não foi criado.
 
-### Analyzing the Bundle Size
+### Instalando pacotes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Em seguida instale os pacotes do projeto:
 
-### Making a Progressive Web App
+```bash
+npm i
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Desenvolvendo
+Nosso projeto utiliza React.js e foi inicializado com create-react-app
 
-### Advanced Configuration
+Agora, inicialize o servidor:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm start
+```
 
-### Deployment
+Abra http://localhost:3000 no seu navegador e veja o resultado.
+Você pode editar as páginas na pasta src/. As páginas atualizam conforme as edita.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Requisitos Funcionais e Não-Funcionais
+Acesse a tabela nesse link: [Tabela de Requisitos](https://app.clickup.com/90131889362/v/l/li/901315745808?pr=90137960275)
