@@ -86,7 +86,6 @@ npm start
 
 Abra http://localhost:3000 no seu navegador e veja o resultado.
 Você pode editar as páginas na pasta src/. As páginas atualizam conforme as edita.
----
 
 ## Requisitos Funcionais e Não-Funcionais
 Acesse a tabela nesse link: [Tabela de Requisitos](https://app.clickup.com/90131889362/v/l/li/901315745808?pr=90137960275)
