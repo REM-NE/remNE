@@ -1,0 +1,23 @@
+.news-image {
+    width: 25%;
+    aspect-ratio: 9/6;
+}
+
+.news {
+    margin-bottom: 40px;
+}
+
+.news .title {
+    margin-top: 50px;
+}
+
+.card-title {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+p.card-text {
+    max-height: 150px;
+    overflow-y: hidden;
+    margin: 0 0 20px 0;
+}

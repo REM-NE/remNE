@@ -1,13 +1,13 @@
 import '../App.css';
 import Navbar from '../components/navbar';
-import Home from './home/page';
+import { Outlet } from "react-router-dom";
 import Footer from '../components/footer';
 
 function Layout() {
     return (
         <>
             <Navbar />
-            <Home />
+            <Outlet />
             <Footer />
         </>
     )

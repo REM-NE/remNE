@@ -1,5 +1,6 @@
 import '../App.css';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import logo from '../assets/images/remne-logo.jpg';
 
@@ -7,23 +8,23 @@ function Navbar() {
 
     function NavBarButtons() {
         let buttonObject = [
-            { title: "Início/Home", icon: "" },
-            { title: "Eventos e Novidades", icon: "" },
-            { title: "Recursos Destaque", icon: "" },
-            { title: "Publi. Científicas", icon: "" },
-            { title: "Biblioteca", icon: "" },
-            { title: "Sobre", icon: "" },
+            { title: "Início/Home", icon: "", path: "/" },
+            { title: "Eventos e Novidades", icon: "", path: "/eventos-e-novidades" },
+            { title: "Recursos Destaque", icon: "", path: "/recursos-destaque" },
+            { title: "Publi. Científicas", icon: "", path: "/publicacoes" },
+            { title: "Biblioteca", icon: "", path: "/biblioteca" },
+            { title: "Sobre", icon: "", path: "/sobre" },
         ];
 
         return (
             <>
                 {buttonObject.map((button, index) => (
-                    <a key={index} href="#">
-                        <img class="icon" src="#" alt=""></img>
+                    <Link key={index} to={button.path}>
+                        <img class="icon" src={button.icon} alt=""></img>
                         <div>
                             <p>{button.title}</p>
                         </div>
-                    </a>
+                    </Link>
                 ))}
             </>
         );
