@@ -1,6 +1,6 @@
 import '../../App.css';
 import './news.css';
-import { Button, Card, CardBody, CardHeader, CardText } from 'react-bootstrap';
+import { Button, CardBody, CardHeader, CardText } from 'react-bootstrap';
 import logo from '../../assets/images/remne-logo.jpg';
 
 function NewsPage() {
@@ -30,15 +30,15 @@ function NewsPage() {
             <>
                 {newsObject.map((noticia, index) => (
                     // <a key={index} href="#">
-                    <Card key={index}>
+                    <div key={index}>
                         <CardHeader>
                             <h4 class="card-title">
                                 {noticia.title}
                             </h4>
                         </CardHeader>
                         <CardBody>
-                            <div class="row">
-                                <div class="column">
+                            <div class="row-main">
+                                <div class="column-main">
                                     <CardText>{noticia.text}</CardText>
                                     <Button>
                                         Leia mais
@@ -47,7 +47,7 @@ function NewsPage() {
                                 <img class="news-image" src={noticia.image} alt=""></img>
                             </div>
                         </CardBody>
-                    </ Card>
+                    </ div>
                     // </a>
                 ))}
             </>
@@ -55,9 +55,9 @@ function NewsPage() {
     }
 
     return (
-        <div class="news home">
+        <div class="news home top-spacing">
             {/* <div class="title">Notícias</div> */}
-            <div class="column title">
+            <div class="column title card-main">
                 <NewsCard />
             </div>
         </div>

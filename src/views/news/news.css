@@ -21,3 +21,12 @@ p.card-text {
     overflow-y: hidden;
     margin: 0 0 20px 0;
 }
+
+.row-main {
+    display: flex;
+}
+
+.column.title.card-main {
+    max-height: 600px;
+    overflow-y: scroll;
+}

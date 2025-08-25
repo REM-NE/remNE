@@ -33,7 +33,7 @@ function Navbar() {
 
     return (
         <div class="header">
-            <div class="row">
+            <div class="row-header">
                 <div class="start-header">
                     <img class="logo" src={logo} alt="logo"/>
                 </div>
@@ -41,8 +41,8 @@ function Navbar() {
                     <div class="top-header">
                         <Button>LOGIN</Button>
                     </div>
-                    <div class="row bottom-header">
-                        <div class="row navbar">
+                    <div class="row-header bottom-header">
+                        <div class="row-header navbar-menu">
                             <NavBarButtons />
                         </div>
                         <div class="search-bar">
