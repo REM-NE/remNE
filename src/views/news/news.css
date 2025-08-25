@@ -3,9 +3,9 @@
     aspect-ratio: 9/6;
 }
 
-.news {
+/* .news {
     margin-bottom: 40px;
-}
+} */
 
 .news .title {
     margin-top: 50px;
@@ -22,11 +22,10 @@ p.card-text {
     margin: 0 0 20px 0;
 }
 
-.row-main {
-    display: flex;
+.card-main {
+    padding-right: 10px!important;
 }
 
-.column.title.card-main {
-    max-height: 600px;
-    overflow-y: scroll;
+.row-main {
+    display: flex;
 }

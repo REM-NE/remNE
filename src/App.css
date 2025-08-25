@@ -150,9 +150,13 @@
 
 .card-main {
   border: var(--borda-padrao);
-  padding: 15px;
-  margin: 10px 5%;
+  padding: 20px;
   border-radius: var(--arredondamento-borda);
+}
+
+.card-inside {
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {

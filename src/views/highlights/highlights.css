@@ -24,8 +24,3 @@
     display: flex;
     justify-content: flex-end;
 }
-
-.card-inside {
-    max-height: 400px;
-    overflow-y: auto;
-}

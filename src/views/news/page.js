@@ -59,7 +59,9 @@ function NewsPage() {
             {/* <div class="title">Notícias</div> */}
             <div class="container flex-grow-1">
                 <div class="column title card-main">
-                    <NewsCard />
+                    <div className="card-inside">
+                        <NewsCard />
+                    </div>
                 </div>
             </div>
         </div>
