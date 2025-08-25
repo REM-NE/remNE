@@ -57,8 +57,10 @@ function NewsPage() {
     return (
         <div class="news home top-spacing">
             {/* <div class="title">Notícias</div> */}
-            <div class="column title card-main">
-                <NewsCard />
+            <div class="container flex-grow-1">
+                <div class="column title card-main">
+                    <NewsCard />
+                </div>
             </div>
         </div>
     )

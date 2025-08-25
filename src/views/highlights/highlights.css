@@ -1,0 +1,31 @@
+.highlight .card {
+    height: 300px;
+}
+
+.circle-img {
+    width: 125px;
+    height: 125px;
+    border-radius: 100px;
+    background-color: lightgray;
+}
+
+.top-spacing-highlight {
+    padding-top: 150px;
+}
+
+.card-list {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-inside {
+    max-height: 400px;
+    overflow-y: auto;
+}
