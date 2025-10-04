@@ -1,6 +1,6 @@
-import '../App.css';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 import logo from '../assets/images/remne-logo.jpg';
 
@@ -30,23 +30,24 @@ function Navbar() {
         );
     }
 
-
     return (
         <div class="header">
             <div class="row-header">
                 <div class="start-header">
-                    <img class="logo" src={logo} alt="logo"/>
+                    <img class="logo" src={logo} alt="logo" />
                 </div>
                 <div class="column">
                     <div class="top-header">
-                        <Button>LOGIN</Button>
+                        <Link to={"/auth/login"}>
+                            <Button >LOGIN</Button>
+                        </Link>
                     </div>
                     <div class="row-header bottom-header">
                         <div class="row-header navbar-menu">
                             <NavBarButtons />
                         </div>
                         <div class="search-bar">
-                            <input type="text" defaultValue={"Busca/Pesquisa"}/>
+                            <input type="text" defaultValue={"Busca/Pesquisa"} />
                         </div>
                     </div>
                 </div>

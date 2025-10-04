@@ -1,12 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from './views/layout';
-import Home from "./views/home/page";
-import NewsPage from "./views/news/page";
-import HighlightsPage from "./views/highlights/page";
-import PublicationsPage from "./views/publications/page";
-import LibraryPage from "./views/library/page";
 import AboutPage from "./views/about/page";
+import LoginPage from "./views/auth/login";
+import RegisterPage from "./views/auth/register";
+import HighlightsPage from "./views/highlights/page";
+import Home from "./views/home/page";
+import Layout from './views/layout';
+import LibraryPage from "./views/library/page";
+import NewsPage from "./views/news/page";
+import PublicationsPage from "./views/publications/page";
+
+import './utils/firebaseConfig'; // Importa e executa a inicialização do Firebase
 
 function App() {
   return (
@@ -19,6 +23,8 @@ function App() {
           <Route path="publicacoes" element={<PublicationsPage />} />
           <Route path="biblioteca" element={<LibraryPage />} />
           <Route path="sobre" element={<AboutPage />} />
+          <Route path="auth/login" element={<LoginPage />} />
+          <Route path="auth/register" element={<RegisterPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
