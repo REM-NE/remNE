@@ -1,0 +1,26 @@
+.highlight .card {
+    height: 300px;
+}
+
+.publication-img {
+    width: 200px;
+    height: 125px;
+    background-color: lightgray;
+}
+
+.top-spacing {
+    padding-top: 150px;
+}
+
+.card-list {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card-main {
+    padding-right: 10px !important;
+    max-height: 500px;
+    overflow-y: auto;
+}
