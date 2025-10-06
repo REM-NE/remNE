@@ -1,10 +1,12 @@
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../utils/authContext';
 import '../App.css';
 
 import logo from '../assets/images/remne-logo.jpg';
 
 function Navbar() {
+    const { currentUser, logout } = useAuth();
 
     function NavBarButtons() {
         let buttonObject = [
@@ -38,9 +40,16 @@ function Navbar() {
                 </div>
                 <div class="column">
                     <div class="top-header">
-                        <Link to={"/auth/login"}>
-                            <Button >LOGIN</Button>
-                        </Link>
+                        {currentUser ? (
+                            <div class="column logout">
+                                <span>Olá, {currentUser.email}</span>
+                                <Button onClick={logout}>Sair</Button>
+                            </div>
+                        ) : (
+                            <Link to={"/auth/login"}>
+                                <Button >LOGIN</Button>
+                            </Link>
+                        )}
                     </div>
                     <div class="row-header bottom-header">
                         <div class="row-header navbar-menu">

@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import './auth.css';
-
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { auth } from '../../utils/firebaseConfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 export default function RegisterPage() {
-
     const [name, setName] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    let navigate = useNavigate();
 
     const isNotEmpty = (valor) => {
         if (valor.length > 0) {
@@ -18,12 +21,20 @@ export default function RegisterPage() {
     }
 
     const enviarDados = () => {
-        if (isNotEmpty(name) && isNotEmpty(login) && isNotEmpty(password)) {
-            alert("Usuário criado com sucesso")
+        if (isNotEmpty(login) && isNotEmpty(password)) {
+            createUserWithEmailAndPassword(auth, login, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert("Login efetuado com sucesso!");
+                    navigate("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Login deu errado!");
+                });
         } else {
-            if (password == confirmPassword) {
-                alert("Algum dado não foi informado")
-            }
+            alert("Algum campo está vazio!")
         }
     }
 
@@ -44,12 +55,19 @@ export default function RegisterPage() {
                     <label>
                         Senha
                     </label>
-                    <input className="input" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
-
+                    <div className="input">
+                        <input className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
+                        <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
+                    </div>
+                    
                     <label>
-                        Confirmar
+                        Confirmar senha
                     </label>
-                    <input className="input" onChange={(e) => setConfirmPassword(e.target.value)} name="confirmarSenha" value={confirmPassword} />
+                    <div className="input">
+                        <input className="inputPassword" onChange={(e) => setConfirmPassword(e.target.value)} name="confirmarSenha" value={confirmPassword} />
+                        <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
+                    </div>
+
                     <button onClick={() => enviarDados()}>
                         Enviar
                     </button>

@@ -9,25 +9,26 @@ import Layout from './views/layout';
 import LibraryPage from "./views/library/page";
 import NewsPage from "./views/news/page";
 import PublicationsPage from "./views/publications/page";
-
-import './utils/firebaseConfig'; // Importa e executa a inicialização do Firebase
+import { AuthProvider } from './utils/authContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="eventos-e-novidades" element={<NewsPage />} />
-          <Route path="recursos-destaque" element={<HighlightsPage />} />
-          <Route path="publicacoes" element={<PublicationsPage />} />
-          <Route path="biblioteca" element={<LibraryPage />} />
-          <Route path="sobre" element={<AboutPage />} />
-          <Route path="auth/login" element={<LoginPage />} />
-          <Route path="auth/register" element={<RegisterPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="eventos-e-novidades" element={<NewsPage />} />
+            <Route path="recursos-destaque" element={<HighlightsPage />} />
+            <Route path="publicacoes" element={<PublicationsPage />} />
+            <Route path="biblioteca" element={<LibraryPage />} />
+            <Route path="sobre" element={<AboutPage />} />
+            <Route path="auth/login" element={<LoginPage />} />
+            <Route path="auth/register" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

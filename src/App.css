@@ -154,6 +154,24 @@
   border-radius: var(--arredondamento-borda);
 }
 
+.top-header .logout {
+  width: auto;
+
+}
+
+input.inputPassword {
+    width: Calc(100% - 30px);
+    border: 0;
+    height: 100%;
+}
+
+button.showPassword {
+    width: 30px;
+    height: 100%;
+    background: white;
+    border: 0;
+}
+
 .card-inside {
     max-height: 500px;
     overflow-y: auto;
