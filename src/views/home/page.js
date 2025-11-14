@@ -1,9 +1,36 @@
+import { useEffect, useState } from 'react';
 import '../../App.css';
+import EditButton from '../../components/editButton';
+import { useAuth } from '../../utils/authContext';
+import { collection, db, getDocs } from "../../utils/firebaseConfig";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Home() {
+
+  const { currentUser } = useAuth();
+
+  const [docsData, setDocsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      const ref = collection(db, "home");
+      const snap = await getDocs(ref);
+
+      const lista = snap.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+
+      setDocsData(lista);
+      setLoading(false);
+    }
+
+    loadData();
+  }, []);
+
   return (
     <div className="top-spacing-home d-flex flex-column min-vh-100">
       {/* Navbar */}
@@ -87,8 +114,13 @@ export default function Home() {
         {/* About Us */}
         <main className="mb-4 mt-4">
           <div className="p-4 bg-light rounded">
-            <h1>About us</h1>
-            <p>This is your main content area. Add your elements here.</p>
+            {currentUser && <EditButton />}
+            {docsData.map((item, index) => (
+              <div key={index}>
+                <h1>{item.titulo}</h1>
+                <p>{item.texto}</p>
+              </div>
+            ))}
           </div>
         </main>
 

@@ -2,6 +2,9 @@
 import { initializeApp } from 'firebase/app';
 // Se você for usar Authentication, importe o getAuth também
 import { getAuth } from 'firebase/auth';
+// import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -16,6 +19,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { addDoc, collection, db, deleteDoc, doc, getDoc, getDocs, updateDoc };
 // const analytics = getAnalytics(app);
 
 // Inicialize o Firebase Authentication e obtenha uma referência para o serviço
