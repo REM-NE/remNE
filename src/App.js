@@ -18,8 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="eventos-e-novidades" element={<NewsPage />} />
-            <Route path="recursos-destaque" element={<HighlightsPage />} />
+            <Route path="eventos-e-noticias" element={<NewsPage />} />
+            <Route path="recursos-educacionais" element={<HighlightsPage />} />
             <Route path="publicacoes" element={<PublicationsPage />} />
             <Route path="biblioteca" element={<LibraryPage />} />
             <Route path="sobre" element={<AboutPage />} />

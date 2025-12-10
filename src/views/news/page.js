@@ -1,7 +1,7 @@
 import '../../App.css';
 import './news.css';
 import { Button, CardBody, CardHeader, CardText } from 'react-bootstrap';
-import logo from '../../assets/images/remne-logo.jpg';
+import logo from '../../assets/images/logo1.png';
 
 function NewsPage() {
     function NewsCard() {
