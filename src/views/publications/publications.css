@@ -8,10 +8,6 @@
     background-color: lightgray;
 }
 
-.top-spacing {
-    padding-top: 150px;
-}
-
 .card-list {
     display: flex;
     justify-content: center;

@@ -1,16 +1,18 @@
 :root {
   --cor-fundo-principal: white;
   --cor-texto-principal: black;
-  --cor-primaria-100: #FDDDDC;
-  --cor-primaria-200: #FAA6A4;
-  --cor-primaria-300: #F96661;
-  --cor-primaria-400: #D92B1E;
-  --cor-primaria-500: #9A1B12;
+  --cor-primaria-100: #fddddc;
+  --cor-primaria-200: #faa6a4;
+  --cor-primaria-300: #f96661;
+  --cor-primaria-400: #d92b1e;
+  --cor-primaria-500: #9a1b12;
   --cor-borda: lightgray;
   --arredondamento-borda: 12px;
   --borda-padrao: solid 1px var(--cor-borda);
-  --tipo-fonte: 'Inter', sans-serif;
-  --tamanho-fonte: 14px;
+  --tipo-fonte: "Inter", sans-serif;
+  --tamanho-fonte: 20px;
+  --tamanho-fonte-grande: 25px;
+  --tamanho-fonte-gigante: 40px;
   --espacamento-padrao: 20px;
 }
 
@@ -103,28 +105,35 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--cor-texto-principal)
+  color: var(--cor-texto-principal);
 }
 
 .navbar-menu div {
   width: 100px;
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-family: var(--tipo-fonte);
-  font-size: 20px;
+  font-size: var(--tamanho-fonte);
   font-style: normal;
   font-weight: 300;
   line-height: 150%;
   letter-spacing: -0.22px;
 }
 
-.navbar-menu div:hover, .navbar-menu .active {
+.navbar-menu div:hover,
+.navbar-menu .active {
   font-weight: 700;
 }
 
 .btn.btn-primary {
   padding: 5px 40px;
   width: 150px;
+}
+
+.container-carousel {
+  width: 100%;
+  padding: 0 !important;
+  margin-bottom: 42px;
 }
 
 .search-bar {
@@ -147,13 +156,40 @@
   justify-content: center;
 }
 
-.top-spacing {
-  padding-top: 120px;
+.home-about {
+  width: 60%;
+  margin-right: 79px;
 }
 
-.top-spacing-home {
-  padding-top: 170px;
+.home-news {
+  width: 40%;
 }
+
+.top-spacing {
+  padding-top: 118px;
+}
+
+.main-title {
+  color: #000;
+  font-family: var(--tipo-fonte);
+  font-size: var(--tamanho-fonte-gigante);
+  font-weight: 700;
+  line-height: 150%; /* 60px */
+  letter-spacing: -0.44px;
+}
+
+.main-text {
+  color: #000;
+  font-family: var(--tipo-fonte);
+  font-size: var(--tamanho-fonte);
+  font-weight: 400;
+  line-height: 150%; /* 30px */
+  letter-spacing: -0.22px;
+}
+
+/* .top-spacing-home {
+  padding-top: 118px;
+} */
 
 .footer {
   border-top: var(--borda-padrao);
@@ -189,9 +225,37 @@
   border-radius: var(--arredondamento-borda);
 }
 
+.home .card-body {
+  width: 404px;
+  height: 104px;
+  border-radius: 0 0 10px 10px;
+  background: var(--cor-primaria-200);
+  padding: 7px 3px 23px 3px;
+  margin-top: -54px;
+}
+
+.card {
+  border: unset;
+  border-radius: unset;
+}
+
+.card-title {
+  text-align: center;
+  font-family: var(--tipo-fonte);
+  font-size: var(--tamanho-fonte-grande);
+  font-weight: 600;
+  line-height: 150%; /* 37.5px */
+  letter-spacing: -0.275px;
+}
+
+.card-img-top {
+  width: 404px;
+  height: 246px;
+  aspect-ratio: 202/123;
+}
+
 .top-header .logout {
   width: auto;
-
 }
 
 input.inputPassword {

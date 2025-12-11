@@ -1,7 +1,6 @@
-import { Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../utils/authContext';
 import '../App.css';
+import { useAuth } from '../utils/authContext';
 
 import logo1 from '../assets/images/logo1.png';
 import logo2 from '../assets/images/logo2.png';
@@ -13,12 +12,12 @@ function Navbar() {
 
     function NavBarButtons() {
         let buttonObject = [
-            { title: "Início", icon: "", path: "/" },
-            { title: "Eventos e Notícias", icon: "", path: "/eventos-e-noticias" },
-            { title: "Recursos Educacionais", icon: "", path: "/recursos-educacionais" },
-            { title: "Publicações Científicas", icon: "", path: "/publicacoes" },
-            { title: "Biblioteca", icon: "", path: "/biblioteca" },
-            { title: "Sobre", icon: "", path: "/sobre" },
+            { title: "Início", path: "/" },
+            { title: "Eventos e Notícias", path: "/eventos-e-noticias" },
+            { title: "Recursos Educacionais", path: "/recursos-educacionais" },
+            { title: "Publicações Científicas", path: "/publicacoes" },
+            { title: "Biblioteca", path: "/biblioteca" },
+            { title: "Sobre", path: "/sobre" },
         ];
 
         return (
