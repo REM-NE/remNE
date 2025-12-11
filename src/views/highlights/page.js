@@ -28,7 +28,7 @@ function HighlightsPage() {
     ]
 
     return (
-        <div class="highlight home top-spacing-highlight">
+        <div class="highlight main top-spacing-highlight">
             <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
                 {cardUpperTexts.map((item, id) => (
                     <div key={id} className="col-md-4 d-flex justify-content-center mb-4">

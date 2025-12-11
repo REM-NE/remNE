@@ -1,7 +1,7 @@
-import '../../App.css';
-import './news.css';
 import { Button, CardBody, CardHeader, CardText } from 'react-bootstrap';
+import '../../App.css';
 import logo from '../../assets/images/logo1.png';
+import './news.css';
 
 function NewsPage() {
     function NewsCard() {
@@ -55,7 +55,7 @@ function NewsPage() {
     }
 
     return (
-        <div class="news home top-spacing">
+        <div class="news main top-spacing">
             {/* <div class="title">Notícias</div> */}
             <div class="container flex-grow-1">
                 <div class="column title card-main">

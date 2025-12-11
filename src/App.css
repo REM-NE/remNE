@@ -147,7 +147,7 @@
   padding: 5px 10px;
 }
 
-.home {
+.main {
   display: flex;
   width: 100%;
   min-height: 83.5vh;
@@ -234,7 +234,7 @@
   margin-top: -54px;
 }
 
-.card {
+.home .card {
   border: unset;
   border-radius: unset;
 }
@@ -248,7 +248,7 @@
   letter-spacing: -0.275px;
 }
 
-.card-img-top {
+.home .card-img-top {
   width: 404px;
   height: 246px;
   aspect-ratio: 202/123;

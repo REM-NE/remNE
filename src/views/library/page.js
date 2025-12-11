@@ -52,17 +52,17 @@ export default function HomeForm() {
         alert(`Documento ${id} salvo!`);
     }
 
-    if (loading) return <p className="container flex-grow-1 library home">Carregando...</p>;
+    if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
     return (
-        <div className="container top-spacing pb-5">
+        <div className="container main top-spacing pb-5">
 
             <h2 className="text-center pt-5 mb-4">Editor da Página Home</h2>
 
             {!user && <p>Faça login para editar.</p>}
 
             {docsData.map((item, index) => (
-                <div key={item.id} className="container library home flex-grow-1 mt-4 p-3 border rounded">
+                <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 
                     <h4>Documento: {item.id}</h4>
 

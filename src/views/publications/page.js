@@ -22,7 +22,7 @@ function PublicationsPage() {
     ]
 
     return (
-        <div class="highlight home top-spacing">
+        <div class="highlight main top-spacing">
             <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
                 <div className="card-main mb-4">
                     <div className="card-inside">
