@@ -194,13 +194,24 @@
 .footer {
   border-top: var(--borda-padrao);
   width: 100%;
-  height: 150px;
+  height: 160px;
   display: flex;
-  gap: 25%;
   padding: var(--espacamento-padrao) 0 0;
-  flex-direction: row;
+  flex-direction: column;
+  background-color: var(--cor-primaria-300);
+ 
 }
-
+.footer-top {
+  display: flex;
+  gap: 100px;
+  padding: var(--espacamento-padrao) 0 0;
+  align-items: center;
+  justify-content: center;  
+}
+.footer img.logo {
+  width: 200px;  
+  height: auto;
+}
 .footer .form-footer {
   margin-top: 15px;
   width: 50%;
@@ -209,14 +220,36 @@
   border: var(--borda-padrao);
 }
 
-.footer .title-footer {
-  width: fit-content;
-  padding-left: 5%;
+.footer p {
+  display: flex;
+  font-size: medium;
+  text-align: center;
+  padding-left: 0;  
+  margin: 0;
+  
+  
 }
 
 .footer .form-footer input {
   margin: var(--espacamento-padrao);
   height: 18px;
+}
+
+.footer-hr {
+  border: none;
+  height: 2px;
+  background-color: #000;
+  opacity: 0.3;
+  margin: 0 60px;
+}
+.footer-section-bottom {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  
+  
 }
 
 .card-main {
