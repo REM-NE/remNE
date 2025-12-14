@@ -121,6 +121,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <div>
+            <video className='video-index' width="100%" height="315" controls>
+              <source src="" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </main>
 
         {/* Cards */}
@@ -141,7 +147,9 @@ export default function Home() {
               </div>
             </div>
             // </button>
+           
           ))}
+           <button className="botao-noticias" onClick={() => { }}>Ver todas as notícias</button>
         </div>
       </div>
     </div>
