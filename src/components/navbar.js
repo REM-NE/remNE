@@ -38,8 +38,8 @@ function Navbar() {
         <div className="header">
             <div className="row-header">
                 <div className="start-header">
-                    <img className="logo" src={logo1} alt="logo" />
-                    <img className="logo" src={logo2} alt="logo" />
+                    <a href='/'><img className="logo" src={logo1} alt="logo" /></a>
+                    <a href='/'><img className="logo" src={logo2} alt="logo" /></a>
                 </div>
                 <div className="column">
                     {/* <div className="top-header"> 

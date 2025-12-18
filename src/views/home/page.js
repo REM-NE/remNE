@@ -6,6 +6,7 @@ import { collection, db, getDocs } from "../../utils/firebaseConfig";
 
 import carouselImage1 from '../../assets/images/carousel1.png';
 import newsImage1 from '../../assets/images/news1.png';
+import red from '../../assets/images/red.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -36,33 +37,6 @@ export default function Home() {
 
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
-      {/* Navbar */}
-      {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">REM</a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link active" href="#">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Features</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
 
       {/* Conteúdo */}
       <div className="container-carousel flex-grow-1">
@@ -109,7 +83,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container w-100 flex-grow-1 d-flex">
+      <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
         <main className="home-about">
           <div>
@@ -120,6 +94,12 @@ export default function Home() {
                 <p className='main-text'>{item.texto}</p>
               </div>
             ))}
+          </div>
+          <div>
+            <video className='video-index' width="100%" height="315" controls>
+              <source src="" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </main>
 
@@ -132,7 +112,7 @@ export default function Home() {
               <div className="card" onClick={() => { }} style={{ cursor: "pointer" }}>
                 <img src={newsImage1} className="card-img-top" alt="..." />
                 <div className="card-body">
-                  <h5 className="card-title">Lorem Ipsum is simply dummy text of the printing </h5>
+                  <h5 className="card-title home-card-title">Lorem Ipsum is simply dummy text of the printing </h5>
                   {/* <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card’s content.
                   </p> */}
@@ -141,7 +121,19 @@ export default function Home() {
               </div>
             </div>
             // </button>
+
           ))}
+          <button className="botao-noticias" onClick={() => { }}>Ver todas as notícias</button>
+        </div>
+      </div>
+      <div className="red-section d-flex flex-column justify-content-center align-items-center container">
+        <img src={red} className="red-img w-100" alt="Red" />
+        <div className="red-content d-flex flex-column justify-content-center align-items-center">
+          <h1 className='red-title'>O Reino de Aljabar</h1>
+          <p className='red-text'>O RED O reino de Aljabar: o desafio da balança consiste em um jogo, para alunos do 4º ano do Ensino Fundamental, cuja ideia geral é utilizar relações de igualdade e desigualdade em uma balança de dois pratos para descobrir valores desconhecidos.</p>
+          <div className='red-actions'>
+            <button className="red-btn" onClick={() => { }}>Veja Mais</button>
+          </div>
         </div>
       </div>
     </div>
