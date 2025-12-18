@@ -4,7 +4,12 @@ import news2 from '../../assets/images/news2.png';
 import Pagination from '../../components/pagination';
 import Post from '../../components/post';
 import './highlights.css';
-
+import banner from '../../assets/images/recursos-banner.jpeg';
+import fundamental from '../../assets/images/ensino-fundamental.jpeg';
+import medio from '../../assets/images/medio.jpeg';
+import superior from '../../assets/images/superior.jpeg';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 function HighlightsPage() {
     const [page, setPage] = useState(1);
 
@@ -96,20 +101,24 @@ function HighlightsPage() {
     }
 
     const cardUpperTexts = [
-        { text: "Ensino Fundamental" },
-        { text: "Ensino Médio" },
-        { text: "Ensino Superior" }
+        { img: fundamental, text: "Ensino Fundamental" },
+        { img: medio, text: "Ensino Médio" },
+        { img: superior , text: "Ensino Superior" }   
     ]
 
     return (
         <div class="highlights main top-spacing">
-            {/* <div class="title">Notícias</div> */}
+            <img src={banner} className=" w-100 h-30" alt="..." style={{ height: "496px", objectFit: "cover" }}/>
+            <br></br>
+            <button className="botao-noticias" style={{ padding_bottom:"50px", }} onClick={() => { }}>Envio de Material</button>
             <div class="container flex-grow-1">
                 <div class="column">
                     <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
                         {cardUpperTexts.map((item, id) => (
+                            
                             <div key={id} className="col-md-4 d-flex justify-content-center mb-4">
                                 <div className="card" style={{ width: "30rem" }}>
+                                    <img src={item.img} class="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{item.text}</h5>
                                         {/* <p className="card-text">
@@ -118,7 +127,9 @@ function HighlightsPage() {
                                         {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                                     </div>
                                 </div>
+                                
                             </div>
+                            
                         ))}
                     </div>
                     <div className="grid">

@@ -4,7 +4,7 @@ import news2 from '../../assets/images/news2.png';
 import Pagination from '../../components/pagination';
 import Post from '../../components/post';
 import './news.css';
-
+import banner from '../../assets/images/recursos-banner.jpeg';
 function NewsPage() {
     const [page, setPage] = useState(1);
 
@@ -96,7 +96,9 @@ function NewsPage() {
     }
 
     return (
+        
         <div class="news main top-spacing">
+            <img src={banner} className=" w-100 h-30" alt="..." style={{ height: "496px", objectFit: "cover" }}/>
             {/* <div class="title">Notícias</div> */}
             <div class="container flex-grow-1">
                 <div class="column">
