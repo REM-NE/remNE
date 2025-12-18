@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function EditButton(path) {
+function EditButton({ path }) {
   return (
     <div className="item">
       {/* {user?.logged && ( */}
