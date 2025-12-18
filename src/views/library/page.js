@@ -1,115 +1,115 @@
-// import '../../App.css';
+import { useState } from 'react';
+import '../../App.css';
+import news2 from '../../assets/images/news2.png';
+import Banner from '../../components/banner';
+import Pagination from '../../components/pagination';
+import Post from '../../components/post';
 
-// function Library() {
-//     return (
-//         <div class="library home">Biblioteca</div>
-//     )
-// }
+function LibraryPage() {
+    const [page, setPage] = useState(1);
 
-// export default Library;
+    let object = [
+        {
+            title: "Início/Home",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Eventos e Novidades",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Recursos Destaque",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Início/Home",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Eventos e Novidades",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Recursos Destaque",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Início/Home",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Eventos e Novidades",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Recursos Destaque",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Início/Home",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Eventos e Novidades",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+        {
+            title: "Recursos Destaque",
+            text: "Lore ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis sed lacus vitae porta. In id nibh lectus. Maecenas scelerisque tellus vel metus cursus, non rhoncus libero convallis. Nullam tincidunt quis lectus quis imperdiet. Mauris gravida feugiat neque, ut rutrum leo dignissim a. Etiam placerat nunc odio, a facilisis nunc porta e. Integer dolor felis, molestie ac condimentum at, vehicula sit amet odio. Maecenas sit amet felis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac rhoncus justo. Pellentesque consequat dolor vel nulla hendrerit varius. Quisque facilisis vel justo id blandit. Donec felis augue, accumsan id elit a, aliquet rhoncus dolor. Cras vitae condimentum ipsum, at vulputate est. Sed non dictum tortor. Duis molestie arcu eget accumsan auctor. Suspendisse neque tellus, faucibus quis condimentum nec, placerat in arcu. Morbi varius orci eleifend dolor efficitur, non ullamcorper ex vulputate. Curabitur bibendum sem vel tincidunt sollicitudin. Vivamus et arcu tincidunt tellus pulvinar ultricies. Curabitur ultricies augue vel magna lacinia fringilla. Quisque posuere efficitur tortor. Nunc sagittis fermentum quam eu interdum. Nullam vehicula ultrices metus, nec aliquet metus porttitor a. Nullam bibendum lorem dui, eget vulputate leo dictum ac. Quisque convallis lectus vitae quam tincidunt, eget gravida augue viverra. Integer quis ultrices neque.",
+            image: `${news2}`,
+            link: ""
+        },
+    ];
 
-import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { auth, db } from "../../utils/firebaseConfig";
-
-export default function HomeForm() {
-    const [user, setUser] = useState(null);
-    const [docsData, setDocsData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // Detectar usuário logado
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-
-        return () => unsub();
-    }, []);
-
-    // Carregar TODOS os documentos da coleção "home"
-    useEffect(() => {
-        async function loadData() {
-            const ref = collection(db, "home");
-            const snap = await getDocs(ref);
-
-            const lista = snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            setDocsData(lista);
-            setLoading(false);
-        }
-
-        loadData();
-    }, []);
-
-    // Atualizar somente o documento alterado
-    async function salvar(id, dados) {
-        const ref = doc(db, "home", id);
-        await updateDoc(ref, dados);
-        alert(`Documento ${id} salvo!`);
+    function LibraryCards() {
+        return (
+            <>
+                {object.map((noticia, index) => (
+                    // <a key={index} href="#">
+                    index < 10 && (<Post key={index} text={noticia.text} image={noticia.image} />)
+                    // </a>
+                ))}
+            </>
+        );
     }
 
-    if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
-
     return (
-        <div className="container main top-spacing pb-5">
-
-            <h2 className="text-center pt-5 mb-4">Editor da Página Home</h2>
-
-            {!user && <p>Faça login para editar.</p>}
-
-            {docsData.map((item, index) => (
-                <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
-
-                    <h4>Documento: {item.id}</h4>
-
-                    {/* TÍTULO */}
-                    <div className="mb-3">
-                        <label>Título:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={item.titulo || ""}
-                            disabled={!user}
-                            onChange={(e) => {
-                                const novo = [...docsData];
-                                novo[index].titulo = e.target.value;
-                                setDocsData(novo);
-                            }}
-                        />
+        
+        <div class="news main top-spacing">
+            <Banner title="Biblioteca" />
+            {/* <div class="title">Notícias</div> */}
+            <div class="container flex-grow-1">
+                <div class="column">
+                    <div className="grid">
+                        <LibraryCards />
                     </div>
-
-                    {/* TEXTO */}
-                    <div className="mb-3">
-                        <label>Texto:</label>
-                        <textarea
-                            className="form-control"
-                            rows={4}
-                            disabled={!user}
-                            value={item.texto || ""}
-                            onChange={(e) => {
-                                const novo = [...docsData];
-                                novo[index].texto = e.target.value;
-                                setDocsData(novo);
-                            }}
-                        ></textarea>
-                    </div>
-
-                    {/* BOTÃO DE SALVAR POR DOCUMENTO */}
-                    {user && (
-                        <button
-                            className="btn btn-success w-100"
-                            onClick={() => salvar(item.id, item)}
-                        >
-                            Salvar alterações
-                        </button>
-                    )}
-
+                    <Pagination totalPages={object.length%10} currentPage={page} onChange={(page) => setPage(page)} />
                 </div>
-            ))}
+            </div>
         </div>
-    );
+    )
 }
+
+export default LibraryPage;

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import '../../App.css';
 import news2 from '../../assets/images/news2.png';
+import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import Post from '../../components/post';
 import './publications.css';
-import banner from '../../assets/images/recursos-banner.jpeg';
 
 function PublicationsPage() {
 
@@ -99,7 +99,7 @@ function PublicationsPage() {
 
     return (
         <div class="publications main top-spacing">
-            <img src={banner} className=" w-100 h-20" alt="..." style={{ height: "496px", objectFit: "cover" }}/>
+            <Banner title="Publicações Científicas" />
             {/* <div class="title">Notícias</div> */}
             <div class="container flex-grow-1">
                 <div class="column">

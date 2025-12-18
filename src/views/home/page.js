@@ -87,7 +87,7 @@ export default function Home() {
         {/* About Us */}
         <main className="home-about">
           <div>
-            {currentUser && <EditButton />}
+            {currentUser && <EditButton path="/home/edit" />}
             {docsData.map((item, index) => (
               <div key={index}>
                 <h1 className='main-title'>{item.titulo}</h1>

@@ -14,6 +14,7 @@
   --tamanho-fonte: 20px;
   --tamanho-fonte-grande: 25px;
   --tamanho-fonte-gigante: 40px;
+  --tamanho-fonte-xg: 80px;
   --espacamento-padrao: 20px;
 }
 
@@ -168,6 +169,19 @@
 
 .top-spacing {
   padding-top: 118px;
+}
+
+.banner-text {
+  color: var(--cor-fundo-principal);
+  text-align: end;
+  font-family: var(--tipo-fonte);
+  font-size: var(--tamanho-fonte-xg);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 150%; /* 120px */
+  letter-spacing: -0.88px;
+  margin-top: -125px;
+  padding-right: 111px;
 }
 
 .main-title {
