@@ -29,6 +29,7 @@ function Footer() {
                 </a>
                 </div>
                 <span>2025 REM - Todos os direitos reservados.</span>
+                <span>Contato: remne2025@gmail.com</span>
             </section>
         </div>
 
