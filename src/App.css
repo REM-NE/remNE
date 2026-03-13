@@ -171,6 +171,11 @@
   padding-top: 118px;
 }
 
+.instagram-posts {
+  width: 100%;
+  margin-bottom:50px;
+}
+
 .banner-text {
   color: var(--cor-fundo-principal);
   text-align: end;

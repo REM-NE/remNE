@@ -35,6 +35,12 @@ export default function Home() {
     loadData();
   }, []);
 
+  (function () {
+    const d = document, s = d.createElement("script");
+    s.type = "module";
+    s.src = "https://w.behold.so/widget.js"; d.head.append(s);
+  })();
+
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
 
@@ -135,6 +141,9 @@ export default function Home() {
             <button className="red-btn" onClick={() => { }}>Veja Mais</button>
           </div>
         </div>
+      </div>
+      <div class="instagram-posts">
+        <div data-behold-id="MZu7Iovm2aAychKp2K34"></div>
       </div>
     </div>
   );
