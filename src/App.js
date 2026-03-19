@@ -10,6 +10,7 @@ import Home from "./views/home/page";
 import Layout from './views/layout';
 import LibraryPage from "./views/library/page";
 import NewsPage from "./views/news/page";
+import NewsForm from "./views/news/edit";
 import PublicationsPage from "./views/publications/page";
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
             <Route path="biblioteca" element={<LibraryPage />} />
             <Route path="sobre" element={<AboutPage />} />
             <Route path="home/edit" element={<HomeForm />} />
-            {/* <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
-            <Route path="recursos-educacionais/edit" element={<HighlightsForm />} />
+            <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
+            {/*<Route path="recursos-educacionais/edit" element={<HighlightsForm />} />
             <Route path="publicacoes/edit" element={<PublicationsForm />} />
             <Route path="biblioteca/edit" element={<LibraryForm />} />
             <Route path="sobre/edit" element={<AboutForm />} /> */}
