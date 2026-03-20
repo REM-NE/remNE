@@ -8,14 +8,13 @@ import { collection, db, getDocs } from "../../utils/firebaseConfig";
 import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
-import news2 from '../../assets/images/news2.png';
 import superior from '../../assets/images/superior.jpeg';
 import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import Post from '../../components/post';
-import './highlights.css';
+import './resources.css';
 
-function HighlightsPage() {
+function ResourcesPage() {
     const { currentUser } = useAuth();
 
     const [docsData, setDocsData] = useState([]);
@@ -58,7 +57,7 @@ function HighlightsPage() {
     ]
 
     return (
-        <div class="highlights main top-spacing">
+        <div class="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
             <br></br>
             <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button>
@@ -83,7 +82,7 @@ function HighlightsPage() {
                         ))}
                     </div>
                     <div className="d-flex justify-content-start mt-5">
-                        {currentUser && <PathButton text="Editar Recursos e Publicações" path="/recursos-educacionais/edit" />}
+                        {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />
@@ -95,4 +94,4 @@ function HighlightsPage() {
     )
 }
 
-export default HighlightsPage;
+export default ResourcesPage;

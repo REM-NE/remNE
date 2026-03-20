@@ -39,7 +39,7 @@ function PublicationsPage() {
             <>
                 {docsData.map((publicacao, index) => (
                     // <a key={index} href="#">
-                    index < 10 && (<Post key={index} text={publicacao.text} image={publicacao.imageURL} />)
+                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} />)
                     // </a>
                 ))}
             </>
@@ -53,7 +53,7 @@ function PublicationsPage() {
             <div class="container flex-grow-1">
                 <div class="column">
                     <div className="d-flex justify-content-start mt-5">
-                        {currentUser && <PathButton text="Editar Recursos e Publicações" path="/publicacoes/edit" />}
+                        {currentUser && <PathButton text="Editar Publicações Científicas" path="/publicacoes/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />

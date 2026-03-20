@@ -1,16 +1,16 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocs, updateDoc, serverTimestamp, addDoc, deleteDoc } from "firebase/firestore";
+import { collection, serverTimestamp, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../utils/firebaseConfig";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
 
-export default function NewsForm() {
+export default function ResourcesForm() {
     const [user, setUser] = useState(null);
-    const [docsData, setDocsData] = useState([]); // Lista de documentos do Firestore
+    const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [newPublicationData, setNewPublicationData] = useState({
+    const [resourcesData, setResourcesData] = useState({
         title: "",
         text: "",
         imageUrl: "",
@@ -27,17 +27,17 @@ export default function NewsForm() {
     }, []);
 
     useEffect(() => {
-        // loadData("publicacoes");
+        // loadData(setDocsData, "recursos");
         setLoading(false);
     }, []);
 
-    const createNewPublication = async (newPublicationData) => {
+    const createNewResource = async (resourcesData) => {
         try {
-            const docRef = await addDoc(collection(db, "publicacoes"), {
-                title: newPublicationData.title,
-                text: newPublicationData.text,
-                imageUrl: newPublicationData.imageUrl,
-                link: newPublicationData.link,
+            const docRef = await addDoc(collection(db, "recursos"), {
+                title: resourcesData.title,
+                text: resourcesData.text,
+                imageUrl: resourcesData.imageUrl,
+                link: resourcesData.link,
                 publishedAt: new Date(),
                 createdAt: serverTimestamp()
             });
@@ -50,14 +50,14 @@ export default function NewsForm() {
     };
 
     async function saveData(id, dados) {
-        const ref = doc(db, "publicacoes", id);
+        const ref = doc(db, "recursos", id);
         await updateDoc(ref, dados);
         alert(`Documento ${id} salvo!`);
     }
 
     const deleteData = async (id) => {   // Remover o documento
         try {
-            await deleteDoc(doc(db, "publicacoes", id));
+            await deleteDoc(doc(db, "recursos", id));
             alert(`Recurso ${id} excluído!`);
         } catch (error) {
             alert("Erro ao excluir recurso:", error);
@@ -68,27 +68,26 @@ export default function NewsForm() {
 
     return (
         <div className="container main top-spacing pb-5">
-            <h2 className="text-center pt-5 mb-4">Editor da Página de Publicações Científicas</h2>
+            <h2 className="text-center pt-5 mb-4">Editor da Página de Recursos Educacionais</h2>
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Criar nova notícia</h3>
-                <InputText label="Título" data={newPublicationData} setData={setNewPublicationData} property="title" disabled={!user} />
-                <InputTextArea label="Texto" data={newPublicationData} setData={setNewPublicationData} property="text" disabled={!user} />
-                <InputText label="Link da imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" disabled={!user} />
-                <InputText label="Link externo" data={newPublicationData} setData={setNewPublicationData} property="link" disabled={!user} />
+                <h3>Criar novo recurso</h3>
+                <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" disabled={!user} />
+                <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" disabled={!user} />
+                <InputText label="Link da imagem" data={resourcesData} setData={setResourcesData} property="imageUrl" disabled={!user} />
+                <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" disabled={!user} />
                 <button
                     className="btn btn-success w-100"
-                    onClick={() => createNewPublication(newPublicationData)}
+                    onClick={() => createNewResource(resourcesData)}
                 >
-                    Adicionar publicação
+                    Adicionar recurso
                 </button>
             </div>
 
             <div className="container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Últimas notícias:</h3>
-
-                {!docsData.length && <p>Nenhuma notícia encontrada.</p>}
-                {docsData && docsData.map((item) => (
+                <h3>Últimos recursos:</h3>
+                {!docsData.length && <p>Nenhum recurso encontrado.</p>}
+                {docsData.map((item) => (
                     <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 
                         <div className="d-flex justify-content-between">
@@ -105,11 +104,12 @@ export default function NewsForm() {
                         {user && (
                             <button
                                 className="btn btn-success w-100"
-                                onClick={() => saveData(item.id, item, "publicacoes")}
+                                onClick={() => saveData(item.id, item)}
                             >
                                 Salvar alterações
                             </button>
                         )}
+
                     </div>
                 ))}
             </div>
