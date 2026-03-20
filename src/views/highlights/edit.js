@@ -3,7 +3,7 @@ import { collection, doc, getDocs, updateDoc, serverTimestamp, addDoc } from "fi
 import { useEffect, useState } from "react";
 import { auth, db } from "../../utils/firebaseConfig";
 
-export default function NewsForm() {
+export default function HighlightsForm() {
     const [user, setUser] = useState(null);
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ export default function NewsForm() {
     }, []);
 
     async function loadData() {
-        const ref = collection(db, "eventos-e-noticias");
+        const ref = collection(db, "recursos");
         const snap = await getDocs(ref);
 
         const lista = snap.docs.map((d) => ({
@@ -43,7 +43,7 @@ export default function NewsForm() {
 
     const createNews = async (newsData) => {
         try {
-            const docRef = await addDoc(collection(db, "eventos-e-noticias"), {
+            const docRef = await addDoc(collection(db, "recursos"), {
                 title: newsData.title,
                 text: newsData.text,
                 imageUrl: newsData.imageUrl,
@@ -61,7 +61,7 @@ export default function NewsForm() {
 
     // Atualizar somente o documento alterado
     async function salvar(id, dados) {
-        const ref = doc(db, "eventos-e-noticias", id);
+        const ref = doc(db, "recursos", id);
         await updateDoc(ref, dados);
         alert(`Documento ${id} salvo!`);
     }
@@ -70,10 +70,10 @@ export default function NewsForm() {
 
     return (
         <div className="container main top-spacing pb-5">
-            <h2 className="text-center pt-5 mb-4">Editor da Página de Eventos e Notícias</h2>
+            <h2 className="text-center pt-5 mb-4">Editor da Página de Recursos Educacionais</h2>
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Criar nova notícia</h3>
+                <h3>Criar novo recurso</h3>
                 <div className="mb-3">
                     <label>Título:</label>
                     <input
@@ -128,14 +128,13 @@ export default function NewsForm() {
                     className="btn btn-success w-100"
                     onClick={() => createNews(newsData)}
                 >
-                    Adicionar notícia
+                    Adicionar recurso
                 </button>
             </div>
 
             <div className="container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Últimas notícias:</h3>
-
-                {!docsData.length && <p>Nenhuma notícia encontrada.</p>}
+                <h3>Últimos recursos:</h3>
+                {!docsData.length && <p>Nenhum recurso encontrado.</p>}
                 {docsData.map((item, index) => (
                     <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 

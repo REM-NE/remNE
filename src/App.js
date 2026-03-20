@@ -5,6 +5,7 @@ import AboutPage from "./views/about/page";
 import LoginPage from "./views/auth/login";
 import RegisterPage from "./views/auth/register";
 import HighlightsPage from "./views/highlights/page";
+import HighlightsForm from "./views/highlights/edit";
 import HomeForm from "./views/home/edit";
 import Home from "./views/home/page";
 import Layout from './views/layout';
@@ -12,6 +13,7 @@ import LibraryPage from "./views/library/page";
 import NewsPage from "./views/news/page";
 import NewsForm from "./views/news/edit";
 import PublicationsPage from "./views/publications/page";
+import PublicationsForm from "./views/publications/edit";
 
 function App() {
   return (
@@ -27,9 +29,9 @@ function App() {
             <Route path="sobre" element={<AboutPage />} />
             <Route path="home/edit" element={<HomeForm />} />
             <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
-            {/*<Route path="recursos-educacionais/edit" element={<HighlightsForm />} />
+            <Route path="recursos-educacionais/edit" element={<HighlightsForm />} />
             <Route path="publicacoes/edit" element={<PublicationsForm />} />
-            <Route path="biblioteca/edit" element={<LibraryForm />} />
+            {/*<Route path="biblioteca/edit" element={<LibraryForm />} />
             <Route path="sobre/edit" element={<AboutForm />} /> */}
             <Route path="auth/login" element={<LoginPage />} />
             <Route path="auth/register" element={<RegisterPage />} />

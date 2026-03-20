@@ -25,7 +25,7 @@ export default function NewsForm() {
     }, []);
 
     async function loadData() {
-        const ref = collection(db, "eventos-e-noticias");
+        const ref = collection(db, "publicacoes");
         const snap = await getDocs(ref);
 
         const lista = snap.docs.map((d) => ({
@@ -43,7 +43,7 @@ export default function NewsForm() {
 
     const createNews = async (newsData) => {
         try {
-            const docRef = await addDoc(collection(db, "eventos-e-noticias"), {
+            const docRef = await addDoc(collection(db, "publicacoes"), {
                 title: newsData.title,
                 text: newsData.text,
                 imageUrl: newsData.imageUrl,
@@ -61,7 +61,7 @@ export default function NewsForm() {
 
     // Atualizar somente o documento alterado
     async function salvar(id, dados) {
-        const ref = doc(db, "eventos-e-noticias", id);
+        const ref = doc(db, "publicacoes", id);
         await updateDoc(ref, dados);
         alert(`Documento ${id} salvo!`);
     }
@@ -128,7 +128,7 @@ export default function NewsForm() {
                     className="btn btn-success w-100"
                     onClick={() => createNews(newsData)}
                 >
-                    Adicionar notícia
+                    Adicionar publicação
                 </button>
             </div>
 

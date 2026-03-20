@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
-import EditButton from '../../components/editButton';
+import PathButton from '../../components/pathButton';
 import { useAuth } from '../../utils/authContext';
 import { collection, db, getDocs } from "../../utils/firebaseConfig";
 
@@ -16,19 +16,29 @@ export default function Home() {
   const { currentUser } = useAuth();
 
   const [docsData, setDocsData] = useState([]);
+  const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
-      const ref = collection(db, "home");
-      const snap = await getDocs(ref);
+      const refHome = collection(db, "home");
+      const refNews = collection(db, "eventos-e-noticias");
 
-      const lista = snap.docs.map((d) => ({
+      const snapHome = await getDocs(refHome);
+      const snapNews = await getDocs(refNews);
+
+      const listaHome = snapHome.docs.map((d) => ({
         id: d.id,
         ...d.data(),
       }));
 
-      setDocsData(lista);
+      const listaNews = snapNews.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+
+      setDocsData(listaHome);
+      setNewsData(listaNews.reverse());
       setLoading(false);
     }
 
@@ -93,45 +103,47 @@ export default function Home() {
         {/* About Us */}
         <main className="home-about">
           <div>
-            {currentUser && <EditButton path="/home/edit" />}
+            <div className="d-flex justify-content-start">
+              {currentUser && <PathButton text="Editar Posts do Home" path="/home/edit" />}
+            </div>
             {docsData.map((item, index) => (
               <div key={index}>
                 <h1 className='main-title'>{item.titulo}</h1>
                 <p className='main-text'>{item.texto}</p>
               </div>
             ))}
-          </div>
-          <div>
             <video className='video-index' width="100%" height="315" controls>
               <source src="" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
-        </main>
+        </main >
 
         {/* Cards */}
-        <div className="justify-content-center">
+        < div className="home-news justify-content-center" >
           <h1 className='main-title'>Últimas Noticias</h1>
-          {[1, 2, 3].map((item) => (
-            // <button className="" onClick={() => {}}>
-            <div key={item} className="d-flex justify-content-center mb-4">
-              <div className="card" onClick={() => { }} style={{ cursor: "pointer" }}>
-                <img src={newsImage1} className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title home-card-title">Lorem Ipsum is simply dummy text of the printing </h5>
-                  {/* <p className="card-text">
+          {
+            newsData.map((item) => (
+              // <button className="" onClick={() => {}}>
+              <div key={item.id} className="d-flex justify-content-center mb-4">
+                <div className="card" onClick={() => { }} style={{ cursor: "pointer" }}>
+                  <img src={item.image || newsImage1} className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title home-card-title">{item.title}</h5>
+                    {/* <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card’s content.
                   </p> */}
-                  {/* <a href="#" className="btn btn-primary">Veja mais</a> */}
+                    {/* <a href="#" className="btn btn-primary">Veja mais</a> */}
+                  </div>
                 </div>
               </div>
-            </div>
-            // </button>
+              // </button>
 
-          ))}
-          <button className="botao-noticias" onClick={() => { }}>Ver todas as notícias</button>
-        </div>
-      </div>
+            ))
+          }
+          <PathButton path="/eventos-e-noticias" text="Veja todas as notícias" />
+        </div >
+      </div >
       <div className="red-section d-flex flex-column justify-content-center align-items-center container">
         <img src={red} className="red-img w-100" alt="Red" />
         <div className="red-content d-flex flex-column justify-content-center align-items-center">
@@ -145,6 +157,6 @@ export default function Home() {
       <div class="instagram-posts">
         <div data-behold-id="MZu7Iovm2aAychKp2K34"></div>
       </div>
-    </div>
+    </div >
   );
 }
