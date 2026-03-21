@@ -4,8 +4,8 @@ import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
+import { getDocuments } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
-import { collection, db, getDocs } from "../../utils/firebaseConfig";
 import './news.css';
 
 function NewsPage() {
@@ -15,29 +15,23 @@ function NewsPage() {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
+    function loadData() {
+        getDocuments("eventos-e-noticias", true).then((data) => {
+            setDocsData(data);
+        });
+        setLoading(false);
+    }
+
     useEffect(() => {
-        async function loadData() {
-            const ref = collection(db, "eventos-e-noticias");
-            const snap = await getDocs(ref);
-
-            const lista = snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            setDocsData(lista.reverse());
-            setLoading(false);
-        }
-
         loadData();
     }, []);
-
+    
     function NewsCard() {
         return (
             <>
                 {docsData.map((noticia, index) => (
                     // <a key={index} href="#">
-                    index < 10 && (<Post key={index} title={noticia.title} image={noticia.imageUrl} />)
+                    index < 10 && (<Post key={index} title={noticia.title} image={noticia.imageUrl} id={noticia.id} />)
                     // </a>
                 ))}
             </>

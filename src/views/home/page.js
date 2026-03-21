@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import '../../App.css';
 import PathButton from '../../components/pathButton';
 import { useAuth } from '../../utils/authContext';
-import { collection, db, getDocs } from "../../utils/firebaseConfig";
 
+import { Link } from "react-router-dom";
 import carouselImage1 from '../../assets/images/carousel1.png';
 import newsImage1 from '../../assets/images/news1.png';
 import red from '../../assets/images/red.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { getDocuments } from '../../cotrollers/firebaseCollections';
 
 export default function Home() {
 
@@ -19,25 +20,15 @@ export default function Home() {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadData() {
-    const refHome = collection(db, "home");
-    const refNews = collection(db, "eventos-e-noticias");
+  function loadData() {
+    getDocuments("home", false).then((data) => {
+      setDocsData(data);
+    });
 
-    const snapHome = await getDocs(refHome);
-    const snapNews = await getDocs(refNews);
+    getDocuments("eventos-e-noticias", true).then((data) => {
+      setNewsData(data);
+    });
 
-    const listaHome = snapHome.docs.map((d) => ({
-      id: d.id,
-      ...d.data(),
-    }));
-
-    const listaNews = snapNews.docs.map((d) => ({
-      id: d.id,
-      ...d.data(),
-    }));
-
-    setDocsData(listaHome);
-    setNewsData(listaNews.reverse());
     setLoading(false);
   }
 
@@ -124,20 +115,19 @@ export default function Home() {
           <h1 className='main-title'>Últimas Noticias</h1>
           {
             newsData.map((item) => (
-              // <button className="" onClick={() => {}}>
-              <div key={item.id} className="d-flex justify-content-center mb-4">
-                <div className="card" onClick={() => { }} style={{ cursor: "pointer" }}>
-                  <img src={item.image || newsImage1} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title home-card-title">{item.title}</h5>
-                    {/* <p className="card-text">
+              <Link to={"eventos-e-noticias/post/" + item.id}>
+                <div key={item.id} className="d-flex justify-content-center mb-4">
+                  <div className="card" style={{ cursor: "pointer" }}>
+                    <img src={item.image || newsImage1} className="card-img-top" alt="..." />
+                    <div className="card-body">
+                      <h5 className="card-title home-card-title">{item.title}</h5>
+                      {/* <p className="card-text">
                     Some quick example text to build on the card title and make up the bulk of the card’s content.
                   </p> */}
-                    {/* <a href="#" className="btn btn-primary">Veja mais</a> */}
+                    </div>
                   </div>
                 </div>
-              </div>
-              // </button>
+              </Link>
 
             ))
           }
@@ -155,6 +145,7 @@ export default function Home() {
         </div>
       </div>
       <div class="instagram-posts">
+        <h1 className='main-title'>Siga a <a href="https://www.instagram.com/remne/" target="_blank" rel="noopener noreferrer">REM-NE</a> no Instagram!</h1>
         <div data-behold-id="MZu7Iovm2aAychKp2K34"></div>
       </div>
     </div >

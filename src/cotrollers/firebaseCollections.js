@@ -3,6 +3,8 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
+    getDocs,
     onSnapshot,
     orderBy,
     query,
@@ -29,21 +31,45 @@ export const subscribeToCollection = (collectionName, callback) => {
     return unsubscribe;
 };
 
+// GET by ID
+export const getDocumentById = async (collectionName, id) => {
+    try {
+        const ref = doc(db, collectionName, id);
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+            return { id: snap.id, ...snap.data() };
+        } else {
+            throw new Error("Documento não encontrado");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
 // GET
 
-// export const getDocuments = async (collectionName) => {
-//     try {
-//         const ref = collection(db, collectionName);
-//         const snap = await getDocs(ref);
+export const getDocuments = async (collectionName, orderByField) => {
+    try {
+        let q;
+        if (orderByField) {
+            q = query(
 
-//         return snap.docs.map((d) => ({
-//             id: d.id,
-//             ...d.data(),
-//         }));
-//     } catch (error) {
-//         throw error;
-//     }
-// }
+                collection(db, collectionName),
+                orderBy("publishedAt", "desc"))
+        } else {
+            q = collection(db, collectionName)
+        }
+        const snap = await getDocs(q);
+
+        return snap.docs.map((d) => ({
+            id: d.id,
+            ...d.data(),
+        }));
+    } catch (error) {
+        throw error;
+    }
+}
 
 // CREATE
 export const createDocument = async (collectionName, data) => {

@@ -4,8 +4,8 @@ import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
+import { getDocuments } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
-import { collection, db, getDocs } from "../../utils/firebaseConfig";
 import './publications.css';
 
 function PublicationsPage() {
@@ -15,20 +15,14 @@ function PublicationsPage() {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
+    function loadData() {
+        getDocuments("publicacoes", true).then((data) => {
+            setDocsData(data);
+        });
+        setLoading(false);
+    }
+
     useEffect(() => {
-        async function loadData() {
-            const ref = collection(db, "publicacoes");
-            const snap = await getDocs(ref);
-
-            const lista = snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            setDocsData(lista);
-            setLoading(false);
-        }
-
         loadData();
     }, []);
 
@@ -37,7 +31,7 @@ function PublicationsPage() {
             <>
                 {docsData.map((publicacao, index) => (
                     // <a key={index} href="#">
-                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} />)
+                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} id={publicacao.id} />)
                     // </a>
                 ))}
             </>

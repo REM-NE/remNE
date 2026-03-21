@@ -18,6 +18,13 @@
   --espacamento-padrao: 20px;
 }
 
+a {
+  text-decoration: none !important;
+  color: unset !important;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
 .App {
   text-align: center;
 }
@@ -176,6 +183,16 @@
   margin-bottom: 50px;
 }
 
+.instagram-posts .main-title {
+  text-align: center;
+}
+
+.instagram-posts .main-title a {
+  color: var(--cor-primaria-500)!important;
+  font-weight: 600!important;
+  text-decoration: underline!important;
+}
+
 .banner-text {
   color: var(--cor-fundo-principal);
   text-align: end;
@@ -292,17 +309,12 @@
 }
 
 .botao-noticias {
-  color: white!important;
+  color: white !important;
   /* margin-left: 0; */
 }
 
 .home-news .botao-noticias {
   margin-left: 56%;
-}
-
-a {
-  display: inline-block;
-  transition: transform 0.3s ease;
 }
 
 a:hover {
@@ -322,7 +334,7 @@ a:hover {
 }
 
 .delete-btn.botao-noticias {
-  position: unset
+  position: unset;
 }
 
 .card-main {

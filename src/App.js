@@ -9,12 +9,16 @@ import Home from "./views/home/page";
 import Layout from './views/layout';
 import LibraryForm from "./views/library/edit";
 import LibraryPage from "./views/library/page";
+import LibraryPost from "./views/library/post";
 import NewsForm from "./views/news/edit";
 import NewsPage from "./views/news/page";
+import NewsPost from "./views/news/post";
 import PublicationsForm from "./views/publications/edit";
 import PublicationsPage from "./views/publications/page";
+import PublicationsPost from "./views/publications/post";
 import ResourcesForm from "./views/resources/edit";
 import ResourcesPage from "./views/resources/page";
+import ResourcesPost from "./views/resources/post";
 
 function App() {
   return (
@@ -33,6 +37,14 @@ function App() {
             <Route path="recursos-educacionais/edit" element={<ResourcesForm />} />
             <Route path="publicacoes/edit" element={<PublicationsForm />} />
             <Route path="biblioteca/edit" element={<LibraryForm />} />
+            <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
+            <Route path="recursos-educacionais/edit" element={<ResourcesForm />} />
+            <Route path="publicacoes/edit" element={<PublicationsForm />} />
+            <Route path="biblioteca/edit" element={<LibraryForm />} />
+            <Route path="eventos-e-noticias/post/:postId" element={<NewsPost />} />
+            <Route path="recursos-educacionais/post/:postId" element={<ResourcesPost />} />
+            <Route path="publicacoes/post/:postId" element={<PublicationsPost />} />
+            <Route path="biblioteca/post/:postId" element={<LibraryPost />} />
             {/* <Route path="sobre/edit" element={<AboutForm />} /> */}
             <Route path="auth/login" element={<LoginPage />} />
             <Route path="auth/register" element={<RegisterPage />} />
