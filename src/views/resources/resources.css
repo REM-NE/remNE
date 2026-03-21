@@ -1,4 +1,4 @@
-.highlight .card {
+.resource .card {
     height: 300px;
 }
 
@@ -9,7 +9,7 @@
     background-color: lightgray;
 }
 
-.top-spacing-highlight {
+.top-spacing-resource {
     padding-top: 150px;
 }
 

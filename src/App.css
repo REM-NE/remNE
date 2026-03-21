@@ -319,7 +319,10 @@ a:hover {
   position: relative;
   padding: 5px 15px;
   bottom: 10px;
-  /* margin-left: 56%; */
+}
+
+.delete-btn.botao-noticias {
+  position: unset
 }
 
 .card-main {

@@ -19,29 +19,29 @@ export default function Home() {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  async function loadData() {
+    const refHome = collection(db, "home");
+    const refNews = collection(db, "eventos-e-noticias");
+
+    const snapHome = await getDocs(refHome);
+    const snapNews = await getDocs(refNews);
+
+    const listaHome = snapHome.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+
+    const listaNews = snapNews.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+
+    setDocsData(listaHome);
+    setNewsData(listaNews.reverse());
+    setLoading(false);
+  }
+
   useEffect(() => {
-    async function loadData() {
-      const refHome = collection(db, "home");
-      const refNews = collection(db, "eventos-e-noticias");
-
-      const snapHome = await getDocs(refHome);
-      const snapNews = await getDocs(refNews);
-
-      const listaHome = snapHome.docs.map((d) => ({
-        id: d.id,
-        ...d.data(),
-      }));
-
-      const listaNews = snapNews.docs.map((d) => ({
-        id: d.id,
-        ...d.data(),
-      }));
-
-      setDocsData(listaHome);
-      setNewsData(listaNews.reverse());
-      setLoading(false);
-    }
-
     loadData();
   }, []);
 

@@ -51,7 +51,7 @@ function PublicationsPage() {
             <div class="container flex-grow-1">
                 <div class="column">
                     <div className="d-flex justify-content-start mt-5">
-                        {currentUser && <PathButton text="Editar Recursos e Publicações" path="/publicacoes/edit" />}
+                        {currentUser && <PathButton text="Editar Publicações Científicas" path="/publicacoes/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />

@@ -51,7 +51,7 @@ function NewsPage() {
             <div className="container flex-grow-1">
                 <div className="column">
                     <div className="d-flex justify-content-start mt-5">
-                        {currentUser && <PathButton text="Editar Notícias" path="/eventos-e-noticias/edit" />}
+                        {currentUser && <PathButton text="Editar Eventos e Notícias" path="/eventos-e-noticias/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />
