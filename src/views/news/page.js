@@ -1,10 +1,9 @@
+import { useEffect, useState } from 'react';
 import '../../App.css';
 import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
-import Post from '../../components/post';
-import { useEffect, useState } from 'react';
-import '../../App.css';
 import PathButton from '../../components/pathButton';
+import Post from '../../components/post';
 import { useAuth } from '../../utils/authContext';
 import { collection, db, getDocs } from "../../utils/firebaseConfig";
 import './news.css';
@@ -49,7 +48,6 @@ function NewsPage() {
 
         <div className="news main top-spacing">
             <Banner title="Eventos e Notícias" />
-            {/* <div class="title">Notícias</div> */}
             <div className="container flex-grow-1">
                 <div className="column">
                     <div className="d-flex justify-content-start mt-5">

@@ -1,11 +1,9 @@
-import '../../App.css';
-import news2 from '../../assets/images/news2.png';
-import Banner from '../../components/banner';
-import Pagination from '../../components/pagination';
-import Post from '../../components/post';
 import { useEffect, useState } from 'react';
 import '../../App.css';
+import Banner from '../../components/banner';
+import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
+import Post from '../../components/post';
 import { useAuth } from '../../utils/authContext';
 import { collection, db, getDocs } from "../../utils/firebaseConfig";
 import './publications.css';
@@ -39,7 +37,7 @@ function PublicationsPage() {
             <>
                 {docsData.map((publicacao, index) => (
                     // <a key={index} href="#">
-                    index < 10 && (<Post key={index} text={publicacao.text} image={publicacao.imageURL} />)
+                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} />)
                     // </a>
                 ))}
             </>
