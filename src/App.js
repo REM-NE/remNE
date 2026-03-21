@@ -4,16 +4,17 @@ import { AuthProvider } from './utils/authContext';
 import AboutPage from "./views/about/page";
 import LoginPage from "./views/auth/login";
 import RegisterPage from "./views/auth/register";
-import ResourcesPage from "./views/resources/page";
-import ResourcesForm from "./views/resources/edit";
 import HomeForm from "./views/home/edit";
 import Home from "./views/home/page";
 import Layout from './views/layout';
+import LibraryForm from "./views/library/edit";
 import LibraryPage from "./views/library/page";
-import NewsPage from "./views/news/page";
 import NewsForm from "./views/news/edit";
-import PublicationsPage from "./views/publications/page";
+import NewsPage from "./views/news/page";
 import PublicationsForm from "./views/publications/edit";
+import PublicationsPage from "./views/publications/page";
+import ResourcesForm from "./views/resources/edit";
+import ResourcesPage from "./views/resources/page";
 
 function App() {
   return (
@@ -31,8 +32,8 @@ function App() {
             <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
             <Route path="recursos-educacionais/edit" element={<ResourcesForm />} />
             <Route path="publicacoes/edit" element={<PublicationsForm />} />
-            {/*<Route path="biblioteca/edit" element={<LibraryForm />} />
-            <Route path="sobre/edit" element={<AboutForm />} /> */}
+            <Route path="biblioteca/edit" element={<LibraryForm />} />
+            {/* <Route path="sobre/edit" element={<AboutForm />} /> */}
             <Route path="auth/login" element={<LoginPage />} />
             <Route path="auth/register" element={<RegisterPage />} />
           </Route>

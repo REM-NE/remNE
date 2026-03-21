@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, serverTimestamp, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { auth, db } from "../../utils/firebaseConfig";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
+import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
+import { auth } from "../../utils/firebaseConfig";
 
 export default function ResourcesForm() {
     const [user, setUser] = useState(null);
@@ -27,42 +28,30 @@ export default function ResourcesForm() {
     }, []);
 
     useEffect(() => {
-        // loadData(setDocsData, "recursos");
-        setLoading(false);
+        const unsubscribe = subscribeToCollection("recursos", (data) => {
+            setDocsData(data);
+            setLoading(false);
+        });
+
+        return () => unsubscribe(); // limpa o listener
     }, []);
 
-    const createNewResource = async (resourcesData) => {
-        try {
-            const docRef = await addDoc(collection(db, "recursos"), {
-                title: resourcesData.title,
-                text: resourcesData.text,
-                imageUrl: resourcesData.imageUrl,
-                link: resourcesData.link,
-                publishedAt: new Date(),
-                createdAt: serverTimestamp()
-            });
+    const createNew = () => createDocument("recursos", {
+        title: resourcesData.title,
+        text: resourcesData.text,
+        imageUrl: resourcesData.imageUrl,
+        link: resourcesData.link,
+        publishedAt: new Date(),
+        createdAt: serverTimestamp()
+    });
 
-            // loadData();
-            alert("Notícia criada com ID:", docRef.id);
-        } catch (error) {
-            alert("Erro ao criar notícia:", error);
-        }
-    };
+    const updateDoc = (id, data) => updateDocument("recursos", id, {
+        title: data.title,
+        text: data.text,
+        imageUrl: data.imageUrl,
+        link: data.link,
+    });
 
-    async function saveData(id, dados) {
-        const ref = doc(db, "recursos", id);
-        await updateDoc(ref, dados);
-        alert(`Documento ${id} salvo!`);
-    }
-
-    const deleteData = async (id) => {   // Remover o documento
-        try {
-            await deleteDoc(doc(db, "recursos", id));
-            alert(`Recurso ${id} excluído!`);
-        } catch (error) {
-            alert("Erro ao excluir recurso:", error);
-        }
-    };
 
     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
@@ -72,13 +61,13 @@ export default function ResourcesForm() {
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
                 <h3>Criar novo recurso</h3>
-                <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" disabled={!user} />
-                <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" disabled={!user} />
-                <InputText label="Link da imagem" data={resourcesData} setData={setResourcesData} property="imageUrl" disabled={!user} />
-                <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" disabled={!user} />
+                <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" isANewDoc={true} disabled={!user} />
+                <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" isANewDoc={true} disabled={!user} />
+                <InputText label="Link da imagem" data={resourcesData} setData={setResourcesData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
-                    onClick={() => createNewResource(resourcesData)}
+                    onClick={() => createNew(resourcesData)}
                 >
                     Adicionar recurso
                 </button>
@@ -92,19 +81,19 @@ export default function ResourcesForm() {
 
                         <div className="d-flex justify-content-between">
                             <h4>Documento: {item.id}</h4>
-                            <button className="btn delete-btn botao-noticias" onClick={() => deleteData(item.id)}>Excluir</button>
+                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
                         </div>
 
-                        <InputText label="Título" data={item} setData={setDocsData} property="title" disabled={!user} />
-                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" disabled={!user} />
-                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" disabled={!user} />
-                        <InputText label="Link externo" data={item} setData={setDocsData} property="link" disabled={!user} />
+                        <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
+                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
+                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" isANewDoc={false} disabled={!user} />
+                        <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
 
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}
                         {user && (
                             <button
                                 className="btn btn-success w-100"
-                                onClick={() => saveData(item.id, item)}
+                                onClick={() => updateDoc(item.id, item)}
                             >
                                 Salvar alterações
                             </button>

@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { auth, db } from "../../utils/firebaseConfig";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
-import { collection, serverTimestamp, addDoc, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
+import { auth } from "../../utils/firebaseConfig";
 
 export default function NewsForm() {
     const [user, setUser] = useState(null);
@@ -26,61 +27,30 @@ export default function NewsForm() {
         return () => unsub();
     }, []);
 
-    async function loadData() {
-        const ref = collection(db, "eventos-e-noticias");
-        const snap = await getDocs(ref);
-
-        const lista = snap.docs.map((d) => ({
-            id: d.id,
-            ...d.data(),
-        }));
-
-        setDocsData(lista);
-        setLoading(false);
-    }
-
     useEffect(() => {
-        loadData();
+        const unsubscribe = subscribeToCollection("eventos-e-noticias", (data) => {
+            setDocsData(data);
+            setLoading(false);
+        });
+
+        return () => unsubscribe(); // limpa o listener
     }, []);
 
-    // Atualizar somente o documento alterado
-    async function saveData(id, dados) {
-        const ref = doc(db, "eventos-e-noticias", id);
-        await updateDoc(ref, dados);
-        alert(`Documento ${id} salvo!`);
-    }
+    const createNew = () => createDocument("eventos-e-noticias", {
+        title: newsData.title,
+        text: newsData.text,
+        imageUrl: newsData.imageUrl,
+        link: newsData.link,
+        publishedAt: new Date(),
+        createdAt: serverTimestamp()
+    });
 
-    const deleteData = async (id) => {   // Remover o documento
-        try {
-            await deleteDoc(doc(db, "eventos-e-noticias", id));
-            alert(`Recurso ${id} excluído!`);
-        } catch (error) {
-            alert("Erro ao excluir recurso:", error);
-        }
-    };
-
-    useEffect(() => {
-        loadData();
-        setLoading(false);
-    }, []);
-
-    const createNews = async (newsData) => {
-        try {
-            const docRef = await addDoc(collection(db, "eventos-e-noticias"), {
-                title: newsData.title,
-                text: newsData.text,
-                imageUrl: newsData.imageUrl,
-                link: newsData.link,
-                publishedAt: new Date(),
-                createdAt: serverTimestamp()
-            });
-
-            // loadData();
-            alert("Notícia criada com ID:", docRef.id);
-        } catch (error) {
-            alert("Erro ao criar notícia:", error);
-        }
-    };
+    const updateDoc = (id, data) => updateDocument("eventos-e-noticias", id, {
+        title: data.title,
+        text: data.text,
+        imageUrl: data.imageUrl,
+        link: data.link,
+    });
 
     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
@@ -90,13 +60,13 @@ export default function NewsForm() {
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
                 <h3>Criar nova notícia</h3>
-                <InputText label="Título" data={newsData} setData={setNewsData} property="title" disabled={!user} />
-                <InputTextArea label="Texto" data={newsData} setData={setNewsData} property="text" disabled={!user} />
-                <InputText label="Link da imagem" data={newsData} setData={setNewsData} property="imageUrl" disabled={!user} />
-                <InputText label="Link externo" data={newsData} setData={setNewsData} property="link" disabled={!user} />
+                <InputText label="Título" data={newsData} setData={setNewsData} property="title" isANewDoc={true} disabled={!user} />
+                <InputTextArea label="Texto" data={newsData} setData={setNewsData} property="text" isANewDoc={true} disabled={!user} />
+                <InputText label="Link da imagem" data={newsData} setData={setNewsData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <InputText label="Link externo" data={newsData} setData={setNewsData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
-                    onClick={() => createNews(newsData)}
+                    onClick={() => createNew(newsData)}
                 >
                     Adicionar notícia
                 </button>
@@ -106,24 +76,24 @@ export default function NewsForm() {
                 <h3>Últimas notícias:</h3>
 
                 {!docsData.length && <p>Nenhuma notícia encontrada.</p>}
-                {docsData.map((item, index) => (
+                {docsData.map((item) => (
                     <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 
                         <div className="d-flex justify-content-between">
                             <h4>Documento: {item.id}</h4>
-                            <button className="btn delete-btn botao-noticias" onClick={() => deleteData(item.id)}>Excluir</button>
+                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
                         </div>
 
-                        <InputText label="Título" data={item} setData={setDocsData} property="title" disabled={!user} />
-                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" disabled={!user} />
-                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" disabled={!user} />
-                        <InputText label="Link externo" data={item} setData={setDocsData} property="link" disabled={!user} />
+                        <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
+                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
+                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" isANewDoc={false} disabled={!user} />
+                        <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
 
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}
                         {user && (
                             <button
                                 className="btn btn-success w-100"
-                                onClick={() => saveData(item.id)}
+                                onClick={() => updateDoc(item.id, item)}
                             >
                                 Salvar alterações
                             </button>
