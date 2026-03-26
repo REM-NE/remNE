@@ -1,23 +1,44 @@
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../utils/firebaseConfig";
+import NewsForm from './edit'; // formulário de adicionar/editar
 import '../../App.css';
 import './about.css';
 
-function AboutPage() {
-    return (
-        <div className="about main top-spacing pt-5 pb-5">
-            <div className="text container">
-                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-            <div className="card ">
-                <div className="container">
-                    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-            </div>
-            <div className="text container">
-                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-        </div>
-        
-    )
-}
+export default function AboutPage() {
+  const [aboutData, setAboutData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export default AboutPage;
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const snap = await getDocs(collection(db, "about"));
+        const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setAboutData(lista.reverse());
+      } catch (err) {
+        console.error("Erro ao buscar dados do Firestore:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  if (loading) return <p className="container main">Carregando...</p>;
+
+  return (
+    <div className="about main top-spacing pt-5 pb-5">
+      {/* Formulário de edição (aparece apenas se logado) */}
+      <NewsForm />
+
+      {/* Conteúdo do Firestore */}
+      {aboutData.length === 0 && <p className="container">Nenhum conteúdo encontrado.</p>}
+      {aboutData.map(item => (
+        <div key={item.id} className={`container mb-5 ${item.type === 'card' ? 'card-block' : ''}`}>
+          {item.title && <h2 className="mb-2">{item.title}</h2>}
+          {item.text && <p className="text">{item.text}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}

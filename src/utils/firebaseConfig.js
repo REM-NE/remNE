@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 // Se você for usar Authentication, importe o getAuth também
 import { getAuth } from 'firebase/auth';
+
 // import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 
@@ -26,5 +27,6 @@ export { addDoc, collection, db, deleteDoc, doc, getDoc, getDocs, updateDoc };
 
 // Inicialize o Firebase Authentication e obtenha uma referência para o serviço
 export const auth = getAuth(app);
+
 
 
