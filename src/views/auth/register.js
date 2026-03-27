@@ -39,7 +39,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="home top-spacing-highlight loginContainer">
+        <div className="home top-spacing-resource loginContainer">
             <div className="stepContainer">
                 <div className="box">
                     <label>

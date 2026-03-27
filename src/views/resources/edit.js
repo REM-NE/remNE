@@ -6,12 +6,12 @@ import InputTextArea from "../../components/forms/inputTextArea";
 import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
 import { auth } from "../../utils/firebaseConfig";
 
-export default function NewsForm() {
+export default function ResourcesForm() {
     const [user, setUser] = useState(null);
-    const [docsData, setDocsData] = useState([]); // Lista de documentos do Firestore
+    const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [newPublicationData, setNewPublicationData] = useState({
+    const [resourcesData, setResourcesData] = useState({
         title: "",
         text: "",
         imageUrl: "",
@@ -28,7 +28,7 @@ export default function NewsForm() {
     }, []);
 
     useEffect(() => {
-        const unsubscribe = subscribeToCollection("publicacoes", (data) => {
+        const unsubscribe = subscribeToCollection("recursos", (data) => {
             setDocsData(data);
             setLoading(false);
         });
@@ -36,52 +36,52 @@ export default function NewsForm() {
         return () => unsubscribe(); // limpa o listener
     }, []);
 
-    const createNew = () => createDocument("publicacoes", {
-        title: newPublicationData.title,
-        text: newPublicationData.text,
-        imageUrl: newPublicationData.imageUrl,
-        link: newPublicationData.link,
+    const createNew = () => createDocument("recursos", {
+        title: resourcesData.title,
+        text: resourcesData.text,
+        imageUrl: resourcesData.imageUrl,
+        link: resourcesData.link,
         publishedAt: new Date(),
         createdAt: serverTimestamp()
     });
 
-    const updateDoc = (id, data) => updateDocument("publicacoes", id, {
+    const updateDoc = (id, data) => updateDocument("recursos", id, {
         title: data.title,
         text: data.text,
         imageUrl: data.imageUrl,
         link: data.link,
     });
 
+
     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
     return (
         <div className="container main top-spacing pb-5">
-            <h2 className="text-center pt-5 mb-4">Editor da Página de Publicações Científicas</h2>
+            <h2 className="text-center pt-5 mb-4">Editor da Página de Recursos Educacionais</h2>
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Criar nova publicação</h3>
-                <InputText label="Título" data={newPublicationData} setData={setNewPublicationData} property="title" isANewDoc={true} disabled={!user} />
-                <InputTextArea label="Texto" data={newPublicationData} setData={setNewPublicationData} property="text" isANewDoc={true} disabled={!user} />
-                <InputText label="Link da imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} />
-                <InputText label="Link externo" data={newPublicationData} setData={setNewPublicationData} property="link" isANewDoc={true} disabled={!user} />
+                <h3>Criar novo recurso</h3>
+                <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" isANewDoc={true} disabled={!user} />
+                <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" isANewDoc={true} disabled={!user} />
+                <InputText label="Link da imagem" data={resourcesData} setData={setResourcesData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
-                    onClick={() => createNew()}
+                    onClick={() => createNew(resourcesData)}
                 >
-                    Adicionar publicação
+                    Adicionar recurso
                 </button>
             </div>
 
             <div className="container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Últimas publicações:</h3>
-
-                {!docsData.length && <p>Nenhuma publicação encontrada.</p>}
-                {docsData && docsData.map((item) => (
+                <h3>Últimos recursos:</h3>
+                {!docsData.length && <p>Nenhum recurso encontrado.</p>}
+                {docsData.map((item) => (
                     <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 
                         <div className="d-flex justify-content-between">
                             <h4>Documento: {item.id}</h4>
-                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument("publicacoes", item.id)}>Excluir</button>
+                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
                         </div>
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
@@ -98,6 +98,7 @@ export default function NewsForm() {
                                 Salvar alterações
                             </button>
                         )}
+
                     </div>
                 ))}
             </div>

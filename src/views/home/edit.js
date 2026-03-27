@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../utils/firebaseConfig";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
 export default function HomeForm() {
     const [user, setUser] = useState(null);
@@ -17,26 +17,26 @@ export default function HomeForm() {
         return () => unsub();
     }, []);
 
+    async function loadData() {
+        const ref = collection(db, "home");
+        const snap = await getDocs(ref);
+
+        const listaHome = snap.docs.map((d) => ({
+            id: d.id,
+            ...d.data(),
+        }));
+
+        setDocsData(listaHome);
+        setLoading(false);
+    }
+
     // Carregar TODOS os documentos da coleção "home"
     useEffect(() => {
-        async function loadData() {
-            const ref = collection(db, "home");
-            const snap = await getDocs(ref);
-
-            const lista = snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            setDocsData(lista);
-            setLoading(false);
-        }
-
         loadData();
+        setLoading(false);
     }, []);
 
-    // Atualizar somente o documento alterado
-    async function salvar(id, dados) {
+    async function saveData(id, dados) {
         const ref = doc(db, "home", id);
         await updateDoc(ref, dados);
         alert(`Documento ${id} salvo!`);
@@ -92,7 +92,7 @@ export default function HomeForm() {
                     {user && (
                         <button
                             className="btn btn-success w-100"
-                            onClick={() => salvar(item.id, item)}
+                            onClick={() => saveData(item.id, item)}
                         >
                             Salvar alterações
                         </button>

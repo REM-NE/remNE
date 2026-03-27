@@ -2,40 +2,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { useEffect, useState } from 'react';
 import '../../App.css';
-import PathButton from '../../components/pathButton';
-import { useAuth } from '../../utils/authContext';
-import { collection, db, getDocs } from "../../utils/firebaseConfig";
-import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
-import news2 from '../../assets/images/news2.png';
 import superior from '../../assets/images/superior.jpeg';
 import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
+import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
-import './highlights.css';
+import { getDocuments } from '../../cotrollers/firebaseCollections';
+import { useAuth } from '../../utils/authContext';
+import './resources.css';
 
-function HighlightsPage() {
+function ResourcesPage() {
     const { currentUser } = useAuth();
 
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
+    function loadData() {
+        getDocuments("recursos", true).then((data) => {
+            setDocsData(data);
+        });
+        setLoading(false);
+    }
+
     useEffect(() => {
-        async function loadData() {
-            const ref = collection(db, "recursos");
-            const snap = await getDocs(ref);
-
-            const lista = snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            setDocsData(lista);
-            setLoading(false);
-        }
-
         loadData();
     }, []);
 
@@ -43,9 +35,8 @@ function HighlightsPage() {
         return (
             <>
                 {docsData.map((recurso, index) => (
-                    // <a key={index} href="#">
-                    index < 10 && (<Post key={index} title={recurso.title} image={recurso.image} />)
-                    // </a>
+                    index < 10 && (
+                        <Post key={index} title={recurso.title} image={recurso.image} id={recurso.id} />)
                 ))}
             </>
         );
@@ -58,7 +49,7 @@ function HighlightsPage() {
     ]
 
     return (
-        <div class="highlights main top-spacing">
+        <div class="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
             <br></br>
             <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button>
@@ -74,16 +65,13 @@ function HighlightsPage() {
                                         {/* <p className="card-text">
                                     Some quick example text to build on the card title and make up the bulk of the card’s content.
                                 </p> */}
-                                        {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                                     </div>
                                 </div>
-
                             </div>
-
                         ))}
                     </div>
                     <div className="d-flex justify-content-start mt-5">
-                        {currentUser && <PathButton text="Editar Recursos e Publicações" path="/recursos-educacionais/edit" />}
+                        {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />
@@ -95,4 +83,4 @@ function HighlightsPage() {
     )
 }
 
-export default HighlightsPage;
+export default ResourcesPage;
