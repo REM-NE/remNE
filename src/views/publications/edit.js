@@ -3,6 +3,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
+import UploadImage from "../../components/forms/uploadImage";
 import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
 import { auth } from "../../utils/firebaseConfig";
 
@@ -62,10 +63,12 @@ export default function NewsForm() {
                 <h3>Criar nova publicação</h3>
                 <InputText label="Título" data={newPublicationData} setData={setNewPublicationData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={newPublicationData} setData={setNewPublicationData} property="text" isANewDoc={true} disabled={!user} />
-                <InputText label="Link da imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <UploadImage label="Imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                {/* <InputText label="Link da imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} /> */}
                 <InputText label="Link externo" data={newPublicationData} setData={setNewPublicationData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
+                    // onClick={() => console.log(newPublicationData.imageUrl)}
                     onClick={() => createNew()}
                 >
                     Adicionar publicação
