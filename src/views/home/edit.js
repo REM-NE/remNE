@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import UploadImage from "../../components/forms/uploadImage";
 import { auth, db } from "../../utils/firebaseConfig";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
 export default function HomeForm() {
     const [user, setUser] = useState(null);
@@ -53,9 +54,18 @@ export default function HomeForm() {
 
             {docsData.map((item, index) => (
                 <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
-
-                    <h4>Documento: {item.id}</h4>
-
+                    {item.images.map((img, imgIndex) => (
+                        <UploadImage
+                            key={imgIndex}
+                            label={`Imagem ${index + 1} do carrossel`}
+                            data={img}
+                            setData={(newData) => {
+                                const novo = [...docsData];
+                                novo[index] = { ...novo[index], ...newData };
+                                setDocsData(novo);
+                            }}
+                        />
+                    ))}
                     {/* TÍTULO */}
                     <div className="mb-3">
                         <label>Título:</label>

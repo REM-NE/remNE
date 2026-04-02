@@ -3,6 +3,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
+import UploadImage from "../../components/forms/uploadImage";
 import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
 import { auth } from "../../utils/firebaseConfig";
 
@@ -63,7 +64,7 @@ export default function LibraryForm() {
                 <h3>Criar nova publicação</h3>
                 <InputText label="Título" data={newLibraryData} setData={setNewLibraryData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={newLibraryData} setData={setNewLibraryData} property="text" isANewDoc={true} disabled={!user} />
-                <InputText label="Link da imagem" data={newLibraryData} setData={setNewLibraryData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
                 <InputText label="Link externo" data={newLibraryData} setData={setNewLibraryData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
@@ -86,8 +87,8 @@ export default function LibraryForm() {
                         </div>
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
-                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
-                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" isANewDoc={false} disabled={!user} />
+                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />                
+                        <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
 
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}

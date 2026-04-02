@@ -13,49 +13,21 @@ import {
 } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+const uploadImage = async (file, type) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", type == "home" ? "standard" : type); //standard é o preset da home
 
-export const uploadImage = async (file) => {
-    const storage = getStorage();
-
-    const metadata = {
-        contentType: 'image/jpeg'
-    };
-
-    const storageRef = ref(storage, 'images/' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
-
-    uploadTask.on('state_changed',
-        (snapshot) => {
-            // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            // console.log('Upload is ' + progress + '% done');
-            // switch (snapshot.state) {
-            //     case 'paused':
-            //         console.log('Upload is paused');
-            //         break;
-            //     case 'running':
-            //         console.log('Upload is running');
-            //         break;
-            // }
-        },
-        (error) => {
-            switch (error.code) {
-                case 'storage/unauthorized':
-                    break;
-                case 'storage/canceled':
-                    break;
-                case 'storage/unknown':
-                    break;
-            }
-        },
-        () => {
-            // Upload completed successfully, now we can get the download URL
-            getDownloadURL(uploadTask.snapshot.ref).then((imageURL) => {
-                return imageURL;
-            });
+    const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dyp5jzbal/image/upload",
+        {
+            method: "POST",
+            body: formData
         }
     );
 
+    const data = await res.json();
+    return data.secure_url;
 };
 
 export const subscribeToCollection = (collectionName, callback) => {
@@ -118,9 +90,19 @@ export const getDocuments = async (collectionName, orderByField) => {
 // CREATE
 export const createDocument = async (collectionName, data) => {
     try {
+        let imageUrl = "";
+
+        if (data.imageFile) {
+            imageUrl = await uploadImage(data.imageFile);
+        }
+
         const docRef = await addDoc(collection(db, collectionName), {
-            ...data,
-            createdAt: serverTimestamp()
+            title: data.title,
+            text: data.text,
+            imageURL: imageUrl, // Faz upload da nova imagem no cloudinary e obtém a URL
+            link: data.link,
+            createdAt: serverTimestamp(),
+            publishedAt: serverTimestamp()
         });
 
         alert("Documento " + data.title + " criado na coleção: " + collectionName);
@@ -133,8 +115,20 @@ export const createDocument = async (collectionName, data) => {
 // UPDATE
 export const updateDocument = async (collectionName, id, data) => {
     try {
+        let imageUrl = "";
+
+        if (data.imageFile) {
+            imageUrl = await uploadImage(data.imageFile);
+        }
+
         const ref = doc(db, collectionName, id);
-        await updateDoc(ref, data);
+        await updateDoc(ref, {
+            title: data.title,
+            text: data.text,
+            imageURL: imageUrl, // Faz upload da nova imagem no cloudinary e obtém a URL
+            link: data.link,
+            publishedAt: serverTimestamp()
+        });
 
         alert("Documento " + data.title + " atualizado na coleção:" + collectionName);
 

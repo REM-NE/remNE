@@ -6,10 +6,10 @@ import { useAuth } from '../../utils/authContext';
 import { Link } from "react-router-dom";
 import carouselImage1 from '../../assets/images/carousel1.png';
 import newsImage1 from '../../assets/images/news1.png';
-import red from '../../assets/images/red.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Carousel from '../../components/carousel';
 import { getDocuments } from '../../cotrollers/firebaseCollections';
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
 
   const [docsData, setDocsData] = useState([]);
   const [newsData, setNewsData] = useState([]);
+  const [resourcesData, setResourcesData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   function loadData() {
@@ -27,6 +28,10 @@ export default function Home() {
 
     getDocuments("eventos-e-noticias", true).then((data) => {
       setNewsData(data);
+    });
+
+    getDocuments("recursos", true).then((data) => {
+      setResourcesData(data);
     });
 
     setLoading(false);
@@ -45,57 +50,14 @@ export default function Home() {
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
 
-      {/* Conteúdo */}
-      <div className="container-carousel flex-grow-1">
-        {/* Carousel */}
-        <div id="carouselExample" className="carousel slide">
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                src={carouselImage1}
-                className="d-block w-100 h-80"
-                alt="..."
-                style={{ height: "496px", objectFit: "cover" }}
-              />
-
-            </div>
-            <div className="carousel-item">
-              <img
-                src={carouselImage1}
-                className="d-block w-100 h-80"
-                alt="..."
-                style={{ height: "496px", objectFit: "cover" }}
-              />
-
-            </div>
-          </div>
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
+      <Carousel images={docsData.length ? docsData[0].imagens : [carouselImage1]} id="homeCarousel" />
 
       <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
         <main className="home-about">
           <div>
             <div className="d-flex justify-content-start">
-              {currentUser && <PathButton text="Editar Posts do Home" path="/home/edit" />}
+              {currentUser && <PathButton text="Editar Home" path="/home/edit" />}
             </div>
             {docsData.map((item, index) => (
               <div key={index}>
@@ -134,7 +96,7 @@ export default function Home() {
           <PathButton path="/eventos-e-noticias" text="Veja todas as notícias" />
         </div >
       </div >
-      <div className="red-section d-flex flex-column justify-content-center align-items-center container">
+      {/* <div className="red-section d-flex flex-column justify-content-center align-items-center container">
         <img src={red} className="red-img w-100" alt="Red" />
         <div className="red-content d-flex flex-column justify-content-center align-items-center">
           <h1 className='red-title'>O Reino de Aljabar</h1>
@@ -143,7 +105,7 @@ export default function Home() {
             <button className="red-btn" onClick={() => { }}>Veja Mais</button>
           </div>
         </div>
-      </div>
+      </div> */}
       <div class="instagram-posts">
         <h1 className='main-title'>Siga a <a href="https://www.instagram.com/remne/" target="_blank" rel="noopener noreferrer">REM-NE</a> no Instagram!</h1>
         <div data-behold-id="MZu7Iovm2aAychKp2K34"></div>

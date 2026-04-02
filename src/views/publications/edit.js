@@ -63,8 +63,7 @@ export default function NewsForm() {
                 <h3>Criar nova publicação</h3>
                 <InputText label="Título" data={newPublicationData} setData={setNewPublicationData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={newPublicationData} setData={setNewPublicationData} property="text" isANewDoc={true} disabled={!user} />
-                <UploadImage label="Imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} />
-                {/* <InputText label="Link da imagem" data={newPublicationData} setData={setNewPublicationData} property="imageUrl" isANewDoc={true} disabled={!user} /> */}
+                <UploadImage label="Imagem" data={newPublicationData} setData={setNewPublicationData} isANewDoc={true} disabled={!user} />
                 <InputText label="Link externo" data={newPublicationData} setData={setNewPublicationData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
@@ -86,12 +85,10 @@ export default function NewsForm() {
                             <h4>Documento: {item.id}</h4>
                             <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument("publicacoes", item.id)}>Excluir</button>
                         </div>
-
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
                         <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
-                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" isANewDoc={false} disabled={!user} />
+                        <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
-
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}
                         {user && (
                             <button

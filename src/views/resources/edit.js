@@ -3,6 +3,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
+import UploadImage from "../../components/forms/uploadImage";
 import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
 import { auth } from "../../utils/firebaseConfig";
 
@@ -63,7 +64,7 @@ export default function ResourcesForm() {
                 <h3>Criar novo recurso</h3>
                 <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" isANewDoc={true} disabled={!user} />
-                <InputText label="Link da imagem" data={resourcesData} setData={setResourcesData} property="imageUrl" isANewDoc={true} disabled={!user} />
+                <UploadImage label="Imagem" data={resourcesData} setData={setResourcesData} isANewDoc={true} disabled={!user} />
                 <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
@@ -86,9 +87,8 @@ export default function ResourcesForm() {
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
                         <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
-                        <InputText label="Link da imagem" data={item} setData={setDocsData} property="imageUrl" isANewDoc={false} disabled={!user} />
+                        <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
-
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}
                         {user && (
                             <button
