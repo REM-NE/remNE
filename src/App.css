@@ -314,7 +314,7 @@ a {
 }
 
 .home-news .botao-noticias {
-  margin-left: 56%;
+  margin-left: 45%;
 }
 
 a:hover {
@@ -407,7 +407,7 @@ button.showPassword {
 .video-index {
   border-radius: var(--arredondamento-borda);
   margin-top: var(--espacamento-padrao);
-  margin-top: 34%;
+  margin-top: 5%;
 }
 
 .red-section {

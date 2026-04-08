@@ -103,7 +103,7 @@ export default function Home() {
                 <p className='main-text'>{item.texto}</p>
               </div>
             ))}
-            <video className='video-index' width="100%" height="315" controls>
+            <video className='video-index' width="100%" height="325" controls>
               <source src="" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
