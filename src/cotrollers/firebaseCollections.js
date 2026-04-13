@@ -191,6 +191,8 @@ export const updateDocument = async (collectionName, id, data) => {
 
 // DELETE
 export const deleteDocument = async (collectionName, id) => {
+    if (!window.confirm("Tem certeza que quer deletar este documento?")) return;
+
     try {
         await deleteDoc(doc(db, collectionName, id));
 

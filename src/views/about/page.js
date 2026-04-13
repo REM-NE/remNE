@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../utils/firebaseConfig";
-import NewsForm from './edit'; // formulário de adicionar/editar
+import { useEffect, useState } from "react";
 import '../../App.css';
+import PathButton from "../../components/pathButton";
+import { useAuth } from "../../utils/authContext";
+import { db } from "../../utils/firebaseConfig";
 import './about.css';
 
 export default function AboutPage() {
+  const { currentUser } = useAuth();
+
   const [aboutData, setAboutData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,9 +31,9 @@ export default function AboutPage() {
 
   return (
     <div className="about main top-spacing pt-5 pb-5">
-      {/* Formulário de edição (aparece apenas se logado) */}
-      <NewsForm />
-
+      <div className="d-flex justify-content-start mt-5">
+        {currentUser && <PathButton text="Editar Página do Sobre" path="/sobre/edit" />}
+      </div>
       {/* Conteúdo do Firestore */}
       {aboutData.length === 0 && <p className="container">Nenhum conteúdo encontrado.</p>}
       {aboutData.map(item => (

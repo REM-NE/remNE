@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import '../../App.css';
+import InputText from "../../components/forms/inputText";
+import InputTextArea from "../../components/forms/inputTextArea";
+import { deleteDocument } from "../../cotrollers/firebaseCollections";
 import { auth, db } from "../../utils/firebaseConfig";
+import './about.css';
 
-export default function NewsForm() {
+export default function AboutForm() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,22 +23,22 @@ export default function NewsForm() {
     return () => unsub();
   }, []);
 
+  async function loadData() {
+    const ref = collection(db, "about");
+    const snap = await getDocs(ref);
+
+    const res = snap.docs.map((d) => ({
+      id: d.id,
+      ...d.data(),
+    }));
+
+    setData(res);
+    setLoading(false);
+  }
+
   useEffect(() => {
     loadData();
   }, []);
-
-  async function loadData() {
-    setLoading(true);
-    try {
-      const snap = await getDocs(collection(db, "about"));
-      const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setData(lista.reverse());
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   async function createBlock() {
     if (!user) return;
@@ -60,94 +65,72 @@ export default function NewsForm() {
     }
   }
 
-  async function deleteBlock(id) {
-    if (!user) return;
-
-    if (!window.confirm("Tem certeza que quer deletar este bloco?")) return;
-
-    try {
-      await deleteDoc(doc(db, "about", id));
-      loadData();
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   if (!user) return null;
-  if (loading) return <p>Carregando...</p>;
+  // if (loading) return <p>Carregando...</p>;
 
   return (
-    <div className="container border p-3 mb-4 rounded" style={{ marginTop: '80px' }}>
-      <h3>Editor da Página About</h3>
+    <div className="container about main top-spacing pb-5">
+      <h2 className="text-center pt-5 mb-4">Editor da Página do Sobre</h2>
 
-      {/* Formulário para adicionar novo bloco */}
-      <input
-        className="form-control mb-2"
-        placeholder="Título"
-        value={form.title}
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
-      />
-      <textarea
-        className="form-control mb-2"
-        placeholder="Texto"
-        value={form.text}
-        onChange={(e) => setForm({ ...form, text: e.target.value })}
-      />
-      <select
-        className="form-control mb-2"
-        value={form.type}
-        onChange={(e) => setForm({ ...form, type: e.target.value })}
-      >
-        <option value="text">Texto</option>
-        <option value="card">Card</option>
-      </select>
-      <button className="btn btn-success w-100 mb-3" onClick={createBlock}>
-        Adicionar bloco
-      </button>
+      <div className="container flex-grow-1 mt-4 p-3 border rounded">
+        {/* Formulário para adicionar novo bloco */}
+        <InputText label="Título" data={form} setData={setForm} property="title" isANewDoc={true} disabled={!user} />
+        <InputTextArea label="Texto" data={form} setData={setForm} property="text" isANewDoc={true} disabled={!user} />
+        <select
+          className="form-control mb-2"
+          value={form.type}
+          onChange={(e) => setForm({ ...form, type: e.target.value })}
+        >
+          <option value="text">Texto</option>
+          <option value="card">Card</option>
+        </select>
+        <button className="btn btn-success w-100 mb-3" onClick={createBlock}>
+          Adicionar texto
+        </button>
+      </div>
 
-      {/* Blocos existentes para edição */}
-      {data.map((item, i) => (
-        <div key={item.id} className="border p-2 mb-3 rounded">
-          <input
-            className="form-control mb-2"
-            value={item.title || ""}
-            onChange={(e) => {
-              const novo = [...data];
-              novo[i].title = e.target.value;
-              setData(novo);
-            }}
-          />
-          <textarea
-            className="form-control mb-2"
-            value={item.text || ""}
-            onChange={(e) => {
-              const novo = [...data];
-              novo[i].text = e.target.value;
-              setData(novo);
-            }}
-          />
-          <select
-            className="form-control mb-2"
-            value={item.type || "text"}
-            onChange={(e) => {
-              const novo = [...data];
-              novo[i].type = e.target.value;
-              setData(novo);
-            }}
-          >
-            <option value="text">Texto</option>
-            <option value="card">Card</option>
-          </select>
-          <div className="d-flex gap-2">
-            <button className="btn btn-primary flex-grow-1" onClick={() => saveBlock(item.id, item)}>
-              Salvar
-            </button>
-            <button className="btn btn-danger flex-grow-1" onClick={() => deleteBlock(item.id)}>
-              Deletar
-            </button>
+      <div className="container flex-grow-1 mt-4 p-3 border rounded">
+        <h3>Conteúdo da Página do Sobre:</h3>
+        {/* Blocos existentes para edição */}
+        {data.map((item, i) => (
+          <div key={item.id} className="container flex-grow-1 mt-4 p-3 border rounded">
+            <div className="d-flex justify-content-between">
+              <h4>Documento: {item.id}</h4>
+              <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument("about", item.id)}>
+                Excluir
+              </button>
+            </div>
+            <InputText label="Título" data={item} setData={setData} property="title" isANewDoc={false} disabled={!user} />
+            <InputTextArea label="Texto" data={item} setData={setData} property="text" isANewDoc={false} disabled={!user} />
+            {/* <select
+              className="form-control mb-2"
+              value={item.text || ""}
+              onChange={(e) => {
+                const novo = [...data];
+                novo[i].text = e.target.value;
+                setData(novo);
+              }}
+            /> */}
+            <select
+              className="form-control mb-2"
+              value={item.type || "text"}
+              onChange={(e) => {
+                const novo = [...data];
+                novo[i].type = e.target.value;
+                setData(novo);
+              }}
+            >
+              <option value="text">Texto</option>
+              <option value="card">Card</option>
+            </select>
+            <div className="d-flex pt-2">
+              <button className="btn  btn-success flex-grow-1" onClick={() => saveBlock(item.id, item)}>
+                Salvar
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

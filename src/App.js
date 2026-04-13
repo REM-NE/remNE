@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import { AuthProvider } from './utils/authContext';
+import AboutForm from "./views/about/edit";
 import AboutPage from "./views/about/page";
 import LoginPage from "./views/auth/login";
 import RegisterPage from "./views/auth/register";
@@ -45,7 +46,7 @@ function App() {
             <Route path="recursos-educacionais/post/:postId" element={<ResourcesPost />} />
             <Route path="publicacoes/post/:postId" element={<PublicationsPost />} />
             <Route path="biblioteca/post/:postId" element={<LibraryPost />} />
-            {/* <Route path="sobre/edit" element={<AboutForm />} /> */}
+            <Route path="sobre/edit" element={<AboutForm />} />
             <Route path="auth/login" element={<LoginPage />} />
             <Route path="auth/register" element={<RegisterPage />} />
           </Route>
