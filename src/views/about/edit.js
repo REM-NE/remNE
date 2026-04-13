@@ -77,7 +77,7 @@ export default function NewsForm() {
   if (loading) return <p>Carregando...</p>;
 
   return (
-    <div className="container border p-3 mb-4 rounded">
+    <div className="container border p-3 mb-4 rounded" style={{ marginTop: '80px' }}>
       <h3>Editor da Página About</h3>
 
       {/* Formulário para adicionar novo bloco */}
