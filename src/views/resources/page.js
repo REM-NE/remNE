@@ -9,7 +9,7 @@ import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
-import { getDocuments } from '../../cotrollers/firebaseCollections';
+import { getDocuments, getNextPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './resources.css';
 
@@ -19,13 +19,39 @@ function ResourcesPage() {
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [lastDoc, setLastDoc] = useState(null);
+    const [history, setHistory] = useState([]);
+
+    const collection = "recursos";
 
     function loadData() {
-        getDocuments("recursos", true).then((data) => {
-            setDocsData(data);
+        getDocuments(collection, true).then((data) => {
+            setDocsData(data.docs);
         });
         setLoading(false);
     }
+
+    const handlePrev = async () => {
+        if (page <= 1) return;
+
+        const prevCursor = history[history.length - 2] || null;
+
+        const res = await getNextPage(prevCursor, collection);
+
+        setHistory(prev => prev.slice(0, -1));
+        setDocsData(res.docs);
+        setLastDoc(res.lastDoc);
+        setPage(prev => prev - 1);
+    };
+
+    const handleNext = async () => {
+        const res = await getNextPage(lastDoc, collection);
+
+        setHistory(prev => [...prev, lastDoc]);
+        setDocsData(res.docs);
+        setLastDoc(res.lastDoc);
+        setPage(prev => prev + 1);
+    };
 
     useEffect(() => {
         loadData();
@@ -34,9 +60,9 @@ function ResourcesPage() {
     function NewsCard() {
         return (
             <>
-                {docsData.map((recurso, index) => (
+                {Array.isArray(docsData) && docsData.map((recurso, index) => (
                     index < 10 && (
-                        <Post key={index} title={recurso.title} image={recurso.image} id={recurso.id} />)
+                        <Post key={index} title={recurso.title} image={recurso.imageURL} id={recurso.id} />)
                 ))}
             </>
         );
@@ -49,17 +75,17 @@ function ResourcesPage() {
     ]
 
     return (
-        <div class="resources main top-spacing">
+        <div className="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
             <br></br>
             <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button>
-            <div class="container flex-grow-1">
-                <div class="column">
+            <div className="container flex-grow-1">
+                <div className="column">
                     <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
                         {cardUpperTexts.map((item, id) => (
                             <div key={id} className="col-md-4 d-flex justify-content-center mb-4">
                                 <div className="card" style={{ width: "30rem" }}>
-                                    <img src={item.img} class="card-img-top" alt="..."></img>
+                                    <img src={item.img} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{item.text}</h5>
                                         {/* <p className="card-text">
@@ -76,7 +102,13 @@ function ResourcesPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    <Pagination totalPages={docsData.length % 10} currentPage={page} onChange={(page) => setPage(page)} />
+                    {<Pagination
+                        currentPage={page}
+                        hasNext={docsData.length === 10} // depende do limit
+                        hasPrev={page > 1}
+                        onNext={handleNext}
+                        onPrev={handlePrev}
+                    />}
                 </div>
             </div>
         </div>

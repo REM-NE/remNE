@@ -11,9 +11,9 @@ export default function Post({ title, image, id}) {
 
     return (
         <Link key={id} to={`post/${id}`}>
-            <div class="column post-card">
-                <img class="post-image" src={image} alt=""></img>
-                <div class="column-main post-text">
+            <div className="column post-card">
+                <img className="post-image" src={image} alt=""></img>
+                <div className="column-main post-text">
                     <p className="card-title">{title}</p>
                     {/* <p className="card-text">{text}</p> */}
                 </div>

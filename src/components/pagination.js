@@ -1,28 +1,38 @@
+import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import '../App.css';
 
-export default function Pagination({ totalPages, currentPage, onChange }) {
+export default function Pagination({
+    currentPage,
+    hasNext,
+    hasPrev,
+    onNext,
+    onPrev
+}) {
     return (
-        <div className='pagination'>
-            {Array.from({ length: totalPages }).map((_, i) => {
-                const page = i + 1;
-                return (
-                    <div className='main-title' key={page}>
-                        <button
-                            onClick={() => onChange(page)}
-                            style={{
-                                padding: "6px",
-                                border: "unset",
-                                background: "unset",
-                                fontWeight: page === currentPage ? "bold" : "normal",
-                                cursor: "pointer"
-                            }}
-                        >
-                            {page}
-                        </button>
-                        {page < totalPages && <span>,</span>}
-                    </div>
-                );
-            })}
+        <div className="pagination">
+            {hasPrev && <button
+                onClick={onPrev}
+                className='pagination-button'
+                style={{
+                    marginRight: "10px",
+                    cursor: hasPrev ? "pointer" : "not-allowed"
+                }}
+            >
+                <BsArrowLeftShort />
+            </button>}
+            <span className="main-title">
+                {currentPage}
+            </span>
+            {hasNext && <button
+                onClick={onNext}
+                className='pagination-button'
+                style={{
+                    marginLeft: "10px",
+                    cursor: hasNext ? "pointer" : "not-allowed"
+                }}
+            >
+                <BsArrowRightShort />
+            </button>}
         </div>
     );
 }

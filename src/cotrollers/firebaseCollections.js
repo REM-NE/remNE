@@ -5,18 +5,22 @@ import {
     doc,
     getDoc,
     getDocs,
+    limit,
     onSnapshot,
     orderBy,
     query,
     serverTimestamp,
+    startAfter,
     updateDoc
 } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 
-const uploadImage = async (file, type) => {
+// Cloudinary - start
+
+const uploadImage = async (file) => { // Faz upload da imagem para o Cloudinary e retorna a URL
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", type == "home" ? "standard" : type); //standard é o preset da home
+    formData.append("upload_preset", "standard"); //standard é o preset da home
 
     const res = await fetch(
         "https://api.cloudinary.com/v1_1/dyp5jzbal/image/upload",
@@ -27,10 +31,17 @@ const uploadImage = async (file, type) => {
     );
 
     const data = await res.json();
+
+    console.log("Resposta do upload da imagem:", data);
+
     return data.secure_url;
 };
 
-export const subscribeToCollection = (collectionName, callback) => {
+// Cloudinary - end
+
+// Firebase Firestore - start
+
+export const subscribeToCollection = (collectionName, callback) => { //Usado na edição, para atualizar a lista de documentos em tempo real
     const q = query(
         collection(db, collectionName),
         orderBy("publishedAt", "desc")
@@ -48,7 +59,7 @@ export const subscribeToCollection = (collectionName, callback) => {
     return unsubscribe;
 };
 
-// GET by ID
+// GET by ID - Usado nos posts
 export const getDocumentById = async (collectionName, id) => {
     try {
         const ref = doc(db, collectionName, id);
@@ -70,36 +81,76 @@ export const getDocuments = async (collectionName, orderByField) => {
         let q;
         if (orderByField) {
             q = query(
-
                 collection(db, collectionName),
-                orderBy("publishedAt", "desc"))
+                orderBy("publishedAt", "desc"),
+                limit(10)
+            )
         } else {
             q = collection(db, collectionName)
         }
         const snap = await getDocs(q);
+        const lastDoc = snap.docs[snap.docs.length - 1];
 
-        return snap.docs.map((d) => ({
-            id: d.id,
-            ...d.data(),
-        }));
+        return {
+            docs: snap.docs.map((d) => ({
+                id: d.id,
+                ...d.data(),
+            })),
+            lastDoc
+        };
     } catch (error) {
         throw error;
     }
 }
 
+export const getNextPage = async (lastDoc, collectionName) => {
+    try {
+        let q;
+
+        if (lastDoc) {
+            q = query(
+                collection(db, collectionName),
+                orderBy("createdAt", "desc"),
+                startAfter(lastDoc),
+                limit(10)
+            );
+        } else {
+            q = query(
+                collection(db, collectionName),
+                orderBy("createdAt", "desc"),
+                limit(10)
+            );
+        }
+
+        const snap = await getDocs(q);
+        const newLastDoc = snap.docs[snap.docs.length - 1];
+
+        return {
+            docs: snap.docs.map((d) => ({
+                id: d.id,
+                ...d.data(),
+            })),
+            newLastDoc
+        };
+    } catch (error) {
+        throw error;
+    }
+};
+
 // CREATE
 export const createDocument = async (collectionName, data) => {
     try {
-        let imageUrl = "";
+        let imageURL = "";
 
-        if (data.imageFile) {
-            imageUrl = await uploadImage(data.imageFile);
+        if (data.imageURL) {
+            imageURL = await uploadImage(data.imageFile);
         }
+        // console.log("Criando documento com dados:", data, "e imagem URL:", imageURL);
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
             text: data.text,
-            imageURL: imageUrl, // Faz upload da nova imagem no cloudinary e obtém a URL
+            imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
             link: data.link,
             createdAt: serverTimestamp(),
             publishedAt: serverTimestamp()
@@ -115,24 +166,24 @@ export const createDocument = async (collectionName, data) => {
 // UPDATE
 export const updateDocument = async (collectionName, id, data) => {
     try {
-        let imageUrl = "";
-
-        if (data.imageFile) {
-            imageUrl = await uploadImage(data.imageFile);
-        }
-
         const ref = doc(db, collectionName, id);
-        await updateDoc(ref, {
+
+        const updatePayload = {
             title: data.title,
             text: data.text,
-            imageURL: imageUrl, // Faz upload da nova imagem no cloudinary e obtém a URL
             link: data.link,
             publishedAt: serverTimestamp()
-        });
+        };
 
-        alert("Documento " + data.title + " atualizado na coleção:" + collectionName);
+        if (data.imageFile) {
+            updatePayload.imageURL = await uploadImage(data.imageFile, collectionName);
+        } else if (data.imageURL) {
+            updatePayload.imageURL = data.imageURL;
+        }
 
+        { updatePayload.imageURL && await updateDoc(ref, updatePayload) };
 
+        alert("Documento " + data.title + " atualizado na coleção: " + collectionName);
     } catch (error) {
         throw error;
     }
@@ -148,3 +199,5 @@ export const deleteDocument = async (collectionName, id) => {
         throw error;
     }
 };
+
+// Firebase Firestore - end

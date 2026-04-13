@@ -15,7 +15,8 @@ export default function LibraryForm() {
     const [newLibraryData, setNewLibraryData] = useState({
         title: "",
         text: "",
-        imageUrl: "",
+        imageURL: "",
+        imageFile: null,
         link: "",
     });
 
@@ -40,7 +41,8 @@ export default function LibraryForm() {
     const createNew = () => createDocument("biblioteca", {
         title: newLibraryData.title,
         text: newLibraryData.text,
-        imageUrl: newLibraryData.imageUrl,
+        imageURL: newLibraryData.imageURL,
+        imageFile: newLibraryData.imageFile,
         link: newLibraryData.link,
         publishedAt: new Date(),
         createdAt: serverTimestamp()
@@ -49,7 +51,8 @@ export default function LibraryForm() {
     const updateDoc = (id, data) => updateDocument("biblioteca", id, {
         title: data.title,
         text: data.text,
-        imageUrl: data.imageUrl,
+        imageURL: data.imageURL,
+        imageFile: data.imageFile,
         link: data.link,
     });
 

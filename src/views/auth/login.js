@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import './auth.css';
-import { auth } from '../../utils/firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../utils/firebaseConfig';
+import './auth.css';
 
 export default function LoginPage() {
     const [login, setLogin] = useState("");
@@ -62,7 +62,7 @@ export default function LoginPage() {
                     </button>
                     <div className="options">
                         <Link to={"/auth/register"}>
-                            <a>Cadastre-se</a>
+                            Cadastre-se
                         </Link>
                         <a href="#">Recuperar Senha</a>
                     </div>

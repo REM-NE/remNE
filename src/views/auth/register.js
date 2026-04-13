@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import './auth.css';
-import { useNavigate, Link } from 'react-router-dom';
-import { auth } from '../../utils/firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from 'react';
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../utils/firebaseConfig';
+import './auth.css';
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -73,7 +73,7 @@ export default function RegisterPage() {
                     </button>
                     <div className="options">
                         <Link to={"/auth/login"}>
-                            <a>Fazer login</a>
+                            Fazer login
                         </Link>
                     </div>
                 </div>

@@ -54,17 +54,8 @@ export default function HomeForm() {
 
             {docsData.map((item, index) => (
                 <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
-                    {item.images.map((img, imgIndex) => (
-                        <UploadImage
-                            key={imgIndex}
-                            label={`Imagem ${index + 1} do carrossel`}
-                            data={img}
-                            setData={(newData) => {
-                                const novo = [...docsData];
-                                novo[index] = { ...novo[index], ...newData };
-                                setDocsData(novo);
-                            }}
-                        />
+                    {item.images && item.images.map((image, imageIndex) => (
+                        <UploadImage key={imageIndex} label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} isArray={true} index={imageIndex} />
                     ))}
                     {/* TÍTULO */}
                     <div className="mb-3">

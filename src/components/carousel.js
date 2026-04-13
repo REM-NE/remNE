@@ -1,18 +1,18 @@
 
-export default function Carousel({ images = [], id = "carousel" }) {
+export default function Carousel({ images, id = "carousel" }) {
   if (!images.length) return null;
 
   return (
     <div className="container-carousel flex-grow-1">
       <div id={id} className="carousel slide">
         <div className="carousel-inner">
-          {images.map((img, index) => (
+          {images.map((image, index) => (
             <div
               key={index}
               className={`carousel-item ${index === 0 ? "active" : ""}`}
             >
               <img
-                src={img}
+                src={image.imageURL}
                 className="d-block w-100"
                 alt={`slide-${index}`}
                 style={{ height: "496px", objectFit: "cover" }}

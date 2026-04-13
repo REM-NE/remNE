@@ -15,7 +15,8 @@ export default function NewsForm() {
     const [newPublicationData, setNewPublicationData] = useState({
         title: "",
         text: "",
-        imageUrl: "",
+        imageURL: "",
+        imageFile: null,
         link: "",
     });
 
@@ -40,7 +41,8 @@ export default function NewsForm() {
     const createNew = () => createDocument("publicacoes", {
         title: newPublicationData.title,
         text: newPublicationData.text,
-        imageUrl: newPublicationData.imageUrl,
+        imageURL: newPublicationData.imageURL,
+        imageFile: newPublicationData.imageFile,
         link: newPublicationData.link,
         publishedAt: new Date(),
         createdAt: serverTimestamp()
@@ -49,7 +51,8 @@ export default function NewsForm() {
     const updateDoc = (id, data) => updateDocument("publicacoes", id, {
         title: data.title,
         text: data.text,
-        imageUrl: data.imageUrl,
+        imageURL: data.imageURL,
+        imageFile: data.imageFile,
         link: data.link,
     });
 
@@ -67,7 +70,7 @@ export default function NewsForm() {
                 <InputText label="Link externo" data={newPublicationData} setData={setNewPublicationData} property="link" isANewDoc={true} disabled={!user} />
                 <button
                     className="btn btn-success w-100"
-                    // onClick={() => console.log(newPublicationData.imageUrl)}
+                    // onClick={() => console.log(newPublicationData.imageURL)}
                     onClick={() => createNew()}
                 >
                     Adicionar publicação

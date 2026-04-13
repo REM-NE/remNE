@@ -15,7 +15,8 @@ export default function ResourcesForm() {
     const [resourcesData, setResourcesData] = useState({
         title: "",
         text: "",
-        imageUrl: "",
+        imageURL: "",
+        imageFile: null,
         link: "",
     });
 
@@ -40,7 +41,8 @@ export default function ResourcesForm() {
     const createNew = () => createDocument("recursos", {
         title: resourcesData.title,
         text: resourcesData.text,
-        imageUrl: resourcesData.imageUrl,
+        imageURL: resourcesData.imageURL,
+        imageFile: resourcesData.imageFile,
         link: resourcesData.link,
         publishedAt: new Date(),
         createdAt: serverTimestamp()
@@ -49,7 +51,8 @@ export default function ResourcesForm() {
     const updateDoc = (id, data) => updateDocument("recursos", id, {
         title: data.title,
         text: data.text,
-        imageUrl: data.imageUrl,
+        imageURL: data.imageURL,
+        imageFile: data.imageFile,
         link: data.link,
     });
 

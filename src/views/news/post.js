@@ -11,7 +11,7 @@ export default function LibraryPost() {
     const [postData, setPostData] = useState({
         title: "",
         text: "",
-        imageUrl: "",
+        imageURL: "",
         link: ""
     });
 
@@ -21,18 +21,18 @@ export default function LibraryPost() {
                 setPostData({
                     title: data.title,
                     text: data.text,
-                    imageUrl: data.imageUrl,
+                    imageURL: data.imageURL,
                     link: data.link
                 });
             })
     }, [postId]);
 
     return (
-        <div class="news main top-spacing">
+        <div className="news main top-spacing">
             <Banner title="Eventos e Notícias" />
             <br></br>
             <div className="main-post border rounded container p-4 mb-5">
-                {postData.imageUrl && <img src={postData.imageUrl} alt={postData.title} className="main-post-image" />}
+                {postData.imageURL && <img src={postData.imageURL} alt={postData.title} className="main-post-image post-img" />}
                 <h3 className="main-post-title">{postData.title}</h3>
                 <p className="main-post-text">{postData.text}</p>
                 {postData.link && <a href={postData.link} target="_blank" rel="noopener noreferrer" className="main-post-link">Saiba mais</a>}

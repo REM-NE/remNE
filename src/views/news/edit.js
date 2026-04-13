@@ -15,7 +15,8 @@ export default function NewsForm() {
     const [newsData, setNewsData] = useState({
         title: "",
         text: "",
-        imageUrl: "",
+        imageURL: "",
+        imageFile: null,
         link: "",
     });
 
@@ -40,7 +41,8 @@ export default function NewsForm() {
     const createNew = () => createDocument("eventos-e-noticias", {
         title: newsData.title,
         text: newsData.text,
-        imageUrl: newsData.imageUrl,
+        imageURL: newsData.imageURL,
+        imageFile: newsData.imageFile,
         link: newsData.link,
         publishedAt: new Date(),
         createdAt: serverTimestamp()
@@ -49,7 +51,8 @@ export default function NewsForm() {
     const updateDoc = (id, data) => updateDocument("eventos-e-noticias", id, {
         title: data.title,
         text: data.text,
-        imageUrl: data.imageUrl,
+        imageURL: data.imageURL,
+        imageFile: data.imageFile,
         link: data.link,
     });
 

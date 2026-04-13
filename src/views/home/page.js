@@ -4,12 +4,12 @@ import PathButton from '../../components/pathButton';
 import { useAuth } from '../../utils/authContext';
 
 import { Link } from "react-router-dom";
-import carouselImage1 from '../../assets/images/carousel1.png';
 import newsImage1 from '../../assets/images/news1.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Carousel from '../../components/carousel';
+import CarouselResources from '../../components/carouselResources';
 import { getDocuments } from '../../cotrollers/firebaseCollections';
 
 export default function Home() {
@@ -21,20 +21,25 @@ export default function Home() {
   const [resourcesData, setResourcesData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  function loadData() {
-    getDocuments("home", false).then((data) => {
-      setDocsData(data);
-    });
+const loadData = async () => {
+    try {
+      getDocuments("home", false).then((data) => {
+        setDocsData(data.docs);
+      });
 
-    getDocuments("eventos-e-noticias", true).then((data) => {
-      setNewsData(data);
-    });
+      getDocuments("eventos-e-noticias", true).then((data) => {
+        setNewsData(data.docs);
+      });
 
-    getDocuments("recursos", true).then((data) => {
-      setResourcesData(data);
-    });
-
-    setLoading(false);
+      getDocuments("recursos", true).then((data) => {
+        // console.log("Recursos carregados:", data);
+        setResourcesData(data.docs);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar dados:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -50,8 +55,7 @@ export default function Home() {
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
 
-      <Carousel images={docsData.length ? docsData[0].imagens : [carouselImage1]} id="homeCarousel" />
-
+      {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />}
       <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
         <main className="home-about">
@@ -90,23 +94,13 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-
             ))
           }
           <PathButton path="/eventos-e-noticias" text="Veja todas as notícias" />
         </div >
       </div >
-      {/* <div className="red-section d-flex flex-column justify-content-center align-items-center container">
-        <img src={red} className="red-img w-100" alt="Red" />
-        <div className="red-content d-flex flex-column justify-content-center align-items-center">
-          <h1 className='red-title'>O Reino de Aljabar</h1>
-          <p className='red-text'>O RED O reino de Aljabar: o desafio da balança consiste em um jogo, para alunos do 4º ano do Ensino Fundamental, cuja ideia geral é utilizar relações de igualdade e desigualdade em uma balança de dois pratos para descobrir valores desconhecidos.</p>
-          <div className='red-actions'>
-            <button className="red-btn" onClick={() => { }}>Veja Mais</button>
-          </div>
-        </div>
-      </div> */}
-      <div class="instagram-posts">
+      {Array.isArray(resourcesData) && <CarouselResources data={resourcesData} id="resourcesCarousel" />}
+      <div className="instagram-posts">
         <h1 className='main-title'>Siga a <a href="https://www.instagram.com/remne/" target="_blank" rel="noopener noreferrer">REM-NE</a> no Instagram!</h1>
         <div data-behold-id="MZu7Iovm2aAychKp2K34"></div>
       </div>
