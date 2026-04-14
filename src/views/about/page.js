@@ -31,7 +31,7 @@ export default function AboutPage() {
 
   return (
     <div className="about main top-spacing pb-5">
-      <div className="d-flex justify-content-start mt-5">
+      <div className="container mt-5">
         {currentUser && <PathButton text="Editar Página do Sobre" path="/sobre/edit" />}
       </div>
       {/* Conteúdo do Firestore */}
