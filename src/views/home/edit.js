@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import UploadImage from "../../components/forms/uploadImage";
+import { uploadImage } from "../../cotrollers/firebaseCollections";
 import { auth, db } from "../../utils/firebaseConfig";
 
 export default function HomeForm() {
@@ -39,7 +40,37 @@ export default function HomeForm() {
 
     async function saveData(id, dados) {
         const ref = doc(db, "home", id);
-        await updateDoc(ref, dados);
+
+        const updatedImages = await Promise.all(
+            (dados.images).map(async (img) => {
+                if (img.imageFile instanceof File) {
+                    const url = await uploadImage(img.imageFile);
+
+                    return {
+                        ...img,
+                        imageURL: url,
+                        // imageFile: undefined
+                    };
+                }
+                return {
+                    imageURL: img.imageURL
+                };
+            })
+        );
+
+        const payload = {
+            title: dados.title || "",
+            text: dados.text || "",
+            link: dados.link || "",
+            videoURL: dados.videoURL || "",
+            publishedAt: serverTimestamp(),
+            images: updatedImages
+        };
+
+        // console.log("Payload para salvar:", payload);
+
+        await updateDoc(ref, payload);
+
         alert(`Documento ${id} salvo!`);
     }
 
@@ -63,11 +94,11 @@ export default function HomeForm() {
                         <input
                             type="text"
                             className="form-control"
-                            value={item.titulo || ""}
+                            value={item.title || ""}
                             disabled={!user}
                             onChange={(e) => {
                                 const novo = [...docsData];
-                                novo[index].titulo = e.target.value;
+                                novo[index].title = e.target.value;
                                 setDocsData(novo);
                             }}
                         />
@@ -80,13 +111,28 @@ export default function HomeForm() {
                             className="form-control"
                             rows={4}
                             disabled={!user}
-                            value={item.texto || ""}
+                            value={item.text || ""}
                             onChange={(e) => {
                                 const novo = [...docsData];
-                                novo[index].texto = e.target.value;
+                                novo[index].text = e.target.value;
                                 setDocsData(novo);
                             }}
                         ></textarea>
+                    </div>
+
+                    <div className="mb-3">
+                        <label>Link para o video:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={item.videoURL || ""}
+                            disabled={!user}
+                            onChange={(e) => {
+                                const novo = [...docsData];
+                                novo[index].videoURL = e.target.value;
+                                setDocsData(novo);
+                            }}
+                        />
                     </div>
 
                     {/* BOTÃO DE SALVAR POR DOCUMENTO */}

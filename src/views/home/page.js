@@ -21,7 +21,7 @@ export default function Home() {
   const [resourcesData, setResourcesData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-const loadData = async () => {
+  const loadData = async () => {
     try {
       getDocuments("home", false).then((data) => {
         setDocsData(data.docs);
@@ -64,15 +64,22 @@ const loadData = async () => {
               {currentUser && <PathButton text="Editar Home" path="/home/edit" />}
             </div>
             {docsData.map((item, index) => (
-              <div key={index}>
-                <h1 className='main-title'>{item.titulo}</h1>
-                <p className='main-text'>{item.texto}</p>
-              </div>
+              <>
+                <div key={index}>
+                  <h1 className='main-title'>{item.title}</h1>
+                  <p className='main-text'>{item.text}</p>
+                </div>
+                <iframe
+                  width="100%"
+                  height="325"
+                  src={item.videoURL || ""}
+                  title="YouTube video"
+                  frameBorder="0"
+                  allowFullScreen
+                />
+              </>
             ))}
-            <video className='video-index' width="100%" height="325" controls>
-              <source src="" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+
           </div>
         </main >
 

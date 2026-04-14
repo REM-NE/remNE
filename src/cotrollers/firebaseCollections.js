@@ -17,10 +17,10 @@ import { db } from "../utils/firebaseConfig";
 
 // Cloudinary - start
 
-const uploadImage = async (file) => { // Faz upload da imagem para o Cloudinary e retorna a URL
+export const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "standard"); //standard é o preset da home
+    formData.append("upload_preset", "standard");
 
     const res = await fetch(
         "https://api.cloudinary.com/v1_1/dyp5jzbal/image/upload",
@@ -32,7 +32,12 @@ const uploadImage = async (file) => { // Faz upload da imagem para o Cloudinary 
 
     const data = await res.json();
 
-    console.log("Resposta do upload da imagem:", data);
+    if (!res.ok || data.error) {
+        console.error("Erro Cloudinary:", data);
+        throw new Error(data.error?.message || "Erro no upload");
+    }
+
+    // console.log("Resposta Cloudinary:", data);
 
     return data.secure_url;
 };
@@ -168,24 +173,26 @@ export const updateDocument = async (collectionName, id, data) => {
     try {
         const ref = doc(db, collectionName, id);
 
+        let imageURL = data.imageURL;
+
+        if (data.imageFile instanceof File) {
+            imageURL = await uploadImage(data.imageFile);
+        }
+
         const updatePayload = {
             title: data.title,
             text: data.text,
             link: data.link,
-            publishedAt: serverTimestamp()
+            publishedAt: serverTimestamp(),
+            imageURL
         };
 
-        if (data.imageFile) {
-            updatePayload.imageURL = await uploadImage(data.imageFile, collectionName);
-        } else if (data.imageURL) {
-            updatePayload.imageURL = data.imageURL;
-        }
+        await updateDoc(ref, updatePayload);
 
-        { updatePayload.imageURL && await updateDoc(ref, updatePayload) };
-
-        alert("Documento " + data.title + " atualizado na coleção: " + collectionName);
+        alert("Documento " + data.title + " atualizado!");
     } catch (error) {
-        throw error;
+        console.error(error);
+        alert("Erro ao atualizar documento");
     }
 };
 

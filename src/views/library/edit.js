@@ -56,7 +56,6 @@ export default function LibraryForm() {
         link: data.link,
     });
 
-
     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
     return (
@@ -64,6 +63,8 @@ export default function LibraryForm() {
             <h2 className="text-center pt-5 mb-4">Editor da Página da Biblioteca</h2>
             {!user && <p>Faça login para editar.</p>}
             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
+                <h3>Criar nova publicação</h3>
+                <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
                 <h3>Criar nova publicação</h3>
                 <InputText label="Título" data={newLibraryData} setData={setNewLibraryData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={newLibraryData} setData={setNewLibraryData} property="text" isANewDoc={true} disabled={!user} />
@@ -90,7 +91,7 @@ export default function LibraryForm() {
                         </div>
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
-                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />                
+                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
                         <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
 
