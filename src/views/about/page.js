@@ -30,7 +30,7 @@ export default function AboutPage() {
   if (loading) return <p className="container main">Carregando...</p>;
 
   return (
-    <div className="about main top-spacing pt-5 pb-5">
+    <div className="about main top-spacing pb-5">
       <div className="d-flex justify-content-start mt-5">
         {currentUser && <PathButton text="Editar Página do Sobre" path="/sobre/edit" />}
       </div>

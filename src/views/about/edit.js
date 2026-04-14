@@ -59,6 +59,8 @@ export default function AboutForm() {
 
     try {
       await updateDoc(doc(db, "about", id), item);
+      alert("Documento " + item.title + " atualizado!");
+
       loadData();
     } catch (err) {
       console.error(err);
