@@ -6,7 +6,7 @@ export default function CarouselResources({ data, id = "carousel" }) {
     if (!data.length) return null;
 
     return (
-        <div className="container-carousel flex-grow-1">
+        <div className="container container-carousel flex-grow-1">
             <div id={id} className="carousel slide">
                 <div className="carousel-inner">
                     {data.map((item, index) => (

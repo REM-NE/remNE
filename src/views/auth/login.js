@@ -8,7 +8,7 @@ import './auth.css';
 export default function LoginPage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     let navigate = useNavigate();
 
     const isNotEmpty = (valor) => {
@@ -43,7 +43,7 @@ export default function LoginPage() {
     // });
 
     return (
-        <div className="home top-spacing-resource loginContainer">
+        <div className="home loginContainer">
             <div className="stepContainer">
                 <div className="box">
                     <label>
@@ -57,7 +57,7 @@ export default function LoginPage() {
                         <input className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
                         <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
                     </div>
-                    <button onClick={() => enviarDados()}>
+                    <button className="authButton" onClick={() => enviarDados()}>
                         Enviar
                     </button>
                     <div className="options">

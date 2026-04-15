@@ -68,7 +68,7 @@ export default function RegisterPage() {
                         <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
                     </div>
 
-                    <button onClick={() => enviarDados()}>
+                    <button className="authButton" onClick={() => enviarDados()}>
                         Enviar
                     </button>
                     <div className="options">

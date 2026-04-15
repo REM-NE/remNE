@@ -5,10 +5,19 @@
   gap: 8px;
 }
 
+input {
+  padding: 0 8px;
+}
+
+input:active,
+input:focus {
+  outline: none;
+}
+
 .input {
-  height: 30px;
+  min-height: 40px;
+  max-height: 40px;
   font-size: 14px;
-  width: 90%;
   margin-bottom: 20px;
   border-color: black;
   border-width: 1px;
@@ -16,34 +25,68 @@
 }
 
 .options {
-    display: flex;
-    gap: 20px;  
-    margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
 }
 
 .loginContainer {
-    min-height: 82vh !important;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--tipo-fonte);
 }
 
 .stepContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
   width: 100%;
+  max-width: 420px;
+  padding: var(--espacamento-padrao);
 }
 
 .box {
-  width: 500px;
-  min-height: 300px;
-  padding-top: 50px;
-  padding: 20px 0;
+  background: var(--cor-secundaria);
+  border: var(--borda-padrao);
+  border-radius: var(--arredondamento-borda);
+  padding: calc(var(--espacamento-padrao) * 1.5);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: lightgray;
-  border-radius: 10%;
+  gap: var(--espacamento-padrao);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Labels */
+.box label {
+  font-size: 14px;
+  color: var(--cor-texto-principal);
+  font-weight: 600;
+}
+
+button.authButton {
+  padding: 12px;
+  border: none;
+  background: var(--cor-primaria-300);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button.authButton:hover {
+  background: var(--cor-primaria-400);
+  transform: translateY(-1px);
+}
+
+button.authButton:active {
+  background: var(--cor-primaria-500);
+  transform: scale(0.98);
+}
+
+/* Links */
+.options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
 }
 
 .reactLogo {
@@ -52,4 +95,17 @@
   position: absolute;
   bottom: 0;
   text-align: center;
+}
+
+button.showPassword {
+  width: 30px;
+  height: 37px;
+  background: white;
+  border: 0;
+}
+
+input.inputPassword {
+  width: Calc(100% - 30px);
+  border: 0;
+  height: 37px;
 }
