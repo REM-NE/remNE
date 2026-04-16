@@ -458,6 +458,7 @@ a:hover {
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
+  overflow-y: hidden;
   height: 120px;
   letter-spacing: -0.33px;
 }
@@ -538,6 +539,9 @@ a:hover {
 .card-title {
   text-align: center;
   padding: 47px 62px 69px 62px;
+  white-space: break-spaces;
+  max-height: 75px;
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
