@@ -12,6 +12,7 @@
 }
 
 @media (max-width: 1199px) {
+
   .row-header .start-header,
   .row-main .start-header {
     width: 220px;
@@ -243,6 +244,16 @@
     font-size: 1rem;
   }
 
+  .resource-highlight-card .card-title {
+    padding: 12px 24px 16px;
+  }
+
+  .banner-image {
+    min-height: 220px;
+    height: 20%;
+    object-fit: cover;
+  }
+
   .button-carousel.carousel-control-prev {
     left: 12px;
   }
@@ -254,6 +265,16 @@
   .button-carousel .carousel-control-prev-icon,
   .button-carousel .carousel-control-next-icon {
     background-size: 60% 60%;
+  }
+
+  .resources-filter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: scroll;
+  }
+
+  .resource-highlight-card .card-img-top {
+    height: 145px;
   }
 
   .instagram-posts {

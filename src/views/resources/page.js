@@ -82,7 +82,7 @@ function ResourcesPage() {
                     <div className="resource-actions">
                         <button className="botao-noticias" onClick={() => { }}>Envio de Material</button>
                     </div>
-                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
+                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1 resources-filter">
                         {cardUpperTexts.map((item, id) => (
                             <div key={id} className="col-12 col-md-6 col-xl-4 d-flex justify-content-center mb-4">
                                 <div className="card resource-highlight-card">

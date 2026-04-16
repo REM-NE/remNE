@@ -245,6 +245,7 @@ a {
   font-weight: 600 !important;
   text-decoration: underline !important;
 }
+
 .image-upload-box {
   border: var(--borda-padrao);
   width: 100%;
@@ -267,6 +268,11 @@ a {
   letter-spacing: -0.88px;
   margin-top: -125px;
   padding-right: 111px;
+}
+
+.banner-image {
+  height: "496px";
+  object-fit: "cover";
 }
 
 .main-title {
