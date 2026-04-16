@@ -1,30 +1,32 @@
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
-import { useAuth } from '../utils/authContext';
 
 import logo1 from '../assets/images/logo1.png';
 import logo2 from '../assets/images/logo2.png';
 
 function Navbar() {
-    const { currentUser, logout } = useAuth();
-
     const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const buttonObject = [
+        { title: "Inicio", path: "/" },
+        { title: "Eventos e Notícias", path: "/eventos-e-noticias" },
+        { title: "Recursos Educacionais", path: "/recursos-educacionais" },
+        { title: "Publicações Cientí­ficas", path: "/publicacoes" },
+        { title: "Biblioteca", path: "/biblioteca" },
+        { title: "Sobre", path: "/sobre" },
+    ];
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location.pathname]);
 
     function NavBarButtons() {
-        let buttonObject = [
-            { title: "Início", path: "/" },
-            { title: "Eventos e Notícias", path: "/eventos-e-noticias" },
-            { title: "Recursos Educacionais", path: "/recursos-educacionais" },
-            { title: "Publicações Científicas", path: "/publicacoes" },
-            { title: "Biblioteca", path: "/biblioteca" },
-            { title: "Sobre", path: "/sobre" },
-        ];
-
         return (
             <>
                 {buttonObject.map((button, index) => (
-                    <Link key={index} to={button.path}>
-                        {/* <img className="icon" src={button.icon} alt=""></img> */}
+                    <Link key={index} to={button.path} className="navbar-link">
                         <div className={location.pathname === button.path ? "active" : ""}>
                             <p>{button.title}</p>
                         </div>
@@ -38,29 +40,25 @@ function Navbar() {
         <div className="header">
             <div className="row-header">
                 <div className="start-header">
-                    <a href='/'><img className="logo" src={logo1} alt="logo" /></a>
-                    <a href='/'><img className="logo" src={logo2} alt="logo" /></a>
+                    <Link to='/'><img className="logo" src={logo1} alt="logo" /></Link>
+                    <Link to='/'><img className="logo" src={logo2} alt="logo" /></Link>
+                    <button
+                        type="button"
+                        className={`navbar-toggle ${isMenuOpen ? "is-open" : ""}`}
+                        aria-label="Abrir menu"
+                        aria-expanded={isMenuOpen}
+                        onClick={() => setIsMenuOpen((current) => !current)}
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
                 </div>
                 <div className="column">
-                    {/* <div className="top-header"> 
-                        {currentUser ? (
-                            <div className="column logout">
-                                <span>Olá, {currentUser.email}</span>
-                                <Button onClick={logout}>Sair</Button>
-                            </div>
-                        ) : (
-                            <Link to={"/auth/login"}>
-                                <Button >LOGIN</Button>
-                            </Link>
-                        )}
-                    </div> */}
                     <div className="row-header bottom-header">
-                        <div className="row-header navbar-menu">
+                        <div className={`row-header navbar-menu ${isMenuOpen ? "is-open" : ""}`}>
                             <NavBarButtons />
                         </div>
-                        {/* <div className="search-bar">
-                            <input type="text" defaultValue={"Busca/Pesquisa"} />
-                        </div> */}
                     </div>
                 </div>
             </div>

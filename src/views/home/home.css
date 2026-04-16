@@ -1,0 +1,62 @@
+.home-content {
+  display: flex;
+  gap: 40px;
+}
+
+.home-video {
+  display: block;
+  width: 100%;
+  height: 325px;
+  margin-top: 24px;
+  border-radius: 12px;
+  border: 0;
+}
+
+.home-news-list {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .home-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .home-about,
+  .home-news {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .home .card,
+  .home .card-img-top,
+  .home .card-body {
+    width: 100%;
+  }
+
+  .home .card-body {
+    height: auto;
+    min-height: 104px;
+    margin-top: 0;
+  }
+
+  .home-news .botao-noticias {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-video {
+    height: 220px;
+    margin-top: 20px;
+  }
+
+  .home .card-img-top {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .home .card-body {
+    padding: 16px 12px 20px;
+  }
+}

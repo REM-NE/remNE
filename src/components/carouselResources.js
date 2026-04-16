@@ -1,8 +1,10 @@
 import '../App.css';
 import news1 from "./../assets/images/news1.png";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CarouselResources({ data, id = "carousel" }) {
+    const navigate = useNavigate();
     if (!data.length) return null;
 
     return (
@@ -11,12 +13,12 @@ export default function CarouselResources({ data, id = "carousel" }) {
                 <div className="carousel-inner">
                     {data.map((item, index) => (
                         <div className={`carousel-item ${index === 0 ? "active" : ""} red-section`} key={index}>
-                            <img src={item.imageURL ? item.imageURL : news1} className="red-img w-100" alt="Red" />
+                            <img src={item.imageURL ? item.imageURL : news1} className="red-img w-100 resource-carousel-image" alt="Red" />
                             <div className="red-content d-flex flex-column justify-content-center align-items-center">
                                 <h1 className='red-title'>{item.title}</h1>
                                 <p className='red-text'>{item.text}</p>
                                 <div className='red-actions'>
-                                    <button className="red-btn" onClick={() => { }}>Veja Mais</button>
+                                    <button className="red-btn" onClick={() => navigate('/recursos-educacionais')}>Veja Mais</button>
                                 </div>
                             </div>
                         </div>))}

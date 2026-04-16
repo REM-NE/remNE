@@ -3,7 +3,7 @@ export default function Carousel({ images, id = "carousel" }) {
   if (!images.length) return null;
 
   return (
-    <div className="container-carousel flex-grow-1">
+    <div className="container-carousel carousel-shell flex-grow-1">
       <div id={id} className="carousel slide">
         <div className="carousel-inner">
           {images.map((image, index) => (
@@ -13,9 +13,8 @@ export default function Carousel({ images, id = "carousel" }) {
             >
               <img
                 src={image.imageURL}
-                className="d-block w-100"
+                className="d-block w-100 home-carousel-image"
                 alt={`slide-${index}`}
-                style={{ height: "496px", objectFit: "cover" }}
               />
             </div>
           ))}
