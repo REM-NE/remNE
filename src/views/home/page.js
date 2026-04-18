@@ -54,7 +54,6 @@ export default function Home() {
 
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
-
       {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />}
       <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
@@ -79,7 +78,6 @@ export default function Home() {
                 />
               </>
             ))}
-
           </div>
         </main >
 

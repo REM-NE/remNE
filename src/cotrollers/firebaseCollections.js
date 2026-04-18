@@ -11,6 +11,7 @@ import {
     query,
     serverTimestamp,
     startAfter,
+    startAt,
     updateDoc
 } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
@@ -36,8 +37,6 @@ export const uploadImage = async (file) => {
         console.error("Erro Cloudinary:", data);
         throw new Error(data.error?.message || "Erro no upload");
     }
-
-    // console.log("Resposta Cloudinary:", data);
 
     return data.secure_url;
 };
@@ -108,6 +107,40 @@ export const getDocuments = async (collectionName, orderByField) => {
     }
 }
 
+export const getPrevPage = async (cursor, collectionName) => {
+    const ref = collection(db, collectionName);
+
+    let q;
+
+    if (cursor) {
+        q = query(
+            ref,
+            orderBy("createdAt", "desc"),
+            startAt(cursor),
+            limit(10)
+        );
+    } else {
+        q = query(
+            ref,
+            orderBy("createdAt", "desc"),
+            limit(10)
+        );
+    }
+
+    const snap = await getDocs(q);
+
+    const docs = snap.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+    }));
+
+    return {
+        docs,
+        firstDoc: snap.docs[0],
+        lastDoc: snap.docs[snap.docs.length - 1]
+    };
+};
+
 export const getNextPage = async (lastDoc, collectionName) => {
     try {
         let q;
@@ -128,15 +161,21 @@ export const getNextPage = async (lastDoc, collectionName) => {
         }
 
         const snap = await getDocs(q);
-        const newLastDoc = snap.docs[snap.docs.length - 1];
+
+        const docs = snap.docs.map((d) => ({
+            id: d.id,
+            ...d.data(),
+        }));
+
+        const firstDoc = snap.docs.length > 0 ? snap.docs[0] : null;
+        const lastDocResult = snap.docs.length > 0 ? snap.docs[snap.docs.length - 1] : null;
 
         return {
-            docs: snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            })),
-            newLastDoc
+            docs,
+            firstDoc,
+            lastDoc: lastDocResult
         };
+
     } catch (error) {
         throw error;
     }
