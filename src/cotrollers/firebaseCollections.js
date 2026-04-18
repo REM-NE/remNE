@@ -12,7 +12,8 @@ import {
     serverTimestamp,
     startAfter,
     startAt,
-    updateDoc
+    updateDoc,
+    where
 } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 
@@ -80,12 +81,15 @@ export const getDocumentById = async (collectionName, id) => {
 }
 
 // GET
-export const getDocuments = async (collectionName, orderByField) => {
+export const getDocuments = async (collectionName, orderByField, filter) => {
     try {
         let q;
         if (orderByField) {
             q = query(
                 collection(db, collectionName),
+                ...(filter
+                    ? [where("educationalLevel", "==", filter)]
+                    : []),
                 orderBy("publishedAt", "desc"),
                 limit(10)
             )
@@ -196,6 +200,7 @@ export const createDocument = async (collectionName, data) => {
             text: data.text,
             imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
             link: data.link,
+            educationalLevel: data.educationalLevel || "", //Só é usada em recursos, adiciona o campo mesmo para outras coleções para evitar erros
             createdAt: serverTimestamp(),
             publishedAt: serverTimestamp()
         });
@@ -222,6 +227,7 @@ export const updateDocument = async (collectionName, id, data) => {
             title: data.title,
             text: data.text,
             link: data.link,
+            educationalLevel: data.educationalLevel || "",
             publishedAt: serverTimestamp(),
             imageURL
         };

@@ -9,7 +9,7 @@ import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
-import { getDocuments, getNextPage } from '../../cotrollers/firebaseCollections';
+import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './resources.css';
 
@@ -19,52 +19,59 @@ function ResourcesPage() {
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [firstDoc, setFirstDoc] = useState(null);
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
+    const [filter, setFilter] = useState("");
 
     const collection = "recursos";
 
     function loadData() {
-        getDocuments(collection, true).then((data) => {
+        getDocuments(collection, true, filter).then((data) => {
             setDocsData(data.docs);
         });
         setLoading(false);
     }
 
-    const handlePrev = async () => {
-        if (page <= 1) return;
-
-        const prevCursor = history[history.length - 2] || null;
-
-        const res = await getNextPage(prevCursor, collection);
-
-        setHistory(prev => prev.slice(0, -1));
-        setDocsData(res.docs);
-        setLastDoc(res.lastDoc);
-        setPage(prev => prev - 1);
-    };
-
     const handleNext = async () => {
+        if (!lastDoc) return;
+
+        setHistory(prev => [...prev, firstDoc]);
         const res = await getNextPage(lastDoc, collection);
 
-        setHistory(prev => [...prev, lastDoc]);
         setDocsData(res.docs);
+        setFirstDoc(res.firstDoc);
         setLastDoc(res.lastDoc);
         setPage(prev => prev + 1);
     };
 
+    const handlePrev = async () => {
+        if (history.length === 0) return;
+
+        const newHistory = [...history];
+        const prevFirstDoc = newHistory.pop();
+
+        const res = await getPrevPage(prevFirstDoc, collection);
+
+        setHistory(newHistory);
+        setDocsData(res.docs);
+        setFirstDoc(res.firstDoc);
+        setLastDoc(res.lastDoc);
+        setPage(prev => prev - 1);
+    };
+
     useEffect(() => {
         loadData();
-    }, []);
+    }, [filter]);
 
-    function NewsCard() {
+    function ResourceCard() {
         return (
-            <>
+            <div className="grid">
                 {Array.isArray(docsData) && docsData.map((recurso, index) => (
                     index < 10 && (
                         <Post key={index} title={recurso.title} image={recurso.imageURL} id={recurso.id} />)
                 ))}
-            </>
+            </div>
         );
     }
 
@@ -78,12 +85,12 @@ function ResourcesPage() {
         <div className="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
             <br></br>
-            <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button>
+            {/* <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button> */}
             <div className="container flex-grow-1">
                 <div className="column">
                     <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
                         {cardUpperTexts.map((item, id) => (
-                            <div key={id} className="col-md-4 d-flex justify-content-center mb-4">
+                            <div key={id} className="col-md-4 filter-btn d-flex justify-content-center mb-4" onClick={() => setFilter(item.text)}>
                                 <div className="card" style={{ width: "30rem" }}>
                                     <img src={item.img} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
@@ -99,10 +106,8 @@ function ResourcesPage() {
                     <div className="d-flex justify-content-start mt-5">
                         {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
-                    <div className="grid">
-                        <NewsCard />
-                    </div>
-                    {<Pagination
+                    {docsData.length > 0 ? <ResourceCard /> : <p style={{ textAlign: "center" }}>Nenhum recurso encontrado.</p>}
+                    {docsData.length > 0 && <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}

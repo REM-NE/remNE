@@ -23,7 +23,7 @@ function PublicationsPage() {
 
     const loadData = async () => {
         try {
-            const data = await getDocuments(collection, true);
+            const data = await getDocuments(collection, true, null);
 
             setDocsData(data.docs);
             setLastDoc(data.lastDoc);
@@ -95,7 +95,7 @@ function PublicationsPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {<Pagination
+                    {docsData.length > 0 &&<Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}

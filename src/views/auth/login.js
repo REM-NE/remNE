@@ -54,7 +54,7 @@ export default function LoginPage() {
                         Senha
                     </label>
                     <div className="input">
-                        <input className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
+                        <input type={`${showPassword ? "text" : "password"}`} className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
                         <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
                     </div>
                     <button className="authButton" onClick={() => enviarDados()}>

@@ -12,9 +12,13 @@ export default function ResourcesForm() {
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const levels = ["Ensino Fundamental", "Ensino Médio", "Ensino Superior"];
+    const defaultSelect = "[Selecione um nível educacional]";
+
     const [resourcesData, setResourcesData] = useState({
         title: "",
         text: "",
+        educationalLevel: "",
         imageURL: "",
         imageFile: null,
         link: "",
@@ -41,6 +45,7 @@ export default function ResourcesForm() {
     const createNew = () => createDocument("recursos", {
         title: resourcesData.title,
         text: resourcesData.text,
+        educationalLevel: resourcesData.educationalLevel !== defaultSelect ? resourcesData.educationalLevel : "",
         imageURL: resourcesData.imageURL,
         imageFile: resourcesData.imageFile,
         link: resourcesData.link,
@@ -51,6 +56,7 @@ export default function ResourcesForm() {
     const updateDoc = (id, data) => updateDocument("recursos", id, {
         title: data.title,
         text: data.text,
+        educationalLevel: data.educationalLevel !== defaultSelect ? data.educationalLevel : "",
         imageURL: data.imageURL,
         imageFile: data.imageFile,
         link: data.link,
@@ -67,6 +73,18 @@ export default function ResourcesForm() {
                 <h3>Criar novo recurso</h3>
                 <InputText label="Título" data={resourcesData} setData={setResourcesData} property="title" isANewDoc={true} disabled={!user} />
                 <InputTextArea label="Texto" data={resourcesData} setData={setResourcesData} property="text" isANewDoc={true} disabled={!user} />
+                <select
+                    className="form-control mb-2"
+                    value={resourcesData.educationalLevel === "" ? defaultSelect : resourcesData.educationalLevel}
+                    onChange={(e) => setResourcesData({ ...resourcesData, educationalLevel: e.target.value })}
+                >
+                    <option value="">
+                        {defaultSelect}
+                    </option>
+                    {levels.map((level, index) => (
+                        <option key={index} value={level}>{level}</option>
+                    ))}
+                </select>
                 <UploadImage label="Imagem" data={resourcesData} setData={setResourcesData} isANewDoc={true} disabled={!user} />
                 <InputText label="Link externo" data={resourcesData} setData={setResourcesData} property="link" isANewDoc={true} disabled={!user} />
                 <button
@@ -90,6 +108,25 @@ export default function ResourcesForm() {
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
                         <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
+                        <select
+                            className="form-control mb-2"
+                            value={item.educationalLevel == "" ? defaultSelect : item.educationalLevel}
+                            onChange={(e) => {
+                                setDocsData((prev) =>
+                                    prev.map((item) => {
+                                        item.educationalLevel = e.target.value;
+                                        return item;
+                                    })
+                                );
+                            }}
+                        >
+                            <option value="">
+                                {defaultSelect}
+                            </option>
+                            {levels.map((level, index) => (
+                                <option key={index} value={level}>{level}</option>
+                            ))}
+                        </select>
                         <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}

@@ -56,7 +56,7 @@ export default function RegisterPage() {
                         Senha
                     </label>
                     <div className="input">
-                        <input className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
+                        <input type={`${showPassword ? "text" : "password"}`} className="inputPassword" onChange={(e) => setPassword(e.target.value)} name="senha" value={password} />
                         <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
                     </div>
                     
@@ -64,7 +64,7 @@ export default function RegisterPage() {
                         Confirmar senha
                     </label>
                     <div className="input">
-                        <input className="inputPassword" onChange={(e) => setConfirmPassword(e.target.value)} name="confirmarSenha" value={confirmPassword} />
+                        <input type={`${showPassword ? "text" : "password"}`} className="inputPassword" onChange={(e) => setConfirmPassword(e.target.value)} name="confirmarSenha" value={confirmPassword} />
                         <button className="showPassword" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <BsEyeSlash /> : <BsEye />}</button>
                     </div>
 

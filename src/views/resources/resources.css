@@ -13,6 +13,10 @@
     padding-top: 150px;
 }
 
+.filter-btn {
+    cursor: pointer;
+}
+
 .card-list {
     display: flex;
     justify-content: center;

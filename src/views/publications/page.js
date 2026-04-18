@@ -4,7 +4,7 @@ import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
-import { getDocuments, getNextPage } from '../../cotrollers/firebaseCollections';
+import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './publications.css';
 
@@ -14,38 +14,44 @@ function PublicationsPage() {
     const [docsData, setDocsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [firstDoc, setFirstDoc] = useState(null);
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
 
     const collection = "publicacoes";
 
     function loadData() {
-        getDocuments(collection, true).then((data) => {
+        getDocuments(collection, true, null).then((data) => {
             setDocsData(data.docs);
         });
         setLoading(false);
     }
 
-    const handlePrev = async () => {
-        if (page <= 1) return;
-
-        const prevCursor = history[history.length - 2] || null;
-
-        const res = await getNextPage(prevCursor, collection);
-
-        setHistory(prev => prev.slice(0, -1));
-        setDocsData(res.docs);
-        setLastDoc(res.lastDoc);
-        setPage(prev => prev - 1);
-    };
-
     const handleNext = async () => {
+        if (!lastDoc) return;
+
+        setHistory(prev => [...prev, firstDoc]);
         const res = await getNextPage(lastDoc, collection);
 
-        setHistory(prev => [...prev, lastDoc]);
         setDocsData(res.docs);
+        setFirstDoc(res.firstDoc);
         setLastDoc(res.lastDoc);
         setPage(prev => prev + 1);
+    };
+
+    const handlePrev = async () => {
+        if (history.length === 0) return;
+
+        const newHistory = [...history];
+        const prevFirstDoc = newHistory.pop();
+
+        const res = await getPrevPage(prevFirstDoc, collection);
+
+        setHistory(newHistory);
+        setDocsData(res.docs);
+        setFirstDoc(res.firstDoc);
+        setLastDoc(res.lastDoc);
+        setPage(prev => prev - 1);
     };
 
     useEffect(() => {
@@ -74,7 +80,7 @@ function PublicationsPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {<Pagination
+                    {docsData.length > 0 &&<Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}
