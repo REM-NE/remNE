@@ -4,11 +4,17 @@ import { useAuth } from '../utils/authContext';
 
 import logo1 from '../assets/images/logo1.png';
 import logo2 from '../assets/images/logo2.png';
+import SearchBar from './searchBar';
+import { useSearchParams } from "react-router-dom";
+import { useState } from 'react';
+
 
 function Navbar() {
     const { currentUser, logout } = useAuth();
-
     const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search");
+    const [term, setTerm] = useState(searchTerm || "");
 
     function NavBarButtons() {
         let buttonObject = [
@@ -24,7 +30,6 @@ function Navbar() {
             <>
                 {buttonObject.map((button, index) => (
                     <Link key={index} to={button.path}>
-                        {/* <img className="icon" src={button.icon} alt=""></img> */}
                         <div className={location.pathname === button.path ? "active" : ""}>
                             <p>{button.title}</p>
                         </div>
@@ -42,22 +47,11 @@ function Navbar() {
                     <a href='/'><img className="logo" src={logo2} alt="logo" /></a>
                 </div>
                 <div className="column">
-                    {/* <div className="top-header"> 
-                        {currentUser ? (
-                            <div className="column logout">
-                                <span>Olá, {currentUser.email}</span>
-                                <Button onClick={logout}>Sair</Button>
-                            </div>
-                        ) : (
-                            <Link to={"/auth/login"}>
-                                <Button >LOGIN</Button>
-                            </Link>
-                        )}
-                    </div> */}
                     <div className="row-header bottom-header">
                         <div className="row-header navbar-menu">
                             <NavBarButtons />
                         </div>
+                        <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />
                         {/* <div className="search-bar">
                             <input type="text" defaultValue={"Busca/Pesquisa"} />
                         </div> */}

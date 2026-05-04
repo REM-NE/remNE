@@ -12,6 +12,7 @@ import {
     serverTimestamp,
     startAfter,
     startAt,
+    endAt,
     updateDoc,
     where
 } from "firebase/firestore";
@@ -81,21 +82,29 @@ export const getDocumentById = async (collectionName, id) => {
 }
 
 // GET
-export const getDocuments = async (collectionName, orderByField, filter) => {
+export const getDocuments = async (collectionName, orderByField, filter, searchTerm) => {
     try {
         let q;
+        const constraints = [];
+
         if (orderByField) {
-            q = query(
-                collection(db, collectionName),
-                ...(filter
-                    ? [where("educationalLevel", "==", filter)]
-                    : []),
-                orderBy("publishedAt", "desc"),
-                limit(10)
-            )
-        } else {
-            q = collection(db, collectionName)
+            if (filter) {
+                constraints.push(where("educationalLevel", "==", filter));
+            }
+
+            if (searchTerm) {
+                constraints.push(orderBy("title"));
+                constraints.push(startAt(searchTerm));
+                constraints.push(endAt(searchTerm + "\uf8ff"));
+            } else {
+                constraints.push(orderBy("publishedAt", "desc"));
+            }
+
+            constraints.push(limit(10));
+
+            q = query(collection(db, collectionName), ...constraints);
         }
+
         const snap = await getDocs(q);
         const lastDoc = snap.docs[snap.docs.length - 1];
 
