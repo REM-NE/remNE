@@ -51,7 +51,7 @@ function Navbar() {
                         <div className="row-header navbar-menu">
                             <NavBarButtons />
                         </div>
-                        <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />
+                        {location.pathname != "/" && location.pathname !="/sobre" && <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />}
                         {/* <div className="search-bar">
                             <input type="text" defaultValue={"Busca/Pesquisa"} />
                         </div> */}

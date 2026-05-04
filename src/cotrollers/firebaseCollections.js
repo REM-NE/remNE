@@ -102,9 +102,8 @@ export const getDocuments = async (collectionName, orderByField, filter, searchT
             }
 
             constraints.push(limit(10));
-
-            q = query(collection(db, collectionName), ...constraints);
         }
+        q = query(collection(db, collectionName), ...constraints);
 
         const snap = await getDocs(q);
         const lastDoc = snap.docs[snap.docs.length - 1];

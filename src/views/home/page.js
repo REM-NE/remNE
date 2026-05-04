@@ -23,15 +23,15 @@ export default function Home() {
 
   const loadData = async () => {
     try {
-      getDocuments("home", false).then((data) => {
+      getDocuments("home", false, null, null).then((data) => {
         setDocsData(data.docs);
       });
 
-      getDocuments("eventos-e-noticias", true).then((data) => {
+      getDocuments("eventos-e-noticias", true, null, null).then((data) => {
         setNewsData(data.docs);
       });
 
-      getDocuments("recursos", true).then((data) => {
+      getDocuments("recursos", true, null, null).then((data) => {
         // console.log("Recursos carregados:", data);
         setResourcesData(data.docs);
       });
