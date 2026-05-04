@@ -93,6 +93,7 @@ export const getDocuments = async (collectionName, orderByField, filter, searchT
             }
 
             if (searchTerm) {
+                // constraints.push(orderBy("title_lower"));
                 constraints.push(orderBy("title"));
                 constraints.push(startAt(searchTerm));
                 constraints.push(endAt(searchTerm + "\uf8ff"));
@@ -202,10 +203,10 @@ export const createDocument = async (collectionName, data) => {
         if (data.imageURL) {
             imageURL = await uploadImage(data.imageFile);
         }
-        // console.log("Criando documento com dados:", data, "e imagem URL:", imageURL);
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
             link: data.link,
@@ -234,6 +235,7 @@ export const updateDocument = async (collectionName, id, data) => {
 
         const updatePayload = {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             link: data.link,
             educationalLevel: data.educationalLevel || "",
