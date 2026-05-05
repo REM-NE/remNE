@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import '../../App.css';
 import PathButton from "../../components/pathButton";
@@ -12,11 +12,17 @@ export default function AboutPage() {
   const [aboutData, setAboutData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const collectionName = "about";
+
   useEffect(() => {
     async function loadData() {
       try {
-        const snap = await getDocs(collection(db, "about"));
-        const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const q = query(
+          collection(db, collectionName),
+          orderBy("createdAt", "desc"),
+        )
+        const snap = await getDocs(q);
+        const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setAboutData(lista.reverse());
       } catch (err) {
         console.error("Erro ao buscar dados do Firestore:", err);
@@ -37,7 +43,7 @@ export default function AboutPage() {
       {/* Conteúdo do Firestore */}
       {aboutData.length === 0 && <p className="container">Nenhum conteúdo encontrado.</p>}
       {aboutData.map(item => (
-        <div key={item.id} className={`container mb-5 ${item.type === 'card' ? 'card-block' : ''}`}>
+        <div key={item.id} className={`container ${item.type === 'card' ? 'about-authors' : ''}`}>
           {item.title && <h2 className="mb-2">{item.title}</h2>}
           {item.text && <p className="text">{item.text}</p>}
         </div>

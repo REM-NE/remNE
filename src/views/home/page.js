@@ -83,11 +83,11 @@ export default function Home() {
 
         {/* Cards */}
         < div className="home-news justify-content-center" >
-          <h1 className='main-title'>Últimas Noticias</h1>
+          <h1 className='red-title'>Últimas Noticias</h1>
           {
             newsData.map((item) => (
-              <Link to={"eventos-e-noticias/post/" + item.id}>
-                <div key={item.id} className="d-flex justify-content-center mb-4">
+              <Link key={item.id} to={"eventos-e-noticias/post/" + item.id}>
+                <div className="d-flex justify-content-center mb-4">
                   <div className="card" style={{ cursor: "pointer" }}>
                     <img src={item.image || newsImage1} className="card-img-top" alt="..." />
                     <div className="card-body">

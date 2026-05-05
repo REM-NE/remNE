@@ -1,9 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
+import logo from '../assets/images/logo.png';
 import { useAuth } from '../utils/authContext';
 
-import logo1 from '../assets/images/logo1.png';
-import logo2 from '../assets/images/logo2.png';
 
 function Navbar() {
     const { currentUser, logout } = useAuth();
@@ -36,31 +35,18 @@ function Navbar() {
 
     return (
         <div className="header">
-            <div className="row-header">
+            <div className="row-header container">
                 <div className="start-header">
-                    <a href='/'><img className="logo" src={logo1} alt="logo" /></a>
-                    <a href='/'><img className="logo" src={logo2} alt="logo" /></a>
+                    <a href='/'><img className="logo" src={logo} alt="logo" /></a>
                 </div>
                 <div className="column">
-                    {/* <div className="top-header"> 
-                        {currentUser ? (
-                            <div className="column logout">
-                                <span>Olá, {currentUser.email}</span>
-                                <Button onClick={logout}>Sair</Button>
-                            </div>
-                        ) : (
-                            <Link to={"/auth/login"}>
-                                <Button >LOGIN</Button>
-                            </Link>
-                        )}
-                    </div> */}
                     <div className="row-header bottom-header">
-                        <div className="row-header navbar-menu">
-                            <NavBarButtons />
-                        </div>
                         {/* <div className="search-bar">
                             <input type="text" defaultValue={"Busca/Pesquisa"} />
                         </div> */}
+                        <div className="row-header navbar-menu">
+                            <NavBarButtons />
+                        </div>
                     </div>
                 </div>
             </div>

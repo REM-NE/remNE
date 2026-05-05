@@ -44,16 +44,18 @@ export default function HomeForm() {
         const updatedImages = await Promise.all(
             (dados.images).map(async (img) => {
                 if (img.imageFile instanceof File) {
-                    const url = await uploadImage(img.imageFile);
+                    const { url, publicId } = await uploadImage(img.imageFile, img.imagePublicId || null);
 
                     return {
                         ...img,
                         imageURL: url,
+                        imagePublicId: publicId,
                         // imageFile: undefined
                     };
                 }
                 return {
-                    imageURL: img.imageURL
+                    imageURL: img.imageURL,
+                    imagePublicId: img.imagePublicId || ""
                 };
             })
         );
