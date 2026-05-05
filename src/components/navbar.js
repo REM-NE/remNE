@@ -3,11 +3,17 @@ import '../App.css';
 import logo from '../assets/images/logo.png';
 import { useAuth } from '../utils/authContext';
 
+import { useState } from 'react';
+import { useSearchParams } from "react-router-dom";
+import SearchBar from './searchBar';
+
 
 function Navbar() {
     const { currentUser, logout } = useAuth();
-
     const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search");
+    const [term, setTerm] = useState(searchTerm || "");
 
     function NavBarButtons() {
         let buttonObject = [
@@ -23,7 +29,6 @@ function Navbar() {
             <>
                 {buttonObject.map((button, index) => (
                     <Link key={index} to={button.path}>
-                        {/* <img className="icon" src={button.icon} alt=""></img> */}
                         <div className={location.pathname === button.path ? "active" : ""}>
                             <p>{button.title}</p>
                         </div>
@@ -41,6 +46,10 @@ function Navbar() {
                 </div>
                 <div className="column">
                     <div className="row-header bottom-header">
+                        <div className="row-header navbar-menu">
+                            <NavBarButtons />
+                        </div>
+                        {location.pathname != "/" && location.pathname !="/sobre" && <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />}
                         {/* <div className="search-bar">
                             <input type="text" defaultValue={"Busca/Pesquisa"} />
                         </div> */}

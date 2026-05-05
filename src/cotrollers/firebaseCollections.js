@@ -12,6 +12,7 @@ import {
     serverTimestamp,
     startAfter,
     startAt,
+    endAt,
     updateDoc,
     where
 } from "firebase/firestore";
@@ -113,21 +114,29 @@ export const getDocumentById = async (collectionName, id) => {
 }
 
 // GET
-export const getDocuments = async (collectionName, orderByField, filter) => {
+export const getDocuments = async (collectionName, orderByField, filter, searchTerm) => {
     try {
         let q;
+        const constraints = [];
+
         if (orderByField) {
-            q = query(
-                collection(db, collectionName),
-                ...(filter
-                    ? [where("educationalLevel", "==", filter)]
-                    : []),
-                orderBy("publishedAt", "desc"),
-                limit(10)
-            )
-        } else {
-            q = collection(db, collectionName)
+            if (filter) {
+                constraints.push(where("educationalLevel", "==", filter));
+            }
+
+            if (searchTerm) {
+                // constraints.push(orderBy("title_lower"));
+                constraints.push(orderBy("title"));
+                constraints.push(startAt(searchTerm));
+                constraints.push(endAt(searchTerm + "\uf8ff"));
+            } else {
+                constraints.push(orderBy("publishedAt", "desc"));
+            }
+
+            constraints.push(limit(10));
         }
+        q = query(collection(db, collectionName), ...constraints);
+
         const snap = await getDocs(q);
         const lastDoc = snap.docs[snap.docs.length - 1];
 
@@ -225,10 +234,10 @@ export const createDocument = async (collectionName, data) => {
         if (data.imageURL) {
             imageURL = await uploadImage(data.imageFile, data.imagePublicId);
         }
-        // console.log("Criando documento com dados:", data, "e imagem URL:", imageURL);
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
             imagePublicId: data.imagePublicId || "", // Armazena o public_id para futuras atualizações
@@ -258,6 +267,7 @@ export const updateDocument = async (collectionName, id, data) => {
 
         const updatePayload = {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             link: data.link,
             educationalLevel: data.educationalLevel || "",

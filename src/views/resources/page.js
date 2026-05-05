@@ -12,6 +12,7 @@ import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './resources.css';
+import { useSearchParams } from "react-router-dom";
 
 function ResourcesPage() {
     const { currentUser } = useAuth();
@@ -24,10 +25,13 @@ function ResourcesPage() {
     const [history, setHistory] = useState([]);
     const [filter, setFilter] = useState("");
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "recursos";
 
     function loadData() {
-        getDocuments(collection, true, filter).then((data) => {
+        getDocuments(collection, true, filter, searchTerm).then((data) => {
             setDocsData(data.docs);
         });
         setLoading(false);
@@ -62,7 +66,7 @@ function ResourcesPage() {
 
     useEffect(() => {
         loadData();
-    }, [filter]);
+    }, [filter, searchTerm]);
 
     function ResourceCard() {
         return (

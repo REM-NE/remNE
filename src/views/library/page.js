@@ -7,6 +7,7 @@ import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import '../news/news.css';
+import { useSearchParams } from "react-router-dom";
 
 function PublicationsPage() {
     const { currentUser } = useAuth();
@@ -19,11 +20,14 @@ function PublicationsPage() {
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "biblioteca";
 
     const loadData = async () => {
         try {
-            const data = await getDocuments(collection, true, null);
+            const data = await getDocuments(collection, true, null, searchTerm);
 
             setDocsData(data.docs);
             setLastDoc(data.lastDoc);
@@ -63,7 +67,7 @@ function PublicationsPage() {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [searchTerm]);
 
     function NewsCard() {
         return (
@@ -95,7 +99,7 @@ function PublicationsPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {docsData.length > 0 &&<Pagination
+                    {docsData.length > 0 && <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}

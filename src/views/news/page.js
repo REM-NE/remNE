@@ -7,6 +7,7 @@ import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './news.css';
+import { useSearchParams } from "react-router-dom";
 
 function NewsPage() {
     const { currentUser } = useAuth();
@@ -18,11 +19,15 @@ function NewsPage() {
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "eventos-e-noticias";
 
-    const loadData = async () => {
-        const data = await getDocuments(collection, true, null);
-        setDocsData(data.docs);
+    function loadData() {
+        getDocuments(collection, true, null, searchTerm).then((data) => {
+            setDocsData(data.docs);
+        });
         setLoading(false);
     }
 
@@ -54,7 +59,7 @@ function NewsPage() {
     };
     useEffect(() => {
         loadData();
-    }, []);
+    }, [searchTerm]);
 
     function NewsCard() {
         return (
