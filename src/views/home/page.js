@@ -8,7 +8,6 @@ import newsImage1 from '../../assets/images/news1.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Carousel from '../../components/carousel';
 import CarouselResources from '../../components/carouselResources';
 import { getDocuments } from '../../cotrollers/firebaseCollections';
 
@@ -54,7 +53,7 @@ export default function Home() {
 
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
-      {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />}
+      {/* {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />} */}
       <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
         <main className="home-about">

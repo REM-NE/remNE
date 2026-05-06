@@ -1,4 +1,6 @@
+import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 export default function SearchBar({ term, setTerm, collectionName }) {
     const navigate = useNavigate();
@@ -8,13 +10,18 @@ export default function SearchBar({ term, setTerm, collectionName }) {
     };
 
     return (
-        <div>
+        <div className="search-container">
             <input
+                className="search-input"
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
+                placeholder="Buscar..."
             />
-            <button onClick={handleSearch}>
-                Buscar
+            <button
+                className="search-button"
+                onClick={handleSearch}
+            >
+                <FaSearch />
             </button>
         </div>
     );

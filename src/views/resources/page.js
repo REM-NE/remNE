@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
@@ -12,7 +13,6 @@ import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './resources.css';
-import { useSearchParams } from "react-router-dom";
 
 function ResourcesPage() {
     const { currentUser } = useAuth();
@@ -92,10 +92,10 @@ function ResourcesPage() {
             {/* <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button> */}
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
+                    <div className="container grid-filter">
                         {cardUpperTexts.map((item, id) => (
-                            <div key={id} className="col-md-4 filter-btn d-flex justify-content-center mb-4" onClick={() => setFilter(item.text)}>
-                                <div className="card" style={{ width: "30rem" }}>
+                            <div key={id} className="filter-btn d-flex justify-content-center mb-4" onClick={() => setFilter(item.text)}>
+                                <div className="card">
                                     <img src={item.img} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{item.text}</h5>
