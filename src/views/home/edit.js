@@ -40,6 +40,7 @@ export default function HomeForm() {
 
     async function saveData(id, dados) {
         const ref = doc(db, "home", id);
+        const refImg = doc(db, "carousel", id);
 
         const updatedImages = await Promise.all(
             (dados.images).map(async (img) => {
@@ -66,14 +67,20 @@ export default function HomeForm() {
             link: dados.link || "",
             videoURL: dados.videoURL || "",
             publishedAt: serverTimestamp(),
+            // images: updatedImages
+        };
+
+        const payloadCarousel = {
+            type: "home",
             images: updatedImages
         };
 
         // console.log("Payload para salvar:", payload);
 
         await updateDoc(ref, payload);
+        await updateDoc(refImg, payloadCarousel);
 
-        alert(`Documento ${id} salvo!`);
+        alert(`Alterações salvas!`);
     }
 
     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;

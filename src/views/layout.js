@@ -35,7 +35,7 @@ function Layout() {
     const loadData = async () => {
         try {
             getDocuments("carousel", false, null, null).then((data) => {
-                if (data.type === location.pathname) {
+                if (data.type === location.pathname.replace("/", "")) {
                     setDocsData(data.docs);
                 }
             });

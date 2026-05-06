@@ -16,7 +16,12 @@ export default function AboutForm() {
   const [form, setForm] = useState({
     title: "",
     text: "",
-    type: "text" // tipo padrão
+    type: "text", // tipo padrão
+    images: [{
+      imageURL: "",
+      imagePublicId: "",
+      imageFile: null
+    }]
   });
 
   const collectionName = "about";
