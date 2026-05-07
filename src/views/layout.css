@@ -114,6 +114,10 @@
     margin-bottom: 0;
   }
 
+  .about.top-spacing {
+    padding-top: 78px;
+  }
+
   .resources .container .container {
     padding: 0 !important;
   }
