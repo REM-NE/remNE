@@ -1,9 +1,7 @@
-import banner from '../assets/images/recursos-banner.jpeg';
-
-export default function Banner({ title }) {
+export default function Banner({ title, image }) {
     return (
-        <div className="w-100 h-30">
-            <img src={banner} className="w-100" alt="..." style={{ height: "496px", objectFit: "cover" }} />
+        <div className="w-100 top-spacing h-30">
+            <img src={image} className="w-100" alt="..." style={{ height: "496px", objectFit: "cover" }} />
             <h1 className="banner-text">{title}</h1>
         </div>
     )

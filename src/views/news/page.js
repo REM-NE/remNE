@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './news.css';
-import { useSearchParams } from "react-router-dom";
 
 function NewsPage() {
     const { currentUser } = useAuth();
@@ -74,12 +73,10 @@ function NewsPage() {
     }
 
     return (
-
-        <div className="news main top-spacing">
-            <Banner title="Eventos e Notícias" />
+        <div className="news main">
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Eventos e Notícias" path="/eventos-e-noticias/edit" />}
                     </div>
                     <div className="grid">

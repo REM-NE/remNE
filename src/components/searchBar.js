@@ -10,7 +10,7 @@ export default function SearchBar({ term, setTerm, collectionName }) {
     };
 
     return (
-        <div className="search-container">
+        <div className="search-container container">
             <input
                 className="search-input"
                 value={term}

@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import '../news/news.css';
-import { useSearchParams } from "react-router-dom";
 
 function PublicationsPage() {
     const { currentUser } = useAuth();
@@ -88,12 +87,10 @@ function PublicationsPage() {
     }
 
     return (
-        <div className="publications main top-spacing">
-            <Banner title="Biblioteca" />
-            {/* <div className="title">Notícias</div> */}
+        <div className="publications main">
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Publicações da Biblioteca" path="/biblioteca/edit" />}
                     </div>
                     <div className="grid">

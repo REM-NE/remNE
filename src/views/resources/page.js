@@ -6,7 +6,6 @@ import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
 import superior from '../../assets/images/superior.jpeg';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
@@ -86,10 +85,7 @@ function ResourcesPage() {
     ]
 
     return (
-        <div className="resources main top-spacing">
-            <Banner title="Recursos Educacionais" />
-            <br></br>
-            {/* <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button> */}
+        <div className="resources main">
             <div className="container flex-grow-1">
                 <div className="column">
                     <div className="container grid-filter">
@@ -107,7 +103,7 @@ function ResourcesPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
                     {docsData.length > 0 ? <ResourceCard /> : <p style={{ textAlign: "center" }}>Nenhum recurso encontrado.</p>}

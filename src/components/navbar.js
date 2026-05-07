@@ -6,9 +6,6 @@ import { useAuth } from '../utils/authContext';
 function Navbar({ menuItems }) {
     const { currentUser, logout } = useAuth();
     const location = useLocation();
-    // const [searchParams] = useSearchParams();
-    // const searchTerm = searchParams.get("search");
-    // const [term, setTerm] = useState(searchTerm || "");
 
     function NavBarButtons() {
         return (
@@ -24,11 +21,6 @@ function Navbar({ menuItems }) {
         );
     }
 
-    // const checkSearchAvailability = () => {
-    //     const button = menuObject.find((b) => b.path === location.pathname);
-    //     return button?.search || false;
-    // };
-
     return (
         <div className="header">
             <div className="row-header container">
@@ -40,7 +32,6 @@ function Navbar({ menuItems }) {
                         <div className="row-header navbar-menu">
                             <NavBarButtons />
                         </div>
-                        {/* {checkSearchAvailability() && <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />} */}
                     </div>
                 </div>
             </div>

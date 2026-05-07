@@ -185,7 +185,7 @@ a {
   width: 40%;
 }
 
-.top-spacing {
+.top-spacing, div#homeCarousel {
   padding-top: 118px;
 }
 
@@ -518,7 +518,6 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 76px 64px;
-  margin-top: 64px;
   justify-items: center;
 }
 
@@ -577,7 +576,10 @@ a:hover {
 
 .search-container {
   display: flex;
-  padding: 0 20px 20px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding-left: 24px;
+  padding-right: 24px;
   width: 100%;
 }
 

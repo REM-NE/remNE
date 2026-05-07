@@ -52,7 +52,7 @@ export default function Home() {
   })();
 
   return (
-    <div className="home top-spacing d-flex flex-column min-vh-100">
+    <div className="home d-flex flex-column min-vh-100">
       {/* {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />} */}
       <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
         {/* About Us */}
@@ -62,8 +62,8 @@ export default function Home() {
               {currentUser && <PathButton text="Editar Home" path="/home/edit" />}
             </div>
             {docsData.map((item, index) => (
-              <>
-                <div key={index}>
+              <div key={index}>
+                <div >
                   <h1 className='main-title'>{item.title}</h1>
                   <p className='main-text'>{item.text}</p>
                 </div>
@@ -75,14 +75,14 @@ export default function Home() {
                   frameBorder="0"
                   allowFullScreen
                 />
-              </>
+              </div>
             ))}
           </div>
         </main >
 
         {/* Cards */}
         < div className="home-news justify-content-center" >
-          <h1 className='red-title'>Últimas Noticias</h1>
+          <h1 className='red-title'>Últimas Notícias</h1>
           {
             newsData.map((item) => (
               <Link key={item.id} to={"eventos-e-noticias/post/" + item.id}>
