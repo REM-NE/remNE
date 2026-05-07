@@ -74,7 +74,7 @@ export default function Home() {
   })();
 
   return (
-    <div className="home top-spacing d-flex flex-column min-vh-100">
+    <div className="home d-flex flex-column min-vh-100">
       <div className="container w-100 flex-grow-1 home-content mb-5">
         <main className="home-about">
           <div>

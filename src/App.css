@@ -12,6 +12,7 @@
   --borda-padrao: solid 1px var(--cor-borda);
   --tipo-fonte: "Inter", sans-serif;
   --tamanho-fonte: 16px;
+  --tamanho-fonte-texto: 20px;
   --tamanho-fonte-grande: 25px;
   --tamanho-fonte-gg: 32px;
   --tamanho-fonte-gigante: 40px;
@@ -297,10 +298,9 @@ div#homeCarousel {
 .main-text {
   color: #000;
   font-family: var(--tipo-fonte);
-  font-size: var(--tamanho-fonte);
+  font-size: var(--tamanho-fonte-texto);
   font-weight: 400;
   line-height: 150%;
-  /* 30px */
   letter-spacing: -0.22px;
 }
 
@@ -599,6 +599,10 @@ a:hover {
   grid-template-columns: repeat(2, 1fr);
   gap: 76px 64px;
   justify-items: center;
+}
+
+.home-news .main-title {
+  text-align: center;
 }
 
 .pagination-button {
