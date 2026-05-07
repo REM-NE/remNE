@@ -11,6 +11,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Carousel from '../../components/carousel';
 import CarouselResources from '../../components/carouselResources';
 import { getDocuments } from '../../cotrollers/firebaseCollections';
+import './home.css';
 
 export default function Home() {
 
@@ -20,6 +21,27 @@ export default function Home() {
   const [newsData, setNewsData] = useState([]);
   const [resourcesData, setResourcesData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const getEmbedUrl = (url) => {
+    if (!url) return "";
+
+    if (url.includes("youtube.com/embed/")) {
+      return url;
+    }
+
+    if (url.includes("youtu.be/")) {
+      const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+
+    if (url.includes("youtube.com/watch")) {
+      const params = new URLSearchParams(url.split("?")[1] || "");
+      const videoId = params.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+
+    return url;
+  };
 
   const loadData = async () => {
     try {
@@ -55,7 +77,7 @@ export default function Home() {
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
       {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />}
-      <div className="container w-100 flex-grow-1 d-flex flex-row mb-5">
+      <div className="container w-100 flex-grow-1 home-content mb-5">
         {/* About Us */}
         <main className="home-about">
           <div>
@@ -63,31 +85,35 @@ export default function Home() {
               {currentUser && <PathButton text="Editar Home" path="/home/edit" />}
             </div>
             {docsData.map((item, index) => (
-              <>
-                <div key={index}>
+              <div key={index}>
+                <div>
                   <h1 className='main-title'>{item.title}</h1>
                   <p className='main-text'>{item.text}</p>
                 </div>
-                <iframe
-                  width="100%"
-                  height="325"
-                  src={item.videoURL || ""}
-                  title="YouTube video"
-                  frameBorder="0"
-                  allowFullScreen
-                />
-              </>
+                {item.videoURL && (
+                  <iframe
+                    className="home-video"
+                    width="100%"
+                    height="325"
+                    src={getEmbedUrl(item.videoURL)}
+                    title="YouTube video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )}
+              </div>
             ))}
           </div>
         </main >
 
         {/* Cards */}
-        < div className="home-news justify-content-center" >
+        <div className="home-news justify-content-center">
           <h1 className='main-title'>Últimas Noticias</h1>
-          {
-            newsData.map((item) => (
-              <Link to={"eventos-e-noticias/post/" + item.id}>
-                <div key={item.id} className="d-flex justify-content-center mb-4">
+          <div className="home-news-list">
+            {newsData.map((item) => (
+              <Link key={item.id} to={"eventos-e-noticias/post/" + item.id}>
+                <div className="d-flex justify-content-center mb-4">
                   <div className="card" style={{ cursor: "pointer" }}>
                     <img src={item.image || newsImage1} className="card-img-top" alt="..." />
                     <div className="card-body">
@@ -99,10 +125,10 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-            ))
-          }
+            ))}
+          </div>
           <PathButton path="/eventos-e-noticias" text="Veja todas as notícias" />
-        </div >
+        </div>
       </div >
       {Array.isArray(resourcesData) && <CarouselResources data={resourcesData} id="resourcesCarousel" />}
       <div className="instagram-posts">

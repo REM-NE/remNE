@@ -28,3 +28,34 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.resource-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.resource-highlight-card {
+    width: min(100%, 30rem);
+}
+
+.resource-highlight-card .card-img-top {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+@media (max-width: 991px) {
+    .resource-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .resource-highlight-card {
+        width: 100%;
+    }
+
+    .resource-highlight-card .card-title {
+        padding: 24px 20px 28px;
+    }
+}

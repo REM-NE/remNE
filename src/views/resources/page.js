@@ -84,14 +84,15 @@ function ResourcesPage() {
     return (
         <div className="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
-            <br></br>
-            {/* <button className="botao-noticias" style={{ padding_bottom: "50px", }} onClick={() => { }}>Envio de Material</button> */}
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1">
+                    <div className="resource-actions">
+                        <button className="botao-noticias" onClick={() => { }}>Envio de Material</button>
+                    </div>
+                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1 resources-filter">
                         {cardUpperTexts.map((item, id) => (
-                            <div key={id} className="col-md-4 filter-btn d-flex justify-content-center mb-4" onClick={() => setFilter(item.text)}>
-                                <div className="card" style={{ width: "30rem" }}>
+                            <div key={id} className="col-12 col-md-6 col-xl-4 d-flex justify-content-center mb-4">
+                                <div className="card resource-highlight-card">
                                     <img src={item.img} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{item.text}</h5>

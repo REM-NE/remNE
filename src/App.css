@@ -42,6 +42,41 @@ a {
   margin: 0;
 }
 
+.navbar-toggle {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--cor-primaria-500);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  margin-left: auto;
+}
+
+.navbar-toggle span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 999px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .row,
 .row-header {
   display: flex;
@@ -145,6 +180,24 @@ a {
   margin-bottom: 42px;
 }
 
+.carousel-shell {
+  position: relative;
+}
+
+.home-carousel-image {
+  height: 496px;
+  object-fit: cover;
+}
+
+.button-carousel {
+  z-index: 4;
+  pointer-events: auto;
+}
+
+.resource-carousel-image {
+  width: 100%;
+}
+
 .search-bar {
   display: flex;
   align-items: center;
@@ -192,6 +245,7 @@ a {
   font-weight: 600 !important;
   text-decoration: underline !important;
 }
+
 .image-upload-box {
   border: var(--borda-padrao);
   width: 100%;
@@ -214,6 +268,11 @@ a {
   letter-spacing: -0.88px;
   margin-top: -125px;
   padding-right: 111px;
+}
+
+.banner-image {
+  height: "496px";
+  object-fit: "cover";
 }
 
 .main-title {
@@ -256,6 +315,28 @@ a {
   padding: var(--espacamento-padrao) 0 0;
   align-items: center;
   justify-content: center;
+}
+
+.footer-brand {
+  flex-shrink: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-wrap: nowrap;
+}
+
+.footer-links-left {
+  justify-content: flex-end;
+}
+
+.footer-links-right {
+  justify-content: flex-start;
 }
 
 .footer img.logo {
@@ -309,6 +390,7 @@ a {
   align-items: center;
   text-align: center;
   margin-top: 10px;
+  gap: 16px;
 }
 
 .footer a {
