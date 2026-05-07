@@ -12,7 +12,6 @@
 }
 
 @media (max-width: 1199px) {
-
   .row-header .start-header,
   .row-main .start-header {
     width: 220px;
@@ -63,6 +62,11 @@
     flex-wrap: nowrap;
   }
 
+  .header {
+    background: var(--cor-primaria-200);
+    position: fixed;
+  }
+
   .row-header .bottom-header,
   .row-main .bottom-header {
     height: auto;
@@ -81,7 +85,10 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.2s ease;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.2s ease,
+      padding 0.2s ease;
   }
 
   .row-header .navbar-menu.is-open,
@@ -91,8 +98,38 @@
     padding: 12px 16px 18px;
   }
 
+  .header .column {
+    background: var(--cor-primaria-200);
+  }
+
   .navbar-toggle {
     display: inline-flex;
+    min-width: 48px;
+  }
+
+  .search-container {
+    padding-top: 124px;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .resources .container .container {
+    padding: 0 !important;
+  }
+
+  .search-input {
+    width: Calc(100% - 48px);
+  }
+
+  div#homeCarousel {
+    padding-top: 94px;
+  }
+
+  .search-button {
+    width: 48px;
+    padding: 14px;
+    font-size: var(--tamanho-fonte-grande);
   }
 
   .navbar-menu a {
@@ -121,6 +158,17 @@
     margin-top: 32px;
   }
 
+  .post-card .card-title {
+    max-height: 110px;
+    overflow-y: hidden;
+    padding: 20px 24px 28px;
+    font-size: 20px;
+  }
+
+  .pagination span {
+    font-size: medium;
+  }
+
   .post-card,
   .post-image {
     height: auto;
@@ -139,6 +187,11 @@
   .footer-top {
     gap: 24px;
     padding: 24px 16px 0;
+  }
+
+  .footer a:hover,
+  .footer a.active {
+    font-weight: 400;
   }
 
   .footer .form-footer {
@@ -245,13 +298,18 @@
   }
 
   .resource-highlight-card .card-title {
-    padding: 12px 24px 16px;
+    padding: 0 20px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
   }
 
   .banner-image {
     min-height: 220px;
     height: 20%;
     object-fit: cover;
+    padding-top: 94px;
   }
 
   .button-carousel.carousel-control-prev {
@@ -269,8 +327,10 @@
 
   .resources-filter {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 200px);
+    gap: 15px;
     overflow: scroll;
+    margin: 0;
   }
 
   .resource-highlight-card .card-img-top {

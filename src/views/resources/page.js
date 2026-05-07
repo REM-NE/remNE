@@ -85,13 +85,12 @@ function ResourcesPage() {
     ]
 
     return (
-        <div className="resources main top-spacing">
-            <Banner title="Recursos Educacionais" />
+        <div className="resources main">
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="row justify-content-center gx-4 mt-4 container flex-grow-1 resources-filter">
+                    <div className="container flex-grow-1 resources-filter">
                         {cardUpperTexts.map((item, id) => (
-                            <div key={id} className="col-12 col-md-6 col-xl-4 d-flex justify-content-center mb-4">
+                            <div key={id} className="d-flex justify-content-center">
                                 <div className="card resource-highlight-card">
                                     <img src={item.img} className="card-img-top" alt="..."></img>
                                     <div className="card-body">

@@ -13,11 +13,13 @@
     padding-top: 150px;
 }
 
-.grid-filter {
+  .resources-filter {
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-}
+    overflow: auto;
+    margin-bottom: 60px;
+  }
 
 .filter-btn {
     cursor: pointer;

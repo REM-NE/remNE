@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
 import logo from '../assets/images/logo.png';
 
@@ -12,6 +12,8 @@ function Footer() {
         { title: "Sobre", path: "/sobre" },
     ];
 
+    const location = useLocation();
+
     const leftLinks = footerLinks.slice(0, 3);
     const rightLinks = footerLinks.slice(3);
 
@@ -21,7 +23,7 @@ function Footer() {
                 <div className="footer-links footer-links-left">
                     {leftLinks.map((item) => (
                         <p key={item.path}>
-                            <Link to={item.path}>{item.title}</Link>
+                            <Link className={location.pathname === item.path ? "active" : ""} to={item.path}>{item.title}</Link>
                         </p>
                     ))}
                 </div>
@@ -30,8 +32,8 @@ function Footer() {
                 </Link>
                 <div className="footer-links footer-links-right">
                     {rightLinks.map((item) => (
-                        <p key={item.path}>
-                            <Link to={item.path}>{item.title}</Link>
+                        <p key={item.path} >
+                            <Link className={location.pathname === item.path ? "active" : ""} to={item.path}>{item.title}</Link>
                         </p>
                     ))}
                 </div>
