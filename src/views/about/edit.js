@@ -1,9 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import '../../App.css';
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
+import UploadImage from "../../components/forms/uploadImage";
 import { deleteDocument } from "../../cotrollers/firebaseCollections";
 import { auth, db } from "../../utils/firebaseConfig";
 import './about.css';
@@ -15,8 +16,15 @@ export default function AboutForm() {
   const [form, setForm] = useState({
     title: "",
     text: "",
-    type: "text" // tipo padrão
+    type: "text", // tipo padrão
+    images: [{
+      imageURL: "",
+      imagePublicId: "",
+      imageFile: null
+    }]
   });
+
+  const collectionName = "about";
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => setUser(u));
@@ -24,16 +32,19 @@ export default function AboutForm() {
   }, []);
 
   async function loadData() {
-    const ref = collection(db, "about");
-    const snap = await getDocs(ref);
-
-    const res = snap.docs.map((d) => ({
-      id: d.id,
-      ...d.data(),
-    }));
-
-    setData(res);
-    setLoading(false);
+    try {
+      const q = query(
+        collection(db, collectionName),
+        orderBy("createdAt", "desc"),
+      )
+      const snap = await getDocs(q);
+      const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      setData(lista.reverse());
+    } catch (err) {
+      console.error("Erro ao buscar dados do Firestore:", err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -45,7 +56,7 @@ export default function AboutForm() {
     if (!form.title && !form.text) return;
 
     try {
-      await addDoc(collection(db, "about"), { ...form, createdAt: serverTimestamp() });
+      await addDoc(collection(db, collectionName), { ...form, createdAt: serverTimestamp() });
       setForm({ title: "", text: "", type: "text" });
       loadData();
     } catch (err) {
@@ -58,7 +69,7 @@ export default function AboutForm() {
     if (!user) return;
 
     try {
-      await updateDoc(doc(db, "about", id), item);
+      await updateDoc(doc(db, collectionName, id), item);
       alert("Documento " + item.title + " atualizado!");
 
       loadData();
@@ -98,21 +109,13 @@ export default function AboutForm() {
           <div key={item.id} className="container flex-grow-1 mt-4 p-3 border rounded">
             <div className="d-flex justify-content-between">
               <h4>Documento: {item.id}</h4>
-              <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument("about", item.id)}>
+              <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(collectionName, item.id)}>
                 Excluir
               </button>
             </div>
             <InputText label="Título" data={item} setData={setData} property="title" isANewDoc={false} disabled={!user} />
             <InputTextArea label="Texto" data={item} setData={setData} property="text" isANewDoc={false} disabled={!user} />
-            {/* <select
-              className="form-control mb-2"
-              value={item.text || ""}
-              onChange={(e) => {
-                const novo = [...data];
-                novo[i].text = e.target.value;
-                setData(novo);
-              }}
-            /> */}
+            {/* <UploadImage image={item.image} /> */}
             <select
               className="form-control mb-2"
               value={item.type || "text"}
@@ -125,6 +128,7 @@ export default function AboutForm() {
               <option value="text">Texto</option>
               <option value="card">Card</option>
             </select>
+            <UploadImage label="Imagem" data={item} setData={setData} isANewDoc={false} disabled={!user} />
             <div className="d-flex pt-2">
               <button className="btn  btn-success flex-grow-1" onClick={() => saveBlock(item.id, item)}>
                 Salvar

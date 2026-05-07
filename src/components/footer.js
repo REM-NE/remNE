@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../App.css';
-import logo2 from '../assets/images/logo2.png';
+import logo from '../assets/images/logo.png';
 
 function Footer() {
     const footerLinks = [
@@ -26,7 +26,7 @@ function Footer() {
                     ))}
                 </div>
                 <Link to='/' className="footer-brand">
-                    <img className="logo" src={logo2} alt="logo" />
+                    <img className="logo" src={logo} alt="logo" />
                 </Link>
                 <div className="footer-links footer-links-right">
                     {rightLinks.map((item) => (

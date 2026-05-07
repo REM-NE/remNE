@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
+import logo from '../assets/images/logo.png';
+import { useAuth } from '../utils/authContext';
 
-import logo1 from '../assets/images/logo1.png';
-import logo2 from '../assets/images/logo2.png';
-
-function Navbar() {
+function Navbar({ menuItems }) {
+    const { currentUser, logout } = useAuth();
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -25,7 +25,7 @@ function Navbar() {
     function NavBarButtons() {
         return (
             <>
-                {buttonObject.map((button, index) => (
+                {menuItems.map((button, index) => (
                     <Link key={index} to={button.path} className="navbar-link">
                         <div className={location.pathname === button.path ? "active" : ""}>
                             <p>{button.title}</p>
@@ -38,10 +38,9 @@ function Navbar() {
 
     return (
         <div className="header">
-            <div className="row-header">
+            <div className="row-header container">
                 <div className="start-header">
-                    <Link to='/'><img className="logo" src={logo1} alt="logo" /></Link>
-                    <Link to='/'><img className="logo" src={logo2} alt="logo" /></Link>
+                    <Link to='/'><img className="logo" src={logo} alt="logo" /></Link>
                     <button
                         type="button"
                         className={`navbar-toggle ${isMenuOpen ? "is-open" : ""}`}

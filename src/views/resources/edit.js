@@ -110,7 +110,7 @@ export default function ResourcesForm() {
                         <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
                         <select
                             className="form-control mb-2"
-                            value={item.educationalLevel == "" ? defaultSelect : item.educationalLevel}
+                            value={item.educationalLevel === "" ? defaultSelect : item.educationalLevel}
                             onChange={(e) => {
                                 setDocsData((prev) =>
                                     prev.map((item) => {

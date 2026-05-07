@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
@@ -19,11 +19,14 @@ function PublicationsPage() {
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "biblioteca";
 
     const loadData = async () => {
         try {
-            const data = await getDocuments(collection, true, null);
+            const data = await getDocuments(collection, true, null, searchTerm);
 
             setDocsData(data.docs);
             setLastDoc(data.lastDoc);
@@ -63,7 +66,7 @@ function PublicationsPage() {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [searchTerm]);
 
     function NewsCard() {
         return (
@@ -84,18 +87,16 @@ function PublicationsPage() {
     }
 
     return (
-        <div className="publications main top-spacing">
-            <Banner title="Biblioteca" />
-            {/* <div className="title">Notícias</div> */}
+        <div className="publications main">
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Publicações da Biblioteca" path="/biblioteca/edit" />}
                     </div>
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {docsData.length > 0 &&<Pagination
+                    {docsData.length > 0 && <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}

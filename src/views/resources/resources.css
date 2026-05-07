@@ -13,6 +13,12 @@
     padding-top: 150px;
 }
 
+.grid-filter {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 20px;
+}
+
 .filter-btn {
     cursor: pointer;
 }

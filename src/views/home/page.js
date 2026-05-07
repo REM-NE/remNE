@@ -8,7 +8,6 @@ import newsImage1 from '../../assets/images/news1.png';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Carousel from '../../components/carousel';
 import CarouselResources from '../../components/carouselResources';
 import { getDocuments } from '../../cotrollers/firebaseCollections';
 import './home.css';
@@ -45,15 +44,15 @@ export default function Home() {
 
   const loadData = async () => {
     try {
-      getDocuments("home", false).then((data) => {
+      getDocuments("home", false, null, null).then((data) => {
         setDocsData(data.docs);
       });
 
-      getDocuments("eventos-e-noticias", true).then((data) => {
+      getDocuments("eventos-e-noticias", true, null, null).then((data) => {
         setNewsData(data.docs);
       });
 
-      getDocuments("recursos", true).then((data) => {
+      getDocuments("recursos", true, null, null).then((data) => {
         // console.log("Recursos carregados:", data);
         setResourcesData(data.docs);
       });
@@ -76,9 +75,7 @@ export default function Home() {
 
   return (
     <div className="home top-spacing d-flex flex-column min-vh-100">
-      {docsData[0] && <Carousel images={docsData[0].images} id="homeCarousel" />}
       <div className="container w-100 flex-grow-1 home-content mb-5">
-        {/* About Us */}
         <main className="home-about">
           <div>
             <div className="d-flex justify-content-start">
@@ -109,7 +106,7 @@ export default function Home() {
 
         {/* Cards */}
         <div className="home-news justify-content-center">
-          <h1 className='main-title'>Últimas Noticias</h1>
+          <h1 className='main-title'>Últimas Notícias</h1>
           <div className="home-news-list">
             {newsData.map((item) => (
               <Link key={item.id} to={"eventos-e-noticias/post/" + item.id}>

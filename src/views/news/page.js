@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
@@ -18,11 +18,15 @@ function NewsPage() {
     const [lastDoc, setLastDoc] = useState(null);
     const [history, setHistory] = useState([]);
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "eventos-e-noticias";
 
-    const loadData = async () => {
-        const data = await getDocuments(collection, true, null);
-        setDocsData(data.docs);
+    function loadData() {
+        getDocuments(collection, true, null, searchTerm).then((data) => {
+            setDocsData(data.docs);
+        });
         setLoading(false);
     }
 
@@ -54,7 +58,7 @@ function NewsPage() {
     };
     useEffect(() => {
         loadData();
-    }, []);
+    }, [searchTerm]);
 
     function NewsCard() {
         return (
@@ -69,12 +73,10 @@ function NewsPage() {
     }
 
     return (
-
-        <div className="news main top-spacing">
-            <Banner title="Eventos e Notícias" />
+        <div className="news main">
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Eventos e Notícias" path="/eventos-e-noticias/edit" />}
                     </div>
                     <div className="grid">

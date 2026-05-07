@@ -1,7 +1,8 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import '../../App.css';
 import PathButton from "../../components/pathButton";
+import { getDocuments } from "../../cotrollers/firebaseCollections";
 import { useAuth } from "../../utils/authContext";
 import { db } from "../../utils/firebaseConfig";
 import './about.css';
@@ -10,13 +11,35 @@ export default function AboutPage() {
   const { currentUser } = useAuth();
 
   const [aboutData, setAboutData] = useState([]);
+  const [aboutImageData, setAboutImageData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const collectionName = "about";
 
   useEffect(() => {
     async function loadData() {
       try {
-        const snap = await getDocs(collection(db, "about"));
-        const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const q = query(
+          collection(db, collectionName),
+          orderBy("createdAt", "desc"),
+        )
+        const snap = await getDocs(q);
+        const lista = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+
+        const data = await getDocuments(
+          "carousel",
+          false,
+          null,
+          null
+        );
+
+        const carouselData = data.docs.find(
+          (doc) => doc.type === collectionName
+        );
+
+        if (carouselData) {
+          setAboutImageData(carouselData);
+        }
         setAboutData(lista.reverse());
       } catch (err) {
         console.error("Erro ao buscar dados do Firestore:", err);
@@ -37,11 +60,14 @@ export default function AboutPage() {
       {/* Conteúdo do Firestore */}
       {aboutData.length === 0 && <p className="container">Nenhum conteúdo encontrado.</p>}
       {aboutData.map(item => (
-        <div key={item.id} className={`container mb-5 ${item.type === 'card' ? 'card-block' : ''}`}>
+        <div key={item.id} className={`container ${item.type === 'card' ? 'about-authors' : ''}`}>
           {item.title && <h2 className="mb-2">{item.title}</h2>}
           {item.text && <p className="text">{item.text}</p>}
         </div>
       ))}
+      <div className="container">
+        <img src={aboutImageData?.images[0]?.imageURL} alt="Imagem do Sobre" className="w-100 pt-5"/>
+      </div>
     </div>
   );
 }

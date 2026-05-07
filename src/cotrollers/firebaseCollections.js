@@ -12,6 +12,7 @@ import {
     serverTimestamp,
     startAfter,
     startAt,
+    endAt,
     updateDoc,
     where
 } from "firebase/firestore";
@@ -19,10 +20,39 @@ import { db } from "../utils/firebaseConfig";
 
 // Cloudinary - start
 
-export const uploadImage = async (file) => {
+// export const uploadImage = async (file) => {
+//     const formData = new FormData();
+//     formData.append("file", file);
+//     formData.append("upload_preset", "standard");
+
+//     const res = await fetch(
+//         "https://api.cloudinary.com/v1_1/dyp5jzbal/image/upload",
+//         {
+//             method: "POST",
+//             body: formData
+//         }
+//     );
+
+//     const data = await res.json();
+
+//     if (!res.ok || data.error) {
+//         console.error("Erro Cloudinary:", data);
+//         throw new Error(data.error?.message || "Erro no upload");
+//     }
+
+//     return data.secure_url;
+// };
+
+export const uploadImage = async (file, publicId = null) => {
     const formData = new FormData();
+
     formData.append("file", file);
     formData.append("upload_preset", "standard");
+
+    if (publicId) {
+        formData.append("public_id", publicId);
+        formData.append("overwrite", true);
+    }
 
     const res = await fetch(
         "https://api.cloudinary.com/v1_1/dyp5jzbal/image/upload",
@@ -39,7 +69,10 @@ export const uploadImage = async (file) => {
         throw new Error(data.error?.message || "Erro no upload");
     }
 
-    return data.secure_url;
+    return {
+        url: data.secure_url,
+        publicId: data.public_id
+    };
 };
 
 // Cloudinary - end
@@ -81,21 +114,29 @@ export const getDocumentById = async (collectionName, id) => {
 }
 
 // GET
-export const getDocuments = async (collectionName, orderByField, filter) => {
+export const getDocuments = async (collectionName, orderByField, filter, searchTerm) => {
     try {
         let q;
+        const constraints = [];
+
         if (orderByField) {
-            q = query(
-                collection(db, collectionName),
-                ...(filter
-                    ? [where("educationalLevel", "==", filter)]
-                    : []),
-                orderBy("publishedAt", "desc"),
-                limit(10)
-            )
-        } else {
-            q = collection(db, collectionName)
+            if (filter) {
+                constraints.push(where("educationalLevel", "==", filter));
+            }
+
+            if (searchTerm) {
+                // constraints.push(orderBy("title_lower"));
+                constraints.push(orderBy("title"));
+                constraints.push(startAt(searchTerm));
+                constraints.push(endAt(searchTerm + "\uf8ff"));
+            } else {
+                constraints.push(orderBy("publishedAt", "desc"));
+            }
+
+            constraints.push(limit(10));
         }
+        q = query(collection(db, collectionName), ...constraints);
+
         const snap = await getDocs(q);
         const lastDoc = snap.docs[snap.docs.length - 1];
 
@@ -191,14 +232,15 @@ export const createDocument = async (collectionName, data) => {
         let imageURL = "";
 
         if (data.imageURL) {
-            imageURL = await uploadImage(data.imageFile);
+            imageURL = await uploadImage(data.imageFile, data.imagePublicId);
         }
-        // console.log("Criando documento com dados:", data, "e imagem URL:", imageURL);
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
+            imagePublicId: data.imagePublicId || "", // Armazena o public_id para futuras atualizações
             link: data.link,
             educationalLevel: data.educationalLevel || "", //Só é usada em recursos, adiciona o campo mesmo para outras coleções para evitar erros
             createdAt: serverTimestamp(),
@@ -220,11 +262,12 @@ export const updateDocument = async (collectionName, id, data) => {
         let imageURL = data.imageURL;
 
         if (data.imageFile instanceof File) {
-            imageURL = await uploadImage(data.imageFile);
+            imageURL = await uploadImage(data.imageFile, data.imagePublicId || null);
         }
 
         const updatePayload = {
             title: data.title,
+            title_lower: data.title.toLowercase(),
             text: data.text,
             link: data.link,
             educationalLevel: data.educationalLevel || "",

@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
 import superior from '../../assets/images/superior.jpeg';
-import Banner from '../../components/banner';
 import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
@@ -24,10 +24,13 @@ function ResourcesPage() {
     const [history, setHistory] = useState([]);
     const [filter, setFilter] = useState("");
 
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("search") || "";
+
     const collection = "recursos";
 
     function loadData() {
-        getDocuments(collection, true, filter).then((data) => {
+        getDocuments(collection, true, filter, searchTerm).then((data) => {
             setDocsData(data.docs);
         });
         setLoading(false);
@@ -62,7 +65,7 @@ function ResourcesPage() {
 
     useEffect(() => {
         loadData();
-    }, [filter]);
+    }, [filter, searchTerm]);
 
     function ResourceCard() {
         return (
@@ -86,9 +89,6 @@ function ResourcesPage() {
             <Banner title="Recursos Educacionais" />
             <div className="container flex-grow-1">
                 <div className="column">
-                    <div className="resource-actions">
-                        <button className="botao-noticias" onClick={() => { }}>Envio de Material</button>
-                    </div>
                     <div className="row justify-content-center gx-4 mt-4 container flex-grow-1 resources-filter">
                         {cardUpperTexts.map((item, id) => (
                             <div key={id} className="col-12 col-md-6 col-xl-4 d-flex justify-content-center mb-4">
@@ -104,7 +104,7 @@ function ResourcesPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="d-flex justify-content-start mt-5">
+                    <div className="d-flex justify-content-start">
                         {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
                     {docsData.length > 0 ? <ResourceCard /> : <p style={{ textAlign: "center" }}>Nenhum recurso encontrado.</p>}
