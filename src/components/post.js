@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import '../App.css';
-import newsImage1 from '../assets/images/news1.png';
+import defaultImage from '../assets/images/default-image.png';
 import '../views/news/news.css';
 
-export default function Post({ title, image, id}) {
+export default function Post({ title, image, id, link }) {
 
     if (!image) {
-        image = newsImage1;
+        image = defaultImage;
     }
 
     return (
-        <Link key={id} to={`post/${id}`}>
+        <Link key={id} to={link != null ? `post/${id}` : link}>
             <div className="column post-card">
                 <img className="post-image" src={image} alt=""></img>
                 <div className="column-main post-text">

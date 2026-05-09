@@ -65,7 +65,7 @@ function NewsPage() {
             <>
                 {Array.isArray(docsData) && docsData.map((noticia, index) => (
                     // <a key={index} href="#">
-                    index < 10 && (<Post key={index} title={noticia.title} image={noticia.imageURL} id={noticia.id} />)
+                    index < 10 && (<Post key={index} title={noticia.title} image={noticia.imageURL} link={null} id={noticia.id} />)
                     // </a>
                 ))}
             </>
@@ -82,13 +82,15 @@ function NewsPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {docsData.length > 0 && <Pagination
+                    {docsData.length > 0 ? <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}
                         onNext={handleNext}
                         onPrev={handlePrev}
-                    />}
+                    />:
+                    <p>Nenhuma notícia encontrada.</p>
+                    }
                 </div>
             </div>
         </div>

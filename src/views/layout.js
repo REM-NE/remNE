@@ -14,7 +14,7 @@ const menuObject = [
     { title: "Eventos e Notícias", path: "/eventos-e-noticias", search: true },
     { title: "Recursos Educacionais", path: "/recursos-educacionais", search: true },
     { title: "Publicações Científicas", path: "/publicacoes", search: true },
-    { title: "Biblioteca", path: "/biblioteca", search: true },
+    { title: "Biblioteca", path: "/biblioteca"},
     { title: "Sobre", path: "/sobre" },
 ];
 

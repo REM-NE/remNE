@@ -6,7 +6,6 @@ import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
 import medio from '../../assets/images/medio.jpeg';
 import superior from '../../assets/images/superior.jpeg';
-import Pagination from '../../components/pagination';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
 import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
@@ -72,7 +71,7 @@ function ResourcesPage() {
             <div className="grid">
                 {Array.isArray(docsData) && docsData.map((recurso, index) => (
                     index < 10 && (
-                        <Post key={index} title={recurso.title} image={recurso.imageURL} id={recurso.id} />)
+                        <Post key={index} title={recurso.title} image={recurso.imageURL} link={null} id={recurso.id} />)
                 ))}
             </div>
         );
@@ -107,13 +106,13 @@ function ResourcesPage() {
                         {currentUser && <PathButton text="Editar Recursos Educacionais" path="/recursos-educacionais/edit" />}
                     </div>
                     {docsData.length > 0 ? <ResourceCard /> : <p style={{ textAlign: "center" }}>Nenhum recurso encontrado.</p>}
-                    {docsData.length > 0 && <Pagination
+                    {/* {docsData.length > 0 ? <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}
                         onNext={handleNext}
                         onPrev={handlePrev}
-                    />}
+                    /> : <p >Nenhum recurso encontrado.</p>} */}
                 </div>
             </div>
         </div>

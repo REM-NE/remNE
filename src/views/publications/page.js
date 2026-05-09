@@ -65,7 +65,7 @@ function PublicationsPage() {
         return (
             <>
                 {Array.isArray(docsData) && docsData.map((publicacao, index) => (
-                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} id={publicacao.id} />)
+                    index < 10 && (<Post key={index} title={publicacao.title} image={publicacao.imageURL} link={null} id={publicacao.id} />)
                 ))}
             </>
         );
@@ -81,13 +81,15 @@ function PublicationsPage() {
                     <div className="grid">
                         <NewsCard />
                     </div>
-                    {docsData.length > 0 && <Pagination
+                    {docsData.length > 0 ? <Pagination
                         currentPage={page}
                         hasNext={docsData.length === 10} // depende do limit
                         hasPrev={page > 1}
                         onNext={handleNext}
                         onPrev={handlePrev}
-                    />}
+                    /> :
+                    <p>Nenhuma publicação encontrada.</p>
+                    }
                 </div>
             </div>
         // </div>

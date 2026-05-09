@@ -9,15 +9,6 @@ function Navbar({ menuItems }) {
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const buttonObject = [
-        { title: "Inicio", path: "/" },
-        { title: "Eventos e Notícias", path: "/eventos-e-noticias" },
-        { title: "Recursos Educacionais", path: "/recursos-educacionais" },
-        { title: "Publicações Cientí­ficas", path: "/publicacoes" },
-        { title: "Biblioteca", path: "/biblioteca" },
-        { title: "Sobre", path: "/sobre" },
-    ];
-
     useEffect(() => {
         setIsMenuOpen(false);
     }, [location.pathname]);

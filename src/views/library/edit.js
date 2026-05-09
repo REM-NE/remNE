@@ -1,112 +1,112 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { serverTimestamp } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import InputText from "../../components/forms/inputText";
-import InputTextArea from "../../components/forms/inputTextArea";
-import UploadImage from "../../components/forms/uploadImage";
-import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
-import { auth } from "../../utils/firebaseConfig";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { serverTimestamp } from "firebase/firestore";
+// import { useEffect, useState } from "react";
+// import InputText from "../../components/forms/inputText";
+// import InputTextArea from "../../components/forms/inputTextArea";
+// import UploadImage from "../../components/forms/uploadImage";
+// import { createDocument, deleteDocument, subscribeToCollection, updateDocument } from "../../cotrollers/firebaseCollections";
+// import { auth } from "../../utils/firebaseConfig";
 
-export default function LibraryForm() {
-    const [user, setUser] = useState(null);
-    const [docsData, setDocsData] = useState([]); // Lista de documentos do Firestore
-    const [loading, setLoading] = useState(true);
+// export default function LibraryForm() {
+//     const [user, setUser] = useState(null);
+//     const [docsData, setDocsData] = useState([]); // Lista de documentos do Firestore
+//     const [loading, setLoading] = useState(true);
 
-    const [newLibraryData, setNewLibraryData] = useState({
-        title: "",
-        text: "",
-        imageURL: "",
-        imageFile: null,
-        link: "",
-    });
+//     const [newLibraryData, setNewLibraryData] = useState({
+//         title: "",
+//         text: "",
+//         imageURL: "",
+//         imageFile: null,
+//         link: "",
+//     });
 
-    // Detectar usuário logado
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
+//     // Detectar usuário logado
+//     useEffect(() => {
+//         const unsub = onAuthStateChanged(auth, (currentUser) => {
+//             setUser(currentUser);
+//         });
 
-        return () => unsub();
-    }, []);
+//         return () => unsub();
+//     }, []);
 
-    useEffect(() => {
-        const unsubscribe = subscribeToCollection("biblioteca", (data) => {
-            setDocsData(data);
-            setLoading(false);
-        });
+//     useEffect(() => {
+//         const unsubscribe = subscribeToCollection("biblioteca", (data) => {
+//             setDocsData(data);
+//             setLoading(false);
+//         });
 
-        return () => unsubscribe(); // limpa o listener
-    }, []);
+//         return () => unsubscribe(); // limpa o listener
+//     }, []);
 
-    const createNew = () => createDocument("biblioteca", {
-        title: newLibraryData.title,
-        text: newLibraryData.text,
-        imageURL: newLibraryData.imageURL,
-        imageFile: newLibraryData.imageFile,
-        link: newLibraryData.link,
-        publishedAt: new Date(),
-        createdAt: serverTimestamp()
-    });
+//     const createNew = () => createDocument("biblioteca", {
+//         title: newLibraryData.title,
+//         text: newLibraryData.text,
+//         imageURL: newLibraryData.imageURL,
+//         imageFile: newLibraryData.imageFile,
+//         link: newLibraryData.link,
+//         publishedAt: new Date(),
+//         createdAt: serverTimestamp()
+//     });
 
-    const updateDoc = (id, data) => updateDocument("biblioteca", id, {
-        title: data.title,
-        text: data.text,
-        imageURL: data.imageURL,
-        imageFile: data.imageFile,
-        link: data.link,
-    });
+//     const updateDoc = (id, data) => updateDocument("biblioteca", id, {
+//         title: data.title,
+//         text: data.text,
+//         imageURL: data.imageURL,
+//         imageFile: data.imageFile,
+//         link: data.link,
+//     });
 
-    if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
+//     if (loading) return <p className="container flex-grow-1 library main">Carregando...</p>;
 
-    return (
-        <div className="container main top-spacing pb-5">
-            <h2 className="text-center pt-5 mb-4">Editor da Página da Biblioteca</h2>
-            {!user && <p>Faça login para editar.</p>}
-            <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Criar nova publicação</h3>
-                <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
-                <h3>Criar nova publicação</h3>
-                <InputText label="Título" data={newLibraryData} setData={setNewLibraryData} property="title" isANewDoc={true} disabled={!user} />
-                <InputTextArea label="Texto" data={newLibraryData} setData={setNewLibraryData} property="text" isANewDoc={true} disabled={!user} />
-                <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
-                <InputText label="Link externo" data={newLibraryData} setData={setNewLibraryData} property="link" isANewDoc={true} disabled={!user} />
-                <button
-                    className="btn btn-success w-100"
-                    onClick={() => createNew(newLibraryData)}
-                >
-                    Adicionar publicação
-                </button>
-            </div>
+//     return (
+//         <div className="container main top-spacing pb-5">
+//             <h2 className="text-center pt-5 mb-4">Editor da Página da Biblioteca</h2>
+//             {!user && <p>Faça login para editar.</p>}
+//             <div className="createNews container library flex-grow-1 mt-4 p-3 border rounded">
+//                 <h3>Criar nova publicação</h3>
+//                 <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
+//                 <h3>Criar nova publicação</h3>
+//                 <InputText label="Título" data={newLibraryData} setData={setNewLibraryData} property="title" isANewDoc={true} disabled={!user} />
+//                 <InputTextArea label="Texto" data={newLibraryData} setData={setNewLibraryData} property="text" isANewDoc={true} disabled={!user} />
+//                 <UploadImage label="Imagem" data={newLibraryData} setData={setNewLibraryData} isANewDoc={true} disabled={!user} />
+//                 <InputText label="Link externo" data={newLibraryData} setData={setNewLibraryData} property="link" isANewDoc={true} disabled={!user} />
+//                 <button
+//                     className="btn btn-success w-100"
+//                     onClick={() => createNew(newLibraryData)}
+//                 >
+//                     Adicionar publicação
+//                 </button>
+//             </div>
 
-            <div className="container library flex-grow-1 mt-4 p-3 border rounded">
-                <h3>Últimas publicações:</h3>
+//             <div className="container library flex-grow-1 mt-4 p-3 border rounded">
+//                 <h3>Últimas publicações:</h3>
 
-                {!docsData.length && <p>Nenhuma publicação encontrada.</p>}
-                {docsData && docsData.map((item) => (
-                    <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
+//                 {!docsData.length && <p>Nenhuma publicação encontrada.</p>}
+//                 {docsData && docsData.map((item) => (
+//                     <div key={item.id} className="container library flex-grow-1 mt-4 p-3 border rounded">
 
-                        <div className="d-flex justify-content-between">
-                            <h4>Documento: {item.id}</h4>
-                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
-                        </div>
+//                         <div className="d-flex justify-content-between">
+//                             <h4>Documento: {item.id}</h4>
+//                             <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
+//                         </div>
 
-                        <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
-                        <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
-                        <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
-                        <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
+//                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />
+//                         <InputTextArea label="Texto" data={item} setData={setDocsData} property="text" isANewDoc={false} disabled={!user} />
+//                         <UploadImage label="Imagem" data={item} setData={setDocsData} isANewDoc={false} disabled={!user} />
+//                         <InputText label="Link externo" data={item} setData={setDocsData} property="link" isANewDoc={false} disabled={!user} />
 
-                        {/* BOTÃO DE SALVAR POR DOCUMENTO */}
-                        {user && (
-                            <button
-                                className="btn btn-success w-100"
-                                onClick={() => updateDoc(item.id, item, "biblioteca")}
-                            >
-                                Salvar alterações
-                            </button>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-}
+//                         {/* BOTÃO DE SALVAR POR DOCUMENTO */}
+//                         {user && (
+//                             <button
+//                                 className="btn btn-success w-100"
+//                                 onClick={() => updateDoc(item.id, item, "biblioteca")}
+//                             >
+//                                 Salvar alterações
+//                             </button>
+//                         )}
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// }
