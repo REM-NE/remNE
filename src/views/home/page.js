@@ -19,7 +19,6 @@ export default function Home() {
   const [docsData, setDocsData] = useState([]);
   const [newsData, setNewsData] = useState([]);
   const [resourcesData, setResourcesData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const getEmbedUrl = (url) => {
     if (!url) return "";
@@ -58,8 +57,6 @@ export default function Home() {
       });
     } catch (error) {
       console.error("Erro ao carregar dados:", error);
-    } finally {
-      setLoading(false);
     }
   }
 

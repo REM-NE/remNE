@@ -12,6 +12,7 @@
 }
 
 @media (max-width: 1199px) {
+
   .row-header .start-header,
   .row-main .start-header {
     width: 220px;
@@ -269,7 +270,7 @@
   .red-img {
     max-height: none;
     height: 220px;
-    border-radius: 18px 18px 0 0;
+    border-radius: 28px 28px 0 0;
   }
 
   .red-content {
@@ -307,13 +308,12 @@
     height: 100%;
     align-items: center;
     justify-content: center;
+    border-radius: 0 0 18px 18px;
   }
 
   .banner-image {
-    min-height: 220px;
-    height: 20%;
-    object-fit: cover;
-    padding-top: 94px;
+    height: "496px";
+    object-fit: "cover";
   }
 
   .button-carousel.carousel-control-prev {

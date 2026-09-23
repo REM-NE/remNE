@@ -12,7 +12,6 @@ import {
     serverTimestamp,
     startAfter,
     startAt,
-    endAt,
     updateDoc,
     where
 } from "firebase/firestore";
@@ -118,6 +117,7 @@ export const getDocuments = async (collectionName, orderByField, filter, searchT
     try {
         let q;
         const constraints = [];
+        const normalizedSearch = searchTerm?.trim().toLowerCase() || "";
 
         if (orderByField) {
             if (filter) {
@@ -125,26 +125,32 @@ export const getDocuments = async (collectionName, orderByField, filter, searchT
             }
 
             if (searchTerm) {
-                // constraints.push(orderBy("title_lower"));
-                constraints.push(orderBy("title"));
-                constraints.push(startAt(searchTerm));
-                constraints.push(endAt(searchTerm + "\uf8ff"));
+                constraints.push(orderBy("publishedAt", "desc"));
             } else {
                 constraints.push(orderBy("publishedAt", "desc"));
             }
-
-            constraints.push(limit(10));
         }
-        q = query(collection(db, collectionName), ...constraints);
 
+        q = query(collection(db, collectionName), ...constraints);
         const snap = await getDocs(q);
-        const lastDoc = snap.docs[snap.docs.length - 1];
+
+        let docs = snap.docs.map((d) => ({
+            id: d.id,
+            ...d.data(),
+        }));
+
+        if (normalizedSearch) {
+            docs = docs.filter((item) => {
+                const title = String(item.title || "").toLowerCase();
+                return title.includes(normalizedSearch);
+            });
+        }
+
+        const limitedDocs = docs.slice(0, 10);
+        const lastDoc = snap.docs.find((doc) => doc.id === limitedDocs[limitedDocs.length - 1]?.id) || null;
 
         return {
-            docs: snap.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            })),
+            docs: limitedDocs,
             lastDoc
         };
     } catch (error) {

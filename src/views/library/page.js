@@ -3,7 +3,6 @@ import '../../App.css';
 import book45 from '../../assets/books/45.jpg';
 import book69 from '../../assets/books/69.jpg';
 import Post from '../../components/post';
-import { useAuth } from '../../utils/authContext';
 import '../news/news.css';
 
 const booksList = [
@@ -34,10 +33,7 @@ const booksList = [
 ]
 
 function LibraryPage() {
-    const { currentUser } = useAuth();
-
     const [docsData, setDocsData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     // const [page, setPage] = useState(1);
     // const [firstDoc, setFirstDoc] = useState(null);
@@ -46,8 +42,6 @@ function LibraryPage() {
 
     // const [searchParams] = useSearchParams();
     // const searchTerm = searchParams.get("search") || "";
-
-    const collection = "biblioteca";
 
     // const loadData = async () => {
     //     try {

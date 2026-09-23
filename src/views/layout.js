@@ -14,8 +14,9 @@ const menuObject = [
     { title: "Eventos e Notícias", path: "/eventos-e-noticias", search: true },
     { title: "Recursos Educacionais", path: "/recursos-educacionais", search: true },
     { title: "Publicações Científicas", path: "/publicacoes", search: true },
-    { title: "Biblioteca", path: "/biblioteca"},
+    { title: "Biblioteca", path: "/biblioteca" },
     { title: "Sobre", path: "/sobre" },
+    
 ];
 
 function Layout() {
@@ -28,21 +29,66 @@ function Layout() {
         type: "",
         images: []
     });
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
 
     const currentMenu = menuObject.find(
         (b) => b.path === location.pathname
     );
 
-    const currentPage = currentMenu.title || "";
+    const currentPage = currentMenu?.title || "";
 
     const currentPath =
         location.pathname === "/"
             ? "home"
             : location.pathname.replace("/", "");
 
-    const currentStatus = currentMenu.search || false;
+    const bannerTypeAliases = {
+        home: ["home"],
+        "recursos-educacionais": ["recursos-educacionais", "recursos", "resources"],
+        "publicacoes": ["publicacoes", "publicacoes-cientificas", "publications"],
+        "biblioteca": ["biblioteca", "library"],
+        "sobre": ["sobre", "about"],
+        "eventos-e-noticias": ["eventos-e-noticias", "eventos", "noticias", "news"],
+    };
+
+    const currentStatus = currentMenu?.search || false;
+
+    useEffect(() => {
+        const searchCollectionMap = {
+            "/eventos-e-noticias": "eventos-e-noticias",
+            "/recursos-educacionais": "recursos",
+            "/publicacoes": "publicacoes",
+        };
+
+        const collectionName = searchCollectionMap[location.pathname];
+
+        if (!collectionName || !currentStatus) {
+            setSearchSuggestions([]);
+            return;
+        }
+
+        let isMounted = true;
+
+        getDocuments(collectionName, true, null, null)
+            .then((data) => {
+                if (isMounted) {
+                    setSearchSuggestions(data.docs || []);
+                }
+            })
+            .catch(() => {
+                if (isMounted) {
+                    setSearchSuggestions([]);
+                }
+            });
+
+        return () => {
+            isMounted = false;
+        };
+    }, [location.pathname, currentStatus]);
 
     const loadData = async () => {
+        setDocsData({ type: "", images: [] });
+
         try {
             const data = await getDocuments(
                 "carousel",
@@ -51,22 +97,28 @@ function Layout() {
                 null
             );
 
+            const aliases = bannerTypeAliases[currentPath] || [currentPath];
             const carouselData = data.docs.find(
-                (doc) => doc.type === currentPath
+                (doc) => aliases.includes(doc.type)
             );
 
             if (carouselData) {
                 setDocsData(carouselData);
+            } else {
+                setDocsData({ type: "", images: [] });
             }
 
         } catch (error) {
             console.error("Erro ao carregar dados:", error);
+            setDocsData({ type: "", images: [] });
         }
     };
 
+
     useEffect(() => {
         loadData();
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname]);
 
     return (
         <>
@@ -75,10 +127,17 @@ function Layout() {
                 location.pathname === "/" ? (
                     <Carousel images={docsData.images} id="homeCarousel" />
                 ) : (
-                    currentPage !== "Sobre" && <Banner title={currentPage} image={docsData.images[0].imageURL} />
+                    currentPage !== "Sobre" && <Banner title={currentPage} image={docsData?.images[0].imageURL} />
                 )
             )}
-            {currentStatus && <SearchBar term={term} setTerm={setTerm} collectionName={location.pathname} />}
+            {currentStatus && (
+                <SearchBar
+                    term={term}
+                    setTerm={setTerm}
+                    collectionName={location.pathname}
+                    suggestions={searchSuggestions}
+                />
+            )}
             <Outlet />
             <Footer />
         </>

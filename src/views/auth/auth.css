@@ -24,11 +24,7 @@ input:focus {
   border-style: solid;
 }
 
-.options {
-  display: flex;
-  gap: 20px;
-  margin-top: 10px;
-}
+
 
 .loginContainer {
   min-height: 100vh;

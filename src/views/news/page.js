@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import '../../App.css';
 import Pagination from '../../components/pagination';
@@ -12,7 +12,6 @@ function NewsPage() {
     const { currentUser } = useAuth();
 
     const [docsData, setDocsData] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [firstDoc, setFirstDoc] = useState(null);
     const [lastDoc, setLastDoc] = useState(null);
@@ -23,12 +22,11 @@ function NewsPage() {
 
     const collection = "eventos-e-noticias";
 
-    function loadData() {
+    const loadData = useCallback(() => {
         getDocuments(collection, true, null, searchTerm).then((data) => {
             setDocsData(data.docs);
         });
-        setLoading(false);
-    }
+    }, [collection, searchTerm]);
 
     const handleNext = async () => {
         if (!lastDoc) return;
@@ -58,7 +56,7 @@ function NewsPage() {
     };
     useEffect(() => {
         loadData();
-    }, [searchTerm]);
+    }, [loadData]);
 
     function NewsCard() {
         return (

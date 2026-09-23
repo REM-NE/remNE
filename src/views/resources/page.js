@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import '../../App.css';
 import fundamental from '../../assets/images/ensino-fundamental.jpeg';
@@ -8,7 +8,7 @@ import medio from '../../assets/images/medio.jpeg';
 import superior from '../../assets/images/superior.jpeg';
 import PathButton from '../../components/pathButton';
 import Post from '../../components/post';
-import { getDocuments, getNextPage, getPrevPage } from '../../cotrollers/firebaseCollections';
+import { getDocuments } from '../../cotrollers/firebaseCollections';
 import { useAuth } from '../../utils/authContext';
 import './resources.css';
 
@@ -16,55 +16,21 @@ function ResourcesPage() {
     const { currentUser } = useAuth();
 
     const [docsData, setDocsData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [page, setPage] = useState(1);
-    const [firstDoc, setFirstDoc] = useState(null);
-    const [lastDoc, setLastDoc] = useState(null);
-    const [history, setHistory] = useState([]);
-    const [filter, setFilter] = useState("");
 
     const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get("search") || "";
 
     const collection = "recursos";
 
-    function loadData() {
-        getDocuments(collection, true, filter, searchTerm).then((data) => {
+    const loadData = useCallback(() => {
+        getDocuments(collection, true, null, searchTerm).then((data) => {
             setDocsData(data.docs);
         });
-        setLoading(false);
-    }
-
-    const handleNext = async () => {
-        if (!lastDoc) return;
-
-        setHistory(prev => [...prev, firstDoc]);
-        const res = await getNextPage(lastDoc, collection);
-
-        setDocsData(res.docs);
-        setFirstDoc(res.firstDoc);
-        setLastDoc(res.lastDoc);
-        setPage(prev => prev + 1);
-    };
-
-    const handlePrev = async () => {
-        if (history.length === 0) return;
-
-        const newHistory = [...history];
-        const prevFirstDoc = newHistory.pop();
-
-        const res = await getPrevPage(prevFirstDoc, collection);
-
-        setHistory(newHistory);
-        setDocsData(res.docs);
-        setFirstDoc(res.firstDoc);
-        setLastDoc(res.lastDoc);
-        setPage(prev => prev - 1);
-    };
+    }, [collection, searchTerm]);
 
     useEffect(() => {
         loadData();
-    }, [filter, searchTerm]);
+    }, [loadData]);
 
     function ResourceCard() {
         return (

@@ -5,7 +5,7 @@ import logo from '../assets/images/logo.png';
 import { useAuth } from '../utils/authContext';
 
 function Navbar({ menuItems }) {
-    const { currentUser, logout } = useAuth();
+    useAuth();
     const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,10 +17,11 @@ function Navbar({ menuItems }) {
         return (
             <>
                 {menuItems.map((button, index) => (
-                    <Link key={index} to={button.path} className="navbar-link">
-                        <div className={location.pathname === button.path ? "active" : ""}>
-                            <p>{button.title}</p>
-                        </div>
+                    <Link key={button.path || index} to={button.path} className="navbar-link"
+                        aria-current={location.pathname === button.path ? "page" : undefined}>
+                        <span className={location.pathname === button.path ? "active" : ""}>
+                            {button.title}
+                        </span>
                     </Link>
                 ))}
             </>
@@ -35,7 +36,7 @@ function Navbar({ menuItems }) {
                     <button
                         type="button"
                         className={`navbar-toggle ${isMenuOpen ? "is-open" : ""}`}
-                        aria-label="Abrir menu"
+                        aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
                         aria-expanded={isMenuOpen}
                         onClick={() => setIsMenuOpen((current) => !current)}
                     >

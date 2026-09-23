@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import '../../App.css';
 import InputText from "../../components/forms/inputText";
 import InputTextArea from "../../components/forms/inputTextArea";
@@ -12,7 +12,6 @@ import './about.css';
 export default function AboutForm() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({
     title: "",
     text: "",
@@ -31,7 +30,7 @@ export default function AboutForm() {
     return () => unsub();
   }, []);
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     try {
       const q = query(
         collection(db, collectionName),
@@ -42,14 +41,12 @@ export default function AboutForm() {
       setData(lista.reverse());
     } catch (err) {
       console.error("Erro ao buscar dados do Firestore:", err);
-    } finally {
-      setLoading(false);
     }
-  }
+  }, [collectionName]);
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   async function createBlock() {
     if (!user) return;
