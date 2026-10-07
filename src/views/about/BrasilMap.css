@@ -1,15 +1,16 @@
 .map-container {
   display: flex;
   width: 100vw;
+  height: 100vh;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-.side-bar {
-  width: 350px;
-  height: 40%;
+.map-side-bar {
+  width: 40%;
+  height: 100%;
   background-color: #ffffff;
   padding: 4rem 3rem;
   display: flex;
@@ -55,14 +56,6 @@
   float: left;
 }
 
-#map .state {
-  cursor: pointer;
-}
-
-#map .state .shape {
-  cursor: pointer;
-}
-
 #map .state .label_icon_state {
   fill: #fff;
   font-family: Arial;
@@ -90,6 +83,7 @@
 
 #map .model-davi .state .shape {
   fill: #ddd;
+  cursor: default;
   transition: all 0.3s ease-in-out;
 }
 
@@ -105,6 +99,7 @@
 }
 #map .model-davi .state.fixed-color:hover .shape {
   fill: #faa6a4 !important;
+  cursor: pointer;
 }
 #map .model-davi .state.fixed-color .label_icon_state {
   fill: #fff !important;

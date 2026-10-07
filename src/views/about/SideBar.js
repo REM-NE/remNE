@@ -94,7 +94,7 @@ function SideBar({
   
   if (!hasSelection) {
     return (
-      <aside className="side-bar" aria-live="polite">
+      <aside className="map-side-bar" aria-live="polite">
         <div className="side-bar__subtitle-state">
           <h2 className="side-bar__title">
             Clique em um dos estados em vermelho
