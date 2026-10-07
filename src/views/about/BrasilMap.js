@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 const BrazilMap = () => {
   const [activeState, setActiveState] = useState(null);
   const [activeStateName, setActiveStateName] = useState('Nenhum estado selecionado');
-  const statesWithFixedColor = ['ce', 'rn', 'pb', 'al', 'ba'];
+  const statesWithFixedColor = ['ce', 'rn', 'pb', 'al', 'ba'];1
 
   const handleStateClick = (e, uf, name) => {
     e.preventDefault();

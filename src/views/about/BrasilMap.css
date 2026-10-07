@@ -1,7 +1,6 @@
 .container {
   display: flex;
   width: 100vw;
-  height: 100vh; /* antes: 100% */
   background-color: #ffffff;
   margin: 0;
   padding: 0;

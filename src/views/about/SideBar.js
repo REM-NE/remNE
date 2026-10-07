@@ -75,22 +75,11 @@ function SideBar({
   const institutions = activeState ? (data[activeState] ?? []) : [];
 
   const hasSelection = Boolean(activeState);
-
-  /*
-   * Sempre que o estado mudar, a instituição selecionada
-   * volta para null.
-   */
+ 
   useEffect(() => {
     setSelectedInstitution(null);
   }, [activeState]);
-
-  /*
-   * Quando uma instituição for selecionada,
-   * procura os professores pertencentes a ela.
-   *
-   * Exemplo:
-   * UFC -> professores cujo acronym === "UFC"
-   */
+ 
   const professoresDaInstituicao = selectedInstitution
     ? defaultProfessoresData.filter(
         (professor) =>
@@ -102,9 +91,7 @@ function SideBar({
     setSelectedInstitution(institution);
   };
 
-  /*
-   * Nenhum estado selecionado
-   */
+  
   if (!hasSelection) {
     return (
       <aside className="side-bar" aria-live="polite">
@@ -121,9 +108,6 @@ function SideBar({
     );
   }
 
-  /*
-   * Uma instituição foi selecionada
-   */
   if (selectedInstitution) {
     return (
       <aside className="side-bar" aria-live="polite">
