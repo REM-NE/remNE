@@ -67,9 +67,9 @@ export default function AboutPage() {
           {item.text && <p className="text">{item.text}</p>}
         </div>
       ))}
-      <div className="container">
+      {/* <div className="container">
         <img src={aboutImageData?.images[0]?.imageURL} alt="Imagem do Sobre" className="w-100 pt-5"/>
-      </div>
+      </div> */}
     </div>
   );
 }

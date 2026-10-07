@@ -110,7 +110,7 @@ function SideBar({
 
   if (selectedInstitution) {
     return (
-      <aside className="side-bar" aria-live="polite">
+      <aside className="map-side-bar" aria-live="polite">
         <div className="side-bar__header">
           <button
             type="button"
@@ -174,7 +174,7 @@ function SideBar({
   }
   
   return (
-    <aside className="side-bar" aria-live="polite">
+    <aside className="map-side-bar" aria-live="polite">
       <div className="side-bar__header">
         <div className="title-row">
           <svg
