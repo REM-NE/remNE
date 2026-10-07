@@ -5,6 +5,7 @@ import PathButton from "../../components/pathButton";
 import { getDocuments } from "../../cotrollers/firebaseCollections";
 import { useAuth } from "../../utils/authContext";
 import { db } from "../../utils/firebaseConfig";
+import BrasilMap from "./BrasilMap";
 import './about.css';
 
 export default function AboutPage() {
@@ -54,6 +55,7 @@ export default function AboutPage() {
 
   return (
     <div className="about main top-spacing pb-5">
+      <BrasilMap />
       <div className="container mt-5">
         {currentUser && <PathButton text="Editar Página do Sobre" path="/sobre/edit" />}
       </div>

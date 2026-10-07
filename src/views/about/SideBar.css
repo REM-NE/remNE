@@ -1,0 +1,309 @@
+.side-bar {
+  width: 420px;
+  min-height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1.5rem 1.5rem 1.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #e5e7eb;
+}
+
+.side-bar__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.title-row {
+  display: flex;
+  align-items: center; /* Alinha o pin verticalmente com o texto */
+  gap: 12px;           /* Espaço exato entre o pin e a palavra "Ceará" */
+  margin-bottom: 8px;  /* Espaço entre o título e o texto de baixo */
+}
+
+.pin-icon {
+  width: 160px;
+  height: 20px;
+}
+
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5A6A85; /* Cor cinza/azulada da imagem anterior */
+  margin: 0;
+}
+
+.side-bar__title {
+  font-family: 'Lora', 'serif';
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1A202C;
+  letter-spacing: -0.03em;
+}
+
+.side-bar__count {
+  margin: 0.2rem 0 0;
+  color: #4b5563;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.side-bar__divider {
+  border-top: 1px solid #dfe5ea;
+  margin: 1rem 0 0.9rem;
+}
+
+.side-bar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.side-bar__item-wrap {
+  width: 100%;
+}
+
+.side-bar__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: #fff;
+  border: 1px solid #dfe4ea;
+  border-radius: 0.5rem;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.side-bar__item:hover {
+  border-color: #c7ced6;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.side-bar__item-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.side-bar__item-copy strong {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.side-bar__item-copy small {
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+.side-bar__item-arrow {
+  font-size: 2rem;
+  line-height: 1;
+  color: #374151;
+  margin-left: 0.5rem;
+}
+
+.side-bar__back {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #374151;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.side-bar__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 0.5rem;
+}
+
+
+
+
+.side-bar__detail-name {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #1f2937;
+}
+
+.side-bar__detail-city {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.side-bar__subtitle {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.97rem;
+  
+}
+
+.side-bar__subtitle-state {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.side-bar__subtitle-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  color: #5A6A85;
+  font-size: 14px;
+  line-height: 100%;
+  
+}
+
+@media (max-width: 900px) {
+  .side-bar {
+    width: 100%;
+    min-height: auto;
+    border-left: none;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+.separator {
+  width: 100%;
+  border: none;
+  height: 1px;
+  background-color: #e2e8f0; 
+  margin: 20px 0; 
+}
+
+.side-bar__institution-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.side-bar__institution-header .side-bar__title {
+  margin: 0;
+  font-size: 1.7rem;
+  line-height: 1.15;
+}
+
+.side-bar__institution-header .side-bar__detail-city {
+  margin: 0;
+}
+
+.side-bar__professors {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar__professor {
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+.side-bar__professor-avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.side-bar__professor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.side-bar__professor-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.side-bar__professor-info strong {
+  color: #1f2937;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.side-bar__professor-info span {
+  color: #5a6a85;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.side-bar__lattes {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid #a80017;
+  border-radius: 0.35rem;
+  background: #fff;
+  color: #a80017;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.side-bar__lattes:hover {
+  background: #a80017;
+  color: #fff;
+}
+
+.side-bar__lattes span {
+  font-size: 0.85rem;
+  line-height: 1;
+}
