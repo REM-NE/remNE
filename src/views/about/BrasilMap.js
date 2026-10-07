@@ -6,20 +6,26 @@ const BrazilMap = () => {
   const [activeState, setActiveState] = useState(null);
   const [activeStateName, setActiveStateName] = useState('Nenhum estado selecionado');
   const statesWithFixedColor = ['ce', 'rn', 'pb', 'al', 'ba'];
+  const statesFromNortheast = ['ce', 'rn', 'pb', 'al', 'ba', "pe", "se", "ma", "pi"];
 
   const handleStateClick = (e, uf, name) => {
+    const chooseState = ()  => {
+      setActiveState(uf);
+      setActiveStateName(name);
+    }
+
     e.preventDefault();
-    setActiveState(uf);
-    setActiveStateName(name);
+    statesWithFixedColor.includes(uf) && chooseState();
   };
 
   const getStateClass = (uf) => {
     const isFixedColor = statesWithFixedColor.includes(uf);
-    return `state ${activeState === uf ? 'active' : ''} ${isFixedColor ? 'fixed-color' : ''}`;
+    const isFromNortheast = statesFromNortheast.includes(uf);
+    return `state ${activeState === uf ? 'active' : ''} ${isFixedColor ? 'fixed-color' : ''} ${isFromNortheast ? 'northeast' : ''}`;
   };
 
   return (
-    <div className="container">
+    <div className="map-container container">
       <div className="box-mapa">
         <svg id="map" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="460" height="465" style={{ display: 'inline' }}>
           <g className="model-davi">
