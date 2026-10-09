@@ -6,7 +6,7 @@ import mapaLogo from '../../assets/images/mapa-logo.png';
 const BrazilMap = () => {
   const [activeState, setActiveState] = useState(null);
   const [activeStateName, setActiveStateName] = useState('Nenhum estado selecionado');
-  const statesWithFixedColor = ['ce', 'rn', 'pb', 'al', 'ba'];
+  const statesWithFixedColor = ['ce', 'rn', 'pe', 'al', 'ba'];
   const statesFromNortheast = ['ce', 'rn', 'pb', 'al', 'ba', "pe", "se", "ma", "pi"];
 
   const handleStateClick = (e, uf, name) => {
