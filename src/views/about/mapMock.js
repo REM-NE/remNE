@@ -16,16 +16,16 @@ export const maindata = {
               "url_imagem": "https://i.imgur.com/I5jRMUU.jpeg"
             },
             {
-              "nome": "Wilker Araujo de Melo",
-              "email": "wilker.melo@penedo.ufal.br",
-              "link_lattes": "http://lattes.cnpq.br/5536949000134139",
-              "url_imagem": "https://i.imgur.com/fPMQ5LY.jpeg"
-            },
-            {
               "nome": "Mariana Tenório da Silva Lima",
               "email": "mariana.lima@cedu.ufal.br",
               "link_lattes": "http://lattes.cnpq.br/6342860968467278",
               "url_imagem": "https://i.imgur.com/b2uFamp.png"
+            },
+            {
+              "nome": "Wilker Araujo de Melo",
+              "email": "wilker.melo@penedo.ufal.br",
+              "link_lattes": "http://lattes.cnpq.br/5536949000134139",
+              "url_imagem": "https://i.imgur.com/fPMQ5LY.jpeg"
             }
           ]
         }
@@ -41,52 +41,10 @@ export const maindata = {
           "sigla": "UESC",
           "membros": [
             {
-              "nome": "Douglas Alves Pimentel",
-              "email": "prof.douglasestudante@uesc.br",
-              "link_lattes": "http://lattes.cnpq.br/6007102831536231",
-              "url_imagem": "https://i.imgur.com/4hditFs.jpeg"
-            },
-            {
-              "nome": "Maria Elizabete Souza Couto",
-              "email": "melizabetesc@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/1085573737741686",
-              "url_imagem": "https://i.imgur.com/04hp8Q6.jpeg"
-            },
-            {
-              "nome": "Tamiles da Silva Oliveira",
-              "email": "tsoliveira1@uesc.br",
-              "link_lattes": "https://lattes.cnpq.br/3635270256500147",
-              "url_imagem": "https://i.imgur.com/BY229h9.jpeg"
-            },
-            {
-              "nome": "Juana Maria Arrieta Arrieta",
-              "email": "juanaarrietaarrieta@gmail.com",
-              "link_lattes": "https://lattes.cnpq.br/1209387388271724",
-              "url_imagem": "https://i.imgur.com/O5o7Jkw.png"
-            },
-            {
-              "nome": "John Leon de Almeida Moura",
-              "email": "johnleon.a.moura@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/3306774751465129",
-              "url_imagem": "https://i.imgur.com/AhNBfwa.jpeg"
-            },
-            {
               "nome": "Açucena Araújo Martins",
               "email": "aamartins.ppgecm@uesc.br",
               "link_lattes": "http://lattes.cnpq.br/9400544275421195",
               "url_imagem": "https://i.imgur.com/fjsdypy.jpeg"
-            },
-            {
-              "nome": "Maria Margarete do Rosário Farias",
-              "email": "mfarias@uesc.br",
-              "link_lattes": "http://lattes.cnpq.br/5188230538300491",
-              "url_imagem": "https://i.imgur.com/r8M2CKu.jpeg"
-            },
-            {
-              "nome": "Saray Carolina Carrillo Paternina",
-              "email": "Scarrillopaternina@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/2370171310526099",
-              "url_imagem": "https://i.imgur.com/JPtYfk2.jpeg"
             },
             {
               "nome": "Alexandre da Silva Souza",
@@ -95,10 +53,34 @@ export const maindata = {
               "url_imagem": "https://i.imgur.com/M8R7mBu.jpeg"
             },
             {
+              "nome": "Diná da Silva Correia",
+              "email": "dina.uesc@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/7352431804016598",
+              "url_imagem": "https://i.imgur.com/VoTz304.jpeg"
+            },
+            {
+              "nome": "Douglas Alves Pimentel",
+              "email": "prof.douglasestudante@uesc.br",
+              "link_lattes": "http://lattes.cnpq.br/6007102831536231",
+              "url_imagem": "https://i.imgur.com/4hditFs.jpeg"
+            },
+            {
               "nome": "Felipe de Almeida Mendonça Falcão",
               "email": "felipefalcao509@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/1990473602266449",
               "url_imagem": "https://i.imgur.com/Q3wWQZ7.jpeg"
+            },
+            {
+              "nome": "John Leon de Almeida Moura",
+              "email": "johnleon.a.moura@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/3306774751465129",
+              "url_imagem": "https://i.imgur.com/AhNBfwa.jpeg"
+            },
+            {
+              "nome": "Juana Maria Arrieta Arrieta",
+              "email": "juanaarrietaarrieta@gmail.com",
+              "link_lattes": "https://lattes.cnpq.br/1209387388271724",
+              "url_imagem": "https://i.imgur.com/O5o7Jkw.png"
             },
             {
               "nome": "Manoel Silva Duarte",
@@ -107,16 +89,34 @@ export const maindata = {
               "url_imagem": "https://i.imgur.com/ocY5Tnl.jpeg"
             },
             {
+              "nome": "Maria Elizabete Souza Couto",
+              "email": "melizabetesc@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/1085573737741686",
+              "url_imagem": "https://i.imgur.com/04hp8Q6.jpeg"
+            },
+            {
+              "nome": "Maria Margarete do Rosário Farias",
+              "email": "mfarias@uesc.br",
+              "link_lattes": "http://lattes.cnpq.br/5188230538300491",
+              "url_imagem": "https://i.imgur.com/r8M2CKu.jpeg"
+            },
+            {
               "nome": "Maria Vitória Santos da Silva",
               "email": "mariavitoriasantos935@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/4989655485645640",
               "url_imagem": "https://i.imgur.com/JW5EhnP.jpeg"
             },
             {
-              "nome": "Diná da Silva Correia",
-              "email": "dina.uesc@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/7352431804016598",
-              "url_imagem": "https://i.imgur.com/VoTz304.jpeg"
+              "nome": "Saray Carolina Carrillo Paternina",
+              "email": "Scarrillopaternina@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/2370171310526099",
+              "url_imagem": "https://i.imgur.com/JPtYfk2.jpeg"
+            },
+            {
+              "nome": "Tamiles da Silva Oliveira",
+              "email": "tsoliveira1@uesc.br",
+              "link_lattes": "https://lattes.cnpq.br/3635270256500147",
+              "url_imagem": "https://i.imgur.com/BY229h9.jpeg"
             }
           ]
         },
@@ -125,16 +125,16 @@ export const maindata = {
           "sigla": "UESB",
           "membros": [
             {
-              "nome": "José Erliton Santos Santana",
-              "email": "erllytonsantana@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/8213894906447308",
-              "url_imagem": "https://i.imgur.com/fbvvcqO.jpeg"
-            },
-            {
               "nome": "Adriano Santos Lago",
               "email": "adrianolago79@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/3842192715298984",
               "url_imagem": "https://i.imgur.com/SmLCML2.jpeg"
+            },
+            {
+              "nome": "José Erliton Santos Santana",
+              "email": "erllytonsantana@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/8213894906447308",
+              "url_imagem": "https://i.imgur.com/fbvvcqO.jpeg"
             }
           ]
         },
@@ -222,12 +222,6 @@ export const maindata = {
           "sigla": "IFCE",
           "membros": [
             {
-              "nome": "Milena Vasconcelos Gomes",
-              "email": "myllenavg@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/8377367336118430",
-              "url_imagem": "https://i.imgur.com/5oYEcXQ.jpeg"
-            },
-            {
               "nome": "Daniel da Silva Rocha",
               "email": "Daniel.srocha.011@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/5150163471227976",
@@ -238,6 +232,12 @@ export const maindata = {
               "email": "marcelopaiva66@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/4852062527286728",
               "url_imagem": "https://i.imgur.com/QqxsiEZ.jpeg"
+            },
+            {
+              "nome": "Milena Vasconcelos Gomes",
+              "email": "myllenavg@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/8377367336118430",
+              "url_imagem": "https://i.imgur.com/5oYEcXQ.jpeg"
             }
           ]
         },
@@ -258,16 +258,16 @@ export const maindata = {
           "sigla": "UFC",
           "membros": [
             {
-              "nome": "Juscileide Braga de Castro",
-              "email": "juscileide@virtual.ufc.br",
-              "link_lattes": "http://lattes.cnpq.br/2525374702919730",
-              "url_imagem": "https://i.imgur.com/yBraHNO.jpeg"
-            },
-            {
               "nome": "Juliana Evaristo Costa",
               "email": "julianaecosta@alu.ufc.br",
               "link_lattes": "http://lattes.cnpq.br/9656110497934224",
               "url_imagem": "https://i.imgur.com/sxg6aUT.jpeg"
+            },
+            {
+              "nome": "Juscileide Braga de Castro",
+              "email": "juscileide@virtual.ufc.br",
+              "link_lattes": "http://lattes.cnpq.br/2525374702919730",
+              "url_imagem": "https://i.imgur.com/yBraHNO.jpeg"
             }
           ]
         },
@@ -275,12 +275,6 @@ export const maindata = {
           "nome": "Universidade Federal do Cariri",
           "sigla": "UFCA",
           "membros": [
-            {
-              "nome": "Rodrigo Lacerda Carvalho",
-              "email": "rodrigo.lacerda@ufca.edu.br",
-              "link_lattes": "http://lattes.cnpq.br/2352144605333782",
-              "url_imagem": "https://i.imgur.com/hZKjMra.jpeg"
-            },
             {
               "nome": "Edicarlos Pereira de Sousa",
               "email": "edicarlos.pereira@ufca.edu.br",
@@ -292,6 +286,12 @@ export const maindata = {
               "email": "jose.valdelaneo@aluno.ufca.edu.br",
               "link_lattes": "http://lattes.cnpq.br/5429692323928237",
               "url_imagem": "https://i.imgur.com/KNJSqBj.jpeg"
+            },
+            {
+              "nome": "Rodrigo Lacerda Carvalho",
+              "email": "rodrigo.lacerda@ufca.edu.br",
+              "link_lattes": "http://lattes.cnpq.br/2352144605333782",
+              "url_imagem": "https://i.imgur.com/hZKjMra.jpeg"
             }
           ]
         },
@@ -362,22 +362,16 @@ export const maindata = {
           "sigla": "UFRN",
           "membros": [
             {
-              "nome": "Lucas Toshio Nascimento da Silva",
-              "email": "tosh.sam@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/5429692323928237",
-              "url_imagem": "https://i.imgur.com/a94J3cv.jpeg"
+              "nome": "Brunno Ferreira de Oliveira Santos",
+              "email": "brunno.santos.106@ufrn.edu.br",
+              "link_lattes": "http://lattes.cnpq.br/3462932568364829",
+              "url_imagem": "https://i.imgur.com/tC6o5uT.png"
             },
             {
               "nome": "Carmélia Regina Silva Xavier",
               "email": "carmeliaxavierxavier@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/0366500502646513",
               "url_imagem": "https://i.imgur.com/H8OcNPP.jpeg"
-            },
-            {
-              "nome": "Brunno Ferreira de Oliveira Santos",
-              "email": "brunno.santos.106@ufrn.edu.br",
-              "link_lattes": "http://lattes.cnpq.br/3462932568364829",
-              "url_imagem": "https://i.imgur.com/tC6o5uT.png"
             },
             {
               "nome": "Dênis Rocha da Silva",
@@ -392,12 +386,6 @@ export const maindata = {
               "url_imagem": "https://i.imgur.com/duBz40k.jpeg"
             },
             {
-              "nome": "Samuel Anderson Machado Lopes",
-              "email": "samuel.lopes.121@ufrn.edu.br",
-              "link_lattes": "http://lattes.cnpq.br/9708412519196484",
-              "url_imagem": "https://i.imgur.com/W54EPUr.png"
-            },
-            {
               "nome": "José Rodrigues da Silva Filho",
               "email": "professor.rodriguess@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/7837239267365682",
@@ -408,6 +396,18 @@ export const maindata = {
               "email": "lidianecnatal@gmail.com",
               "link_lattes": "https://lattes.cnpq.br/9889835203617579",
               "url_imagem": "https://i.imgur.com/wCzxrOC.jpeg"
+            },
+            {
+              "nome": "Lucas Toshio Nascimento da Silva",
+              "email": "tosh.sam@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/5429692323928237",
+              "url_imagem": "https://i.imgur.com/a94J3cv.jpeg"
+            },
+            {
+              "nome": "Samuel Anderson Machado Lopes",
+              "email": "samuel.lopes.121@ufrn.edu.br",
+              "link_lattes": "http://lattes.cnpq.br/9708412519196484",
+              "url_imagem": "https://i.imgur.com/W54EPUr.png"
             }
           ]
         }

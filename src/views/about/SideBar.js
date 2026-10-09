@@ -21,18 +21,6 @@ function SideBar({
     }
   }, [activeState]);
 
-  // Log de debug adaptado para a nova estrutura
-  useEffect(() => {
-    if (selectedState) {
-      selectedState.instituicoes.forEach((instituicao) => {
-        console.log(`Instituição: ${instituicao.nome}`);
-        instituicao.membros.forEach((professor) => {
-          console.log(`Professor: ${professor.nome}`);
-        });
-      });
-    }
-  }, [selectedState]);
-
   const handleInstitutionClick = (institution) => {
     setSelectedInstitution(institution);
   };
@@ -136,11 +124,14 @@ function SideBar({
           </h2>
         </div>
 
-        {selectedState.instituicoes && selectedState.instituicoes.length > 0 && (
+        {selectedState.instituicoes && selectedState.instituicoes.length > 1 ? (
           <p className="subtitle">
             {selectedState.instituicoes.length} instituições encontradas.
           </p>
-        )}
+        ) : (
+          <p className="subtitle">
+            1 instituição encontrada.
+          </p>)}
       </div>
       <ul className="side-bar__list">
         {selectedState.instituicoes.map((instituicao, index) => (
