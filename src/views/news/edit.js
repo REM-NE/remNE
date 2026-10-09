@@ -85,7 +85,7 @@ export default function NewsForm() {
 
                         <div className="d-flex justify-content-between">
                             <h4>Documento: {item.id}</h4>
-                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument(item.id)}>Excluir</button>
+                            <button className="btn delete-btn botao-noticias" onClick={() => deleteDocument("eventos-e-noticias", item.id)}>Excluir</button>
                         </div>
 
                         <InputText label="Título" data={item} setData={setDocsData} property="title" isANewDoc={false} disabled={!user} />

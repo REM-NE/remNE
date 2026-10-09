@@ -17,6 +17,9 @@
     - [Como utilizar suas próprias chaves secretas](#como-utilizar-suas-próprias-chaves-secretas)
   - [Instalando pacotes](#instalando-pacotes)
   - [Desenvolvendo](#desenvolvendo)
+- [Testes](#testes)
+  - [Testes unitários](#testes-unitários)
+  - [Testes E2E e de segurança](#testes-e2e-e-de-segurança)
 - [Requisitos Funcionais e Não-Funcionais](#requisitos-funcionais-e-não-funcionais)
 
 ---
@@ -86,6 +89,63 @@ npm start
 
 Abra http://localhost:3000 no seu navegador e veja o resultado.
 Você pode editar as páginas na pasta src/. As páginas atualizam conforme as edita.
+
+## Testes
+
+O projeto tem dois tipos de teste: **unitários** (testam funções isoladas) e **E2E** (simulam um usuário no navegador).
+
+### Testes unitários
+
+Testam as funções do controller (`src/cotrollers/firebaseCollections.js`) sem precisar do Firebase real.
+
+Pra executar basta:
+
+```bash
+npm test
+```
+
+Só isso. Não precisa de nenhum serviço rodando.
+
+### Testes E2E e de segurança
+
+Simulam um usuário navegando pelo site. Precisam de 3 coisas rodando ao mesmo tempo:
+
+**1. Instalar o Firebase CLI** (só na primeira vez):
+
+```bash
+npm install -g firebase-tools
+```
+
+> Precisa ter o Java 21+ instalado.
+
+**2. Subir os emuladores do Firebase:**
+
+```bash
+firebase emulators:start --only auth,firestore
+```
+
+Isso cria um banco de dados e autenticação temporários nas nossas máquinas pra executarmos os testes.
+
+**3. Em outro terminal, subir o app conectado aos emuladores:**
+
+> No Windows (CMD): `set REACT_APP_USE_EMULATORS=true && npm start`
+> No Windows (PowerShell): `$env:REACT_APP_USE_EMULATORS="true"; npm start`
+
+**4. Em outro terminal, rodar os testes:**
+
+```bash
+npx cypress run
+```
+
+Para ver os testes rodando no navegador (modo interativo):
+
+```bash
+npx cypress open
+```
+
+Depois selecione **E2E Testing** > escolha o navegador > clique em **admin.cy.js**.
+
+---
 
 ## Requisitos Funcionais e Não-Funcionais
 Acesse a tabela nesse link: [Tabela de Requisitos](https://app.clickup.com/90131889362/v/l/li/901315745808?pr=90137960275)

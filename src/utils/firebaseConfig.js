@@ -1,10 +1,10 @@
 // firebase-config.js ou um arquivo similar
 import { initializeApp } from 'firebase/app';
 // Se você for usar Authentication, importe o getAuth também
-import { getAuth } from 'firebase/auth';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
 
 // import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, connectFirestoreEmulator, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -28,5 +28,8 @@ export { addDoc, collection, db, deleteDoc, doc, getDoc, getDocs, updateDoc };
 // Inicialize o Firebase Authentication e obtenha uma referência para o serviço
 export const auth = getAuth(app);
 
-
-
+// Conectar aos emuladores quando REACT_APP_USE_EMULATORS estiver ativo
+if (process.env.REACT_APP_USE_EMULATORS === 'true') {
+  connectFirestoreEmulator(db, 'localhost', 8080);
+  connectAuthEmulator(auth, 'http://localhost:9099');
+}

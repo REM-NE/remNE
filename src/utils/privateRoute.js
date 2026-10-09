@@ -17,5 +17,5 @@ export default function PrivateRoute({ children }) {
         return children;
     }
 
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/auth/login" replace />;
 }

@@ -22,6 +22,7 @@ import ResourcesForm from "./views/resources/edit";
 import ResourcesPage from "./views/resources/page";
 import ResourcesPost from "./views/resources/post";
 import NotFound from "./views/not found/notfound";
+import PrivateRoute from "./utils/privateRoute";
 
 export function notify(message, type = "success") {
   window.dispatchEvent(new CustomEvent("app-notification", { detail: { message, type } }));
@@ -147,20 +148,16 @@ function AppRoutes() {
             <Route path="publicacoes" element={<PublicationsPage />} />
             <Route path="biblioteca" element={<LibraryPage />} />
             <Route path="sobre" element={<AboutPage />} />
-            <Route path="home/edit" element={<HomeForm />} />
-            <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
-            <Route path="recursos-educacionais/edit" element={<ResourcesForm />} />
-            <Route path="publicacoes/edit" element={<PublicationsForm />} />
-            <Route path="biblioteca/edit" element={<LibraryForm />} />
-            <Route path="eventos-e-noticias/edit" element={<NewsForm />} />
-            <Route path="recursos-educacionais/edit" element={<ResourcesForm />} />
-            <Route path="publicacoes/edit" element={<PublicationsForm />} />
-            <Route path="biblioteca/edit" element={<LibraryForm />} />
+            <Route path="home/edit" element={<PrivateRoute><HomeForm /></PrivateRoute>} />
+            <Route path="eventos-e-noticias/edit" element={<PrivateRoute><NewsForm /></PrivateRoute>} />
+            <Route path="recursos-educacionais/edit" element={<PrivateRoute><ResourcesForm /></PrivateRoute>} />
+            <Route path="publicacoes/edit" element={<PrivateRoute><PublicationsForm /></PrivateRoute>} />
+            <Route path="biblioteca/edit" element={<PrivateRoute><LibraryForm /></PrivateRoute>} />
             <Route path="eventos-e-noticias/post/:postId" element={<NewsPost />} />
             <Route path="recursos-educacionais/post/:postId" element={<ResourcesPost />} />
             <Route path="publicacoes/post/:postId" element={<PublicationsPost />} />
             <Route path="biblioteca/post/:postId" element={<LibraryPost />} />
-            <Route path="sobre/edit" element={<AboutForm />} />
+            <Route path="sobre/edit" element={<PrivateRoute><AboutForm /></PrivateRoute>} />
             <Route path="auth/login" element={<LoginPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />

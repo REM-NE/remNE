@@ -243,7 +243,7 @@ export const createDocument = async (collectionName, data) => {
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
-            title_lower: data.title.toLowercase(),
+            title_lower: data.title.toLowerCase(),
             text: data.text,
             imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
             imagePublicId: data.imagePublicId || "", // Armazena o public_id para futuras atualizações
@@ -273,7 +273,7 @@ export const updateDocument = async (collectionName, id, data) => {
 
         const updatePayload = {
             title: data.title,
-            title_lower: data.title.toLowercase(),
+            title_lower: data.title.toLowerCase(),
             text: data.text,
             link: data.link,
             educationalLevel: data.educationalLevel || "",
