@@ -30,7 +30,6 @@ export default function LibraryPost() {
     return (
         <div className="resources main top-spacing">
             <Banner title="Recursos Educacionais" />
-            <br></br>
             <div className="main-post border rounded container p-4 mb-5">
                 {postData.imageURL && <img src={postData.imageURL} alt={postData.title} className="main-post-image post-img" />}
                 <h3 className="main-post-title">{postData.title}</h3>
