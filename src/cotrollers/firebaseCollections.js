@@ -235,18 +235,18 @@ export const getNextPage = async (lastDoc, collectionName) => {
 // CREATE
 export const createDocument = async (collectionName, data) => {
     try {
-        let imageURL = "";
+        let imageUploadData = "";
 
         if (data.imageURL) {
-            imageURL = await uploadImage(data.imageFile, data.imagePublicId);
+            imageUploadData = await uploadImage(data.imageFile, data.imagePublicId);
         }
 
         const docRef = await addDoc(collection(db, collectionName), {
             title: data.title,
             title_lower: data.title.toLowerCase(),
             text: data.text,
-            imageURL, // Faz upload da nova imagem no cloudinary e obtém a URL
-            imagePublicId: data.imagePublicId || "", // Armazena o public_id para futuras atualizações
+            imageURL: imageUploadData.url, // Faz upload da nova imagem no cloudinary e obtém a URL
+            imagePublicId: imageUploadData.imagePublicId || "", // Armazena o public_id para futuras atualizações
             link: data.link,
             educationalLevel: data.educationalLevel || "", //Só é usada em recursos, adiciona o campo mesmo para outras coleções para evitar erros
             createdAt: serverTimestamp(),

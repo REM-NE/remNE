@@ -109,7 +109,7 @@ export default function Home() {
               <Link key={item.id} to={"eventos-e-noticias/post/" + item.id}>
                 <div className="d-flex justify-content-center mb-4">
                   <div className="card" style={{ cursor: "pointer" }}>
-                    <img src={item.image || newsImage1} className="card-img-top" alt="..." />
+                    <img src={item.imageURL || newsImage1} className="card-img-top" alt="..." />
                     <div className="card-body">
                       <h5 className="card-title home-card-title">{item.title}</h5>
                     </div>

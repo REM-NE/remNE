@@ -649,6 +649,7 @@ a {
 .home .card-img-top {
   width: 404px;
   height: 246px;
+  object-fit: cover;
   aspect-ratio: 202/123;
 }
 
