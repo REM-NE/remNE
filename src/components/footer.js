@@ -14,6 +14,8 @@ function Footer() {
 
     const location = useLocation();
 
+    const currentYear = new Date().getFullYear();
+
     const leftLinks = footerLinks.slice(0, 3);
     const rightLinks = footerLinks.slice(3);
 
@@ -48,7 +50,7 @@ function Footer() {
                     </svg>
                     <span>@rem_nordeste</span>
                 </a>
-                <div className="footer-copyright">© 2025 REM — Todos os direitos reservados.</div>
+                <div className="footer-copyright">© {currentYear} REM — Todos os direitos reservados.</div>
             </section>
         </div>
     )
