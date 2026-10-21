@@ -19,6 +19,7 @@ function SideBar({
     } else {
       setSelectedState(null);
     }
+    setSelectedInstitution(null);
   }, [activeState]);
 
   const handleInstitutionClick = (institution) => {
