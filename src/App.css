@@ -39,11 +39,9 @@ a {
   height: 118px;
   width: 100%;
   position: fixed;
-  background: linear-gradient(
-    90deg,
-    var(--cor-secundaria) 50%,
-    var(--cor-primaria-500) 50%
-  );
+  background: linear-gradient(90deg,
+      var(--cor-secundaria) 50%,
+      var(--cor-primaria-500) 50%);
   z-index: 10;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
@@ -312,7 +310,7 @@ a {
 }
 
 #homeCarousel {
-  padding-top:120px;
+  padding-top: 120px;
 }
 
 .instagram-posts {
@@ -812,6 +810,7 @@ a {
     opacity: 0;
     transform: translateY(28px) scale(0.94);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -823,6 +822,7 @@ a {
     opacity: 0;
     transform: scale(0.8);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -834,6 +834,7 @@ a {
     opacity: 0;
     transform: scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -902,6 +903,18 @@ a {
   width: auto !important;
 }
 
+.main-post-link {
+  cursor: pointer;
+  background-color: var(--cor-primaria-500) !important;
+  border: solid 1px var(--cor-primaria-500);
+  border-radius: 8px;
+  color: white!important;
+  text-align: right;
+  position: relative;
+  padding: 5px 15px;
+  bottom: 10px;
+}
+
 .home-news a {
   display: flex;
   justify-content: flex-end;
@@ -946,6 +959,11 @@ a {
   object-fit: cover;
   aspect-ratio: 92/63;
   border-radius: 10px;
+}
+
+.main-post-image {
+  height: 400px;
+  object-fit: scale-down;
 }
 
 .post-text {
