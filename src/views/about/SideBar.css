@@ -35,7 +35,6 @@
 
 
 .subtitle {
-  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #5A6A85; /* Cor cinza/azulada da imagem anterior */
@@ -43,7 +42,6 @@
 }
 
 .side-bar__title {
-  font-family: 'Lora', 'serif';
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
@@ -176,7 +174,6 @@
 }
 
 .side-bar__subtitle-text {
-  font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   color: #5A6A85;
   font-size: 14px;
