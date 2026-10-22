@@ -9,6 +9,21 @@ export default function Post({ title, image, id, link }) {
         image = defaultImage;
     }
 
+    const isDownload = link != null && link.endsWith('.pdf');
+
+    if (isDownload) {
+        return (
+            <a key={id} href={link} download={title + '.pdf'}>
+                <div className="column post-card">
+                    <img className="post-image" src={image} alt=""></img>
+                    <div className="column-main post-text">
+                        <p className="card-title">{title}</p>
+                    </div>
+                </div>
+            </a>
+        );
+    }
+
     return (
         <Link key={id} to={link == null ? `post/${id}` : link}>
             <div className="column post-card">
