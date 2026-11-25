@@ -19,13 +19,13 @@ export const maindata = {
               "nome": "Mariana Tenório da Silva Lima",
               "email": "mariana.lima@cedu.ufal.br",
               "link_lattes": "http://lattes.cnpq.br/6342860968467278",
-              "url_imagem": "https://i.imgur.com/b2uFamp.png"
+              "url_imagem": "https://i.imgur.com/fPMQ5LY.jpeg"
             },
             {
               "nome": "Wilker Araujo de Melo",
               "email": "wilker.melo@penedo.ufal.br",
               "link_lattes": "http://lattes.cnpq.br/5536949000134139",
-              "url_imagem": "https://i.imgur.com/fPMQ5LY.jpeg"
+              "url_imagem": "https://i.imgur.com/b2uFamp.png"
             }
           ]
         }
@@ -107,6 +107,18 @@ export const maindata = {
               "url_imagem": "https://i.imgur.com/JW5EhnP.jpeg"
             },
             {
+              "nome": "Rayane Vieira Ribeiro",
+              "email": "prof.rvribeiro@gmail.com",
+              "link_lattes": "https://lattes.cnpq.br/51242868",
+              "url_imagem": "https://drive.google.com/open?id=13av808fDMclk"
+            },
+            {
+              "nome": "Reilan Bomfim da Silva",
+              "email": "reilanbomfim@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/129402125",
+              "url_imagem": "https://drive.google.com/open?id=1DslqtekOVL.Jd"
+            },
+            {
               "nome": "Saray Carolina Carrillo Paternina",
               "email": "Scarrillopaternina@gmail.com",
               "link_lattes": "http://lattes.cnpq.br/2370171310526099",
@@ -162,54 +174,54 @@ export const maindata = {
             }
           ]
         },
-        {
-          "nome": "Secretaria Municipal de Educação de Itabuna-BA",
-          "sigla": "SME-Itabuna",
-          "membros": [
-            {
-              "nome": "Silvana Carvalho de Almeida",
-              "email": "siilvanacarvalho2022@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/5743295491804586",
-              "url_imagem": "https://i.imgur.com/DYCQslr.png"
-            }
-          ]
-        },
-        {
-          "nome": "Centro de Atenção Integral a Criança - CAIC, Centro Integrado Cristo Redentor",
-          "sigla": "CAIC",
-          "membros": [
-            {
-              "nome": "Lucivânia da Silva Costa Ribeiro",
-              "email": "lucivaniacostaribeiro01@gmail.com",
-              "link_lattes": "https://lattes.cnpq.br/2248122283645968",
-              "url_imagem": "https://i.imgur.com/CDwNoke.jpeg"
-            }
-          ]
-        },
-        {
-          "nome": "Secretaria Municipal de Educação de São José da Vitória-BA",
-          "sigla": "SME-SJV",
-          "membros": [
-            {
-              "nome": "Geníria Almeida dos Santos Souza",
-              "email": "janasouza10@yahoo.com",
-              "link_lattes": "http://lattes.cnpq.br/6715420279974005",
-              "url_imagem": "https://i.imgur.com/mp5sV63.png"
-            }
-          ]
-        },
-        {
-          "nome": "Escola Beabá",
-          "sigla": "BEABÁ",
-          "membros": [
-            {
-              "nome": "Daniela Paulo dos Santos",
-              "email": "danilfs.mat@gmail.com",
-              "link_lattes": "http://lattes.cnpq.br/5683083039329504",
-              "url_imagem": "https://i.imgur.com/64A7zro.jpeg"
-            }
-          ]
-        }
+        // {
+        //   "nome": "Secretaria Municipal de Educação de Itabuna-BA",
+        //   "sigla": "SME-Itabuna",
+        //   "membros": [
+        //     {
+        //       "nome": "Silvana Carvalho de Almeida",
+        //       "email": "siilvanacarvalho2022@gmail.com",
+        //       "link_lattes": "http://lattes.cnpq.br/5743295491804586",
+        //       "url_imagem": "https://i.imgur.com/DYCQslr.png"
+        //     }
+        //   ]
+        // },
+        // {
+        //   "nome": "Centro de Atenção Integral a Criança - CAIC, Centro Integrado Cristo Redentor",
+        //   "sigla": "CAIC",
+        //   "membros": [
+        //     {
+        //       "nome": "Lucivânia da Silva Costa Ribeiro",
+        //       "email": "lucivaniacostaribeiro01@gmail.com",
+        //       "link_lattes": "https://lattes.cnpq.br/2248122283645968",
+        //       "url_imagem": "https://i.imgur.com/CDwNoke.jpeg"
+        //     }
+        //   ]
+        // },
+        // {
+        //   "nome": "Secretaria Municipal de Educação de São José da Vitória-BA",
+        //   "sigla": "SME-SJV",
+        //   "membros": [
+        //     {
+        //       "nome": "Geníria Almeida dos Santos Souza",
+        //       "email": "janasouza10@yahoo.com",
+        //       "link_lattes": "http://lattes.cnpq.br/6715420279974005",
+        //       "url_imagem": "https://i.imgur.com/mp5sV63.png"
+        //     }
+        //   ]
+        // },
+        // {
+        //   "nome": "Escola Beabá",
+        //   "sigla": "BEABÁ",
+        //   "membros": [
+        //     {
+        //       "nome": "Daniela Paulo dos Santos",
+        //       "email": "danilfs.mat@gmail.com",
+        //       "link_lattes": "http://lattes.cnpq.br/5683083039329504",
+        //       "url_imagem": "https://i.imgur.com/64A7zro.jpeg"
+        //     }
+        //   ]
+        // }
       ]
     },
     {
@@ -257,6 +269,24 @@ export const maindata = {
           "nome": "Universidade Federal do Ceará",
           "sigla": "UFC",
           "membros": [
+            {
+              "nome": "Dayany Barros Ferreira",
+              "email": "dayanybarros@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/343625232",
+              "url_imagem": "https://drive.google.com/open?id=1nvg24bz7yt8Ef"
+            },
+            {
+              "nome": "José Aires de Castro Filho",
+              "email": "aires@virtual.ufc.br",
+              "link_lattes": "http://lattes.cnpq.br/100117270",
+              "url_imagem": "https://drive.google.com/open?id=1PlzanyUtqTj41"
+            },
+            {
+              "nome": "Josiane Marques Duarte",
+              "email": "josiane.marques@educa",
+              "link_lattes": "https://wwws.cnpq.br/cvlattesw",
+              "url_imagem": "https://drive.google.com/open?id=1PK1vBHg7ynR"
+            },
             {
               "nome": "Juliana Evaristo Costa",
               "email": "julianaecosta@alu.ufc.br",
@@ -362,6 +392,18 @@ export const maindata = {
           "sigla": "UFRN",
           "membros": [
             {
+              "nome": "Ana Carolina Costa Silva",
+              "email": "anacarolinacs663@gmail.com",
+              "link_lattes": "https://lattes.cnpq.br/84687922",
+              "url_imagem": "https://drive.google.com/open?id=1aL5DwBw70S"
+            },
+            {
+              "nome": "Ana Claudia Costa Silva",
+              "email": "anaclaudiacs.2725@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/974353062",
+              "url_imagem": "https://drive.google.com/open?id=1d7JV8JVPme"
+            },
+            {
               "nome": "Brunno Ferreira de Oliveira Santos",
               "email": "brunno.santos.106@ufrn.edu.br",
               "link_lattes": "http://lattes.cnpq.br/3462932568364829",
@@ -408,6 +450,49 @@ export const maindata = {
               "email": "samuel.lopes.121@ufrn.edu.br",
               "link_lattes": "http://lattes.cnpq.br/9708412519196484",
               "url_imagem": "https://i.imgur.com/W54EPUr.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nome": "Paraná",
+      "sigla": "PR",
+      "instituicoes": [
+        {
+          "nome": "Universidade Tecnológica Federal do Paraná",
+          "sigla": "UTFPR",
+          "membros": [
+            {
+              "nome": "Adan Santos Martens",
+              "email": "adanm9090@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/628346710",
+              "url_imagem": "https://drive.google.com/open?id=1A0be0EKTzFas"
+            },
+            {
+              "nome": "André Luis Trevisan",
+              "email": "andreluistrevisan@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/316601022",
+              "url_imagem": "https://drive.google.com/open?id=1XYBXIKNSf28M"
+            },
+            {
+              "nome": "Eliane Maria de Oliveira",
+              "email": "elianearaman@utfpr.edu.br",
+              "link_lattes": "http://lattes.cnpq.br/123775716",
+              "url_imagem": "https://drive.google.com/open?id=1cM2zEZorOW"
+            }
+          ]
+        },
+        {
+          "nome": "Instituto Federal do Paraná",
+          "sigla": "IFPR",
+          "membros": [
+            {
+              "nome": "Adan Santos Martens",
+              "email": "adanm9090@gmail.com",
+              "link_lattes": "http://lattes.cnpq.br/628346710",
+              "url_imagem": "https://drive.google.com/open?id=1A0be0EKTzFas"
             }
           ]
         }
